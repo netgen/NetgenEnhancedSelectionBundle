@@ -1,0 +1,7 @@
+{% block ngclasslist_field %}
+{% spaceless %}
+    {% for identifier in field.value.identifiers %}
+        {{ identifier }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+{% endspaceless %}
+{% endblock %}

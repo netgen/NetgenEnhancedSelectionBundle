@@ -1,0 +1,9 @@
+parameters:
+    ezpublish.fieldType.sckenhancedselection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type
+
+services:
+    ezpublish.fieldType.sckenhancedselection:
+        class: %ezpublish.fieldType.sckenhancedselection.class%
+        parent: ezpublish.fieldType
+        tags:
+            - {name: ezpublish.fieldType, alias: sckenhancedselection}

@@ -1,0 +1,19 @@
+{
+    "name": "netgen/enhanced-selection-bundle",
+    "description": "Netgen Enhanced Selection bundle for eZ Publish",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Netgen",
+            "homepage": "http://www.netgenlabs.com"
+        }
+    ],
+    "require": {
+        "ezsystems/ezpublish-kernel": "*",
+        "netgen/enhancedselection2": "*"
+    },
+    "autoload": {
+        "psr-0": { "Netgen\\Bundle\\EnhancedSelectionBundle": "" }
+    },
+    "target-dir": "Netgen/Bundle/EnhancedSelectionBundle"
+}
