@@ -1,8 +1,13 @@
 parameters:
     ezpublish.fieldType.sckenhancedselection.converter.class: Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\EnhancedSelectionConverter
+    ezpublish.twig.twig_extension.enhancedselection_sort.class: Netgen\Bundle\EnhancedSelectionBundle\Twig\Extension\EnhancedSelectionSortExtension
 
 services:
     ezpublish.fieldType.sckenhancedselection.converter:
         class: %ezpublish.fieldType.sckenhancedselection.converter.class%
         tags:
             - {name: ezpublish.storageEngine.legacy.converter, alias: sckenhancedselection, lazy: true, callback: "::create"}
+    ezpublish.twig.twig_extension.enhancedselection_sort:
+        class:  %ezpublish.twig.twig_extension.enhancedselection_sort.class%
+        tags:
+            - { name: twig.extension }
