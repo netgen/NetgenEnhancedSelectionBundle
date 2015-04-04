@@ -49,3 +49,20 @@ php ezpublish/console cache:clear
 ### Use the bundle
 
 You can now load and create content with `sckenhancedselection` field type.
+
+## Using the content field within your own custom template
+
+Add the following template code into your template:
+
+```twig
+{% if not ez_is_field_empty(content, "selection") %}
+      {{ez_render_field(content, "selection")}}
+{% else %}
+       Empty selection
+{% endif %}
+```
+
+Replaced the text: "selection" with your own contenttype field identifier text string as needed.
+
+Save these additions to your custom template and clear caches as required.
+

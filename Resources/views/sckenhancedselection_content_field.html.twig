@@ -1,7 +1,26 @@
 {% block sckenhancedselection_field %}
 {% spaceless %}
-    {% for identifier in field.value.identifiers %}
-        {{ identifier }}{% if not loop.last %}, {% endif %}
+
+{% set available_options = fieldSettings.options %}
+{% set identifiers = field.value.identifiers %}
+
+{% if fieldSettings.delimiter is not empty %}
+    {% set delimiter = fieldSettings.delimiter %}
+{% else %}
+    {% set delimiter = ', ' %}
+{% endif %}
+
+{% if available_options is not empty and identifiers is not empty %}
+    {% for option in available_options %}
+        {% if option.identifier in identifiers %}
+            {{ option.name }}{% if not loop.last %}{{ delimiter }}{% endif %}
+        {% endif %}
     {% endfor %}
+{% elseif identifiers is not empty %}
+    {% for identifier in identifiers %}
+        {{ identifier }}{% if not loop.last %}{{ delimiter }}{% endif %}
+    {% endfor %}
+{% endif %}
+
 {% endspaceless %}
 {% endblock %}
