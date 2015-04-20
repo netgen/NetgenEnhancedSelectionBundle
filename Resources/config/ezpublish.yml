@@ -1,0 +1,4 @@
+system:
+    default:
+        field_templates:
+            - {template: "NetgenEnhancedSelectionBundle::sckenhancedselection_content_field.html.twig", priority: 10}

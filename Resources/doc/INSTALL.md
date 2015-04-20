@@ -41,19 +41,6 @@ public function registerBundles()
 }
 ```
 
-### Edit configuration
-
-Put the following config in your `ezpublish/config/config.yml` file to be able to load `sckenhancedselection` content field template.
-
-```yml
-parameters:
-   ezsettings.YOUR_SITEACCESS_NAME.field_templates:
-       - {template: EzPublishCoreBundle::content_fields.html.twig, priority: 0}
-       - {template: NetgenEnhancedSelectionBundle::sckenhancedselection_content_field.html.twig, priority: 0}
-```
-
-Be sure to replace `YOUR_SITEACCESS_NAME` text with the name of your frontend siteaccess.
-
 ### Clear the caches
 
 Clear eZ Publish 5 caches.
