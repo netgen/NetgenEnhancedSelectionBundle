@@ -11,13 +11,10 @@ Installation steps
 
 ### Use Composer
 
-Add the following to your composer.json and run `php composer.phar update netgen/enhanced-selection-bundle` to refresh dependencies:
+Run the following command from your project root to install the bundle:
 
-```json
-"require": {
-    "netgen/enhanced-selection-bundle": "~1.0",
-    "netgen/enhancedselection2": "*"
-}
+```bash
+$ composer require netgen/enhanced-selection-bundle:~1.0
 ```
 
 ### Activate the bundle
