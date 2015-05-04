@@ -75,7 +75,7 @@ class EnhancedSelectionConverter implements Converter
                     $optionNode = $xml->createElement( "option" )
                 );
 
-                $optionNode->setAttribute( "id", (string)$option["id"] );
+                $optionNode->setAttribute( "id", (string)( $key + 1 ) );
                 $optionNode->setAttribute( "name", (string)$option["name"] );
                 $optionNode->setAttribute( "identifier", (string)$option["identifier"] );
                 $optionNode->setAttribute( "priority", (string)$option["priority"] );
