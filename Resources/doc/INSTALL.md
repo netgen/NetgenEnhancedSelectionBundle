@@ -55,14 +55,13 @@ You can now load and create content with `sckenhancedselection` field type.
 Add the following template code into your template:
 
 ```twig
-{% if not ez_is_field_empty(content, "selection") %}
-      {{ez_render_field(content, "selection")}}
+{% if not ez_is_field_empty( content, "selection" ) %}
+      {{ ez_render_field( content, "selection" ) }}
 {% else %}
        Empty selection
 {% endif %}
 ```
 
-Replaced the text: "selection" with your own contenttype field identifier text string as needed.
+Replace the text: "selection" with your own content type field identifier as needed.
 
 Save these additions to your custom template and clear caches as required.
-

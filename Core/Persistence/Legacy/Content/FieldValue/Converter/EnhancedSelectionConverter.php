@@ -56,59 +56,56 @@ class EnhancedSelectionConverter implements Converter
     public function toStorageFieldDefinition( FieldDefinition $fieldDef, StorageFieldDefinition $storageDef )
     {
         $fieldSettings = $fieldDef->fieldTypeConstraints->fieldSettings;
-        $options = array();
-        $isMultiple = false;
-        $delimiter = false;
-        $query = false;
 
+        $xml = new DOMDocument( "1.0", "utf-8" );
+        $xml->appendChild(
+            $selection = $xml->createElement( "content" )
+        );
+
+        // Options
         if ( !empty( $fieldSettings["options"] ) )
         {
-            // Options
-            $xml = new DOMDocument( "1.0", "utf-8" );
-            $xml->appendChild(
-                $selection = $xml->createElement( "content" )
-            );
             $selection->appendChild(
                 $options = $xml->createElement( "options" )
             );
 
-            foreach( $fieldSettings["options"] as $key => $option )
+            foreach ( $fieldSettings["options"] as $key => $option )
             {
-               $options->appendChild(
-                   $optionNode = $xml->createElement( "option" )
-               );
+                $options->appendChild(
+                    $optionNode = $xml->createElement( "option" )
+                );
 
-               $optionNode->setAttribute( "id", (int)$option["id"] );
-               $optionNode->setAttribute( "name", (string)$option["name"] );
-               $optionNode->setAttribute( "identifier", (string)$option["identifier"] );
-               $optionNode->setAttribute( "priority", (int)$option["priority"] );
+                $optionNode->setAttribute( "id", (string)$option["id"] );
+                $optionNode->setAttribute( "name", (string)$option["name"] );
+                $optionNode->setAttribute( "identifier", (string)$option["identifier"] );
+                $optionNode->setAttribute( "priority", (string)$option["priority"] );
             }
-
-            // Multiselect
-            if ( isset( $fieldSettings["isMultiple"] ) )
-            {
-                $multiSelectNode = $xml->createElement( "multiselect", intval( $fieldSettings["isMultiple"] ) );
-                $selection->appendChild( $multiSelectNode );
-            }
-
-            // Delimiter
-            if( isset( $fieldSettings["delimiter"] ) )
-            {
-                $delimiterElement = $xml->createElement("delimiter");
-                $delimiterElement->appendChild( $xml->createCDATASection( $fieldSettings["delimiter"] ) );
-                $selection->appendChild( $delimiterElement );
-            }
-
-            // DB Query
-            if( isset( $fieldSettings["query"] ) )
-            {
-                $queryElement = $xml->createElement("query");
-                $queryElement->appendChild( $xml->createCDATASection( $fieldSettings["query"] ) );
-                $selection->appendChild( $queryElement );
-            }
-
-            $storageDef->dataText5 = $xml->saveXML();
         }
+
+        // Multiselect
+        if ( isset( $fieldSettings["isMultiple"] ) )
+        {
+            $multiSelectNode = $xml->createElement( "multiselect", intval( $fieldSettings["isMultiple"] ) );
+            $selection->appendChild( $multiSelectNode );
+        }
+
+        // Delimiter
+        if ( !empty( $fieldSettings["delimiter"] ) )
+        {
+            $delimiterElement = $xml->createElement( "delimiter" );
+            $delimiterElement->appendChild( $xml->createCDATASection( $fieldSettings["delimiter"] ) );
+            $selection->appendChild( $delimiterElement );
+        }
+
+        // DB query
+        if ( !empty( $fieldSettings["query"] ) )
+        {
+            $queryElement = $xml->createElement( "query" );
+            $queryElement->appendChild( $xml->createCDATASection( $fieldSettings["query"] ) );
+            $selection->appendChild( $queryElement );
+        }
+
+        $storageDef->dataText5 = $xml->saveXML();
     }
 
     /**
@@ -127,22 +124,30 @@ class EnhancedSelectionConverter implements Converter
 
         if ( $simpleXml !== false )
         {
-            foreach ( $simpleXml->options->option as $option )
+            if ( !empty( $simpleXml->options ) )
             {
-                $options[] = array( "id" => (int)$option["id"],
-                                    "name" => (string)$option["name"],
-                                    "identifier" => (string)$option["identifier"],
-                                    "priority" => (int)$option["priority"] );
+                foreach ( $simpleXml->options->option as $option )
+                {
+                    $options[] = array(
+                        "id" => (int)$option["id"],
+                        "name" => (string)$option["name"],
+                        "identifier" => (string)$option["identifier"],
+                        "priority" => (int)$option["priority"]
+                    );
+                }
             }
-            if( $simpleXml->multiselect == 1 )
+
+            if ( !empty( $simpleXml->multiselect ) )
             {
                 $isMultiple = true;
             }
-            if( (string)$simpleXml->delimiter != null )
+
+            if ( !empty( $simpleXml->delimiter ) )
             {
                 $delimiter = (string)$simpleXml->delimiter;
             }
-            if( $simpleXml->query )
+
+            if ( !empty( $simpleXml->query ) )
             {
                 $query = (string)$simpleXml->query;
             }
