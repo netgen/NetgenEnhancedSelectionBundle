@@ -119,8 +119,8 @@ class EnhancedSelectionConverter implements Converter
         $simpleXml = simplexml_load_string( $storageDef->dataText5 );
         $options = array();
         $isMultiple = false;
-        $delimiter = false;
-        $query = false;
+        $delimiter = "";
+        $query = "";
 
         if ( $simpleXml !== false )
         {
