@@ -11,3 +11,5 @@ License and installation instructions
 [License](LICENSE)
 
 [Installation instructions](Resources/doc/INSTALL.md)
+
+[Changelog](Resources/doc/CHANGELOG.md)
