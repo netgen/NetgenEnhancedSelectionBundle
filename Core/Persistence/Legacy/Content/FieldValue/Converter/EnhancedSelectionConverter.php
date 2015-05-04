@@ -83,11 +83,11 @@ class EnhancedSelectionConverter implements Converter
         }
 
         // Multiselect
-        if ( isset( $fieldSettings["isMultiple"] ) )
-        {
-            $multiSelectNode = $xml->createElement( "multiselect", intval( $fieldSettings["isMultiple"] ) );
-            $selection->appendChild( $multiSelectNode );
-        }
+        $multiSelectNode = $xml->createElement(
+            "multiselect",
+            !empty( $fieldSettings["isMultiple"] ) ? "1" : "0"
+        );
+        $selection->appendChild( $multiSelectNode );
 
         // Delimiter
         if ( !empty( $fieldSettings["delimiter"] ) )

@@ -6,9 +6,36 @@ use eZ\Publish\Core\FieldType\FieldType;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 use eZ\Publish\SPI\FieldType\Value as SPIValue;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
+use eZ\Publish\Core\FieldType\ValidationError;
 
 class Type extends FieldType
 {
+    /**
+     * List of settings available for this FieldType
+     *
+     * The key is the setting name, and the value is the default value for this setting
+     *
+     * @var array
+     */
+    protected $settingsSchema = array(
+        "options" => array(
+            "type" => "array",
+            "default" => array()
+        ),
+        "isMultiple" => array(
+            "type" => "boolean",
+            "default" => false
+        ),
+        "delimiter" => array(
+            "type" => "string",
+            "default" => ""
+        ),
+        "query" => array(
+            "type" => "string",
+            "default" => ""
+        )
+    );
+
     /**
      * Returns the field type identifier for this field type
      *
@@ -210,5 +237,201 @@ class Type extends FieldType
     public function isEmptyValue( SPIValue $value )
     {
         return $value === null || $value->identifiers == $this->getEmptyValue()->identifiers;
+    }
+
+    /**
+     * Validates the fieldSettings of a FieldDefinitionCreateStruct or FieldDefinitionUpdateStruct
+     *
+     * @param mixed $fieldSettings
+     *
+     * @return \eZ\Publish\SPI\FieldType\ValidationError[]
+     */
+    public function validateFieldSettings( $fieldSettings )
+    {
+        $validationErrors = array();
+        if ( !is_array( $fieldSettings ) )
+        {
+            $validationErrors[] = new ValidationError( "Field settings must be in form of an array" );
+            return $validationErrors;
+        }
+
+        foreach ( $fieldSettings as $name => $value )
+        {
+            if ( !isset( $this->settingsSchema[$name] ) )
+            {
+                $validationErrors[] = new ValidationError(
+                    "Setting '%setting%' is unknown",
+                    null,
+                    array(
+                        "setting" => $name
+                    )
+                );
+                continue;
+            }
+
+            switch ( $name )
+            {
+                case "options":
+                    if ( !is_array( $value ) )
+                    {
+                        $validationErrors[] = new ValidationError(
+                            "Setting '%setting%' value must be of array type",
+                            null,
+                            array(
+                                "setting" => $name
+                            )
+                        );
+                    }
+                    else
+                    {
+                        foreach ( $value as $option )
+                        {
+                            if ( !isset( $option["name"] ) )
+                            {
+                                $validationErrors[] = new ValidationError(
+                                    "Setting '%setting%' value item must have a 'name' property",
+                                    null,
+                                    array(
+                                        "setting" => $name
+                                    )
+                                );
+                            }
+                            else
+                            {
+                                if ( !is_string( $option["name"] ) )
+                                {
+                                    $validationErrors[] = new ValidationError(
+                                        "Setting '%setting%' value item's 'name' property must be of string value",
+                                        null,
+                                        array(
+                                            "setting" => $name
+                                        )
+                                    );
+                                }
+
+                                if ( empty( $option["name"] ) )
+                                {
+                                    $validationErrors[] = new ValidationError(
+                                        "Setting '%setting%' value item's 'name' property must have a value",
+                                        null,
+                                        array(
+                                            "setting" => $name
+                                        )
+                                    );
+                                }
+                            }
+
+                            if ( !isset( $option["identifier"] ) )
+                            {
+                                $validationErrors[] = new ValidationError(
+                                    "Setting '%setting%' value item must have an 'identifier' property",
+                                    null,
+                                    array(
+                                        "setting" => $name
+                                    )
+                                );
+                            }
+                            else
+                            {
+                                if ( !is_string( $option["identifier"] ) )
+                                {
+                                    $validationErrors[] = new ValidationError(
+                                        "Setting '%setting%' value item's 'identifier' property must be of string value",
+                                        null,
+                                        array(
+                                            "setting" => $name
+                                        )
+                                    );
+                                }
+
+                                if ( empty( $option["identifier"] ) )
+                                {
+                                    $validationErrors[] = new ValidationError(
+                                        "Setting '%setting%' value item's 'identifier' property must have a value",
+                                        null,
+                                        array(
+                                            "setting" => $name
+                                        )
+                                    );
+                                }
+                            }
+
+                            if ( !isset( $option["priority"] ) )
+                            {
+                                $validationErrors[] = new ValidationError(
+                                    "Setting '%setting%' value item must have an 'priority' property",
+                                    null,
+                                    array(
+                                        "setting" => $name
+                                    )
+                                );
+                            }
+                            else
+                            {
+                                if ( !is_int( $option["priority"] ) )
+                                {
+                                    $validationErrors[] = new ValidationError(
+                                        "Setting '%setting%' value item's 'priority' property must be of integer value",
+                                        null,
+                                        array(
+                                            "setting" => $name
+                                        )
+                                    );
+                                }
+                            }
+                        }
+                    }
+
+                    break;
+                case "isMultiple":
+                    if ( !is_bool( $value ) )
+                    {
+                        $validationErrors[] = new ValidationError(
+                            "Setting '%setting%' value must be of boolean type",
+                            null,
+                            array(
+                                "setting" => $name
+                            )
+                        );
+                    }
+                    break;
+                case "delimiter":
+                    if ( !is_string( $value ) )
+                    {
+                        $validationErrors[] = new ValidationError(
+                            "Setting '%setting%' value must be of string type",
+                            null,
+                            array(
+                                "setting" => $name
+                            )
+                        );
+                    }
+                    break;
+                case "query":
+                    if ( !is_string( $value ) )
+                    {
+                        $validationErrors[] = new ValidationError(
+                            "Setting '%setting%' value must be of string type",
+                            null,
+                            array(
+                                "setting" => $name
+                            )
+                        );
+                    }
+                    break;
+            }
+        }
+
+        return $validationErrors;
+    }
+
+    /**
+     * Returns whether the field type is searchable
+     *
+     * @return boolean
+     */
+    public function isSearchable()
+    {
+        return true;
     }
 }
