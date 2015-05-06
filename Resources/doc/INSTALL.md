@@ -67,19 +67,19 @@ Replace the text: "selection" with your own content type field identifier as nee
 Save these additions to your custom template and clear caches as required.
 
 Custom usage
-------------------
+------------
 
-### Custom content_field template override
+### Custom content field template override
 
 If you need to customize the `sckenhancedselection_content_field.html.twig` template provided by this bundle you must override it within your own custom bundle.
 
 There is general documentation on how to [import template override settings from a bundle](https://doc.ez.no/display/EZP/Import+settings+from+a+bundle)
 
-#### Example of the content_field template override bundle changes required
+#### Example of content field template override
 
-An example of the custom bundle changes required is available within the [BCPageLayoutOverrideTestBundle](https://github.com/brookinsconsulting/BCPageLayoutOverrideTestBundle/commit/e48f57387a3b88c5869300d64e9ff3702eb37a67) which provides a `sckenhancedselection_content_field.html.twig` template override which you can use to see what is needed to be added to your own custom bundle.
+An example of changes required to override the content field template is available within the [BCPageLayoutOverrideTestBundle](https://github.com/brookinsconsulting/BCPageLayoutOverrideTestBundle/commit/e48f57387a3b88c5869300d64e9ff3702eb37a67) which provides an overriden `sckenhancedselection_content_field.html.twig` template.
 
-#### General requirements of a content_field template override bundle
+#### General requirements of a content field template override bundle
 
 * Within your custom bundle create a DependencyInjection/YourCustomTemplateOverrideExtension.php class implementing the PrependExtensionInterface class. Remember to load the `Resources/config/ezpublish.yml` config file from in your own bundle. The [import template override settings from a bundle documentation](https://doc.ez.no/display/EZP/Import+settings+from+a+bundle#Importsettingsfromabundle-Theimplicitway) provides an example.
 
