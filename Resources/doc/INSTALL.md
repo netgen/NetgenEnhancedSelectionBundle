@@ -79,13 +79,9 @@ There is general documentation on how to [import template override settings from
 
 An example of changes required to override the content field template is available within the [BCPageLayoutOverrideTestBundle](https://github.com/brookinsconsulting/BCPageLayoutOverrideTestBundle/commit/e48f57387a3b88c5869300d64e9ff3702eb37a67) which provides an overriden `sckenhancedselection_content_field.html.twig` template.
 
-#### General requirements of a content field template override bundle
+#### Step by step instructions to override the content field template
 
-* Within your custom bundle create a DependencyInjection/YourCustomTemplateOverrideExtension.php class implementing the PrependExtensionInterface class. Remember to load the `Resources/config/ezpublish.yml` config file from in your own bundle. The [import template override settings from a bundle documentation](https://doc.ez.no/display/EZP/Import+settings+from+a+bundle#Importsettingsfromabundle-Theimplicitway) provides an example.
-
-* Create a config file override in `Resources/config/ezpublish.yml` (within your own custom bundle) and populate it with the settings required in the field_templates settings block to override the template.
-
-Here is an example of the bundle's template override config settings required:
+* Create `Resources/config/ezpublish.yml` file within your own custom bundle and populate it with the following example to override the template, changing the bundle name as required:
 
 ```yaml
 system:
@@ -94,11 +90,12 @@ system:
             - {template: "BCPageLayoutOverrideTestBundle::sckenhancedselection_content_field.html.twig", priority: 30}
 ```
 
-* It is very important that within the `Resources/config/ezpublish.yml` template override settings you set the 'priority' variable value larger than within the NetgenEnhancedSelectionBundle default 'priority' value used, which is 10. Your 'priority' variable value should be larger than 10 like for example 20.
+* It is very important that value of `priority` configuration in the example above is larger than the default priority defined in this bundle, which is 10.
 
-* Note: Instead of autoloading the config settings (by using PrependExtensionInterface class), you could also create the config settings within `ezpublish/config/ezpublish.yml` if you prefer or require global settings overrides or you can import the settings from your bundle within `ezpublish/config/config.yml` instead of autoloading the settings.
+* Within your custom bundle create a `DependencyInjection/MyBundleExtension.php` class implementing the `PrependExtensionInterface` interface. The [import template override settings from a bundle documentation](https://doc.ez.no/display/EZP/Import+settings+from+a+bundle#Importsettingsfromabundle-Theimplicitway) provides an example. `prepend` method should load your `Resources/config/ezpublish.yml` config file.
 
-* Then create a copy of the default `sckenhancedselection_content_field.html.twig` template into your own custom bundle's `Resources/views` directory and customize the template to meet your own unique needs.
+* Create a copy of the default `sckenhancedselection_content_field.html.twig` template in your own custom bundle's `Resources/views` directory and customize the template to meet your own unique needs.
 
 * Clear caches
 
+* NOTE: Instead of autoloading the configuration by implementing `PrependExtensionInterface` as noted above, you could also place the configuration in `ezpublish/config/ezpublish.yml` or import it from your bundle within `ezpublish/config/config.yml` file.
