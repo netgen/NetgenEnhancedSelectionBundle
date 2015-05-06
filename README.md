@@ -7,7 +7,7 @@ This repository represents eZ Publish 5 rewrite of the original eZ Publish 4 ext
 
 However, The eZ Publish 4 extension is still required to populate field type through the admin interface.
 
-If you install this bundle by composer the eZ Publish 4 extension is installed automatically but not activated in settings.
+When you install this bundle with Composer, the eZ Publish 4 extension is installed automatically but not activated in settings.
 
 License and installation instructions
 -------------------------------------
