@@ -1,7 +1,7 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
-1.1
+1.1 (07.05.2015)
 ----------------
 
 * Load field type view template automatically by implementing `PrependExtensionInterface` in DI extension
