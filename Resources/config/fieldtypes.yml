@@ -1,5 +1,6 @@
 parameters:
     ezpublish.fieldType.sckenhancedselection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type
+    ezpublish.fieldType.indexable.sckenhancedselection.class: %ezpublish.fieldType.indexable.unindexed.class%
 
 services:
     ezpublish.fieldType.sckenhancedselection:
@@ -7,3 +8,8 @@ services:
         parent: ezpublish.fieldType
         tags:
             - {name: ezpublish.fieldType, alias: sckenhancedselection}
+
+    ezpublish.fieldType.indexable.sckenhancedselection:
+        class: %ezpublish.fieldType.indexable.sckenhancedselection.class%
+        tags:
+            - {name: ezpublish.fieldType.indexable, alias: sckenhancedselection}

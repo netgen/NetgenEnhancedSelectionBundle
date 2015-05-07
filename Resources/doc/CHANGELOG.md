@@ -1,6 +1,11 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+1.1.1 (07.05.2015)
+------------------
+
+* Mark the field type as unindexable (for now) in order not to crash elasticsearch/solr indexing scripts
+
 1.1 (07.05.2015)
 ----------------
 
