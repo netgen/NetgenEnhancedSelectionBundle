@@ -10,7 +10,7 @@
     ],
     "require": {
         "ezsystems/ezpublish-kernel": "*",
-        "netgen/enhancedselection2": "~1.0"
+        "netgen/enhancedselection2": "~2.0"
     },
     "autoload": {
         "psr-0": { "Netgen\\Bundle\\EnhancedSelectionBundle": "" }
