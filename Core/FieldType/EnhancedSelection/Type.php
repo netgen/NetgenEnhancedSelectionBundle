@@ -5,6 +5,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection
 use eZ\Publish\Core\FieldType\FieldType;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 use eZ\Publish\SPI\FieldType\Value as SPIValue;
+use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\Core\FieldType\ValidationError;
 
@@ -221,6 +222,36 @@ class Type extends FieldType
     protected function getSortInfo( BaseValue $value )
     {
         return false;
+    }
+
+    /**
+     * Converts a $value to a persistence value
+     *
+     * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value $value
+     *
+     * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
+     */
+    public function toPersistenceValue( SPIValue $value )
+    {
+        return new FieldValue(
+            array(
+                "data" => null,
+                "externalData" => $this->toHash( $value ),
+                "sortKey" => $this->getSortInfo( $value ),
+            )
+        );
+    }
+
+    /**
+     * Converts a persistence $fieldValue to a Value
+     *
+     * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
+     *
+     * @return \eZ\Publish\Core\FieldType\Value
+     */
+    public function fromPersistenceValue( FieldValue $fieldValue )
+    {
+        return $this->fromHash( $fieldValue->externalData );
     }
 
     /**

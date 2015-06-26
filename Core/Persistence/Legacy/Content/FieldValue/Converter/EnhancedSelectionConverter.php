@@ -32,7 +32,6 @@ class EnhancedSelectionConverter implements Converter
      */
     public function toStorageValue( FieldValue $value, StorageFieldValue $storageFieldValue )
     {
-        $storageFieldValue->dataText = empty( $value->data ) ? serialize( array() ) : serialize( $value->data );
     }
 
     /**
@@ -43,8 +42,6 @@ class EnhancedSelectionConverter implements Converter
      */
     public function toFieldValue( StorageFieldValue $value, FieldValue $fieldValue )
     {
-        $data = trim( $value->dataText );
-        $fieldValue->data = empty( $data ) ? array() : unserialize( $data );
     }
 
     /**
