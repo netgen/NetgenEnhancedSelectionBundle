@@ -42,7 +42,7 @@ public function registerBundles()
 
 Import the following database table to your MySQL database:
 
-```mysql
+```sql
 CREATE TABLE `sckenhancedselection` (
   `contentobject_attribute_id` int(11) NOT NULL default '0',
   `contentobject_attribute_version` int(11) NOT NULL default '0',
