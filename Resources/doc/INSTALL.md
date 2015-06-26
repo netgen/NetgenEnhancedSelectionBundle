@@ -14,7 +14,7 @@ Installation steps
 Run the following command from your project root to install the bundle:
 
 ```bash
-$ composer require netgen/enhanced-selection-bundle:~1.0
+$ composer require netgen/enhanced-selection-bundle:~2.0
 ```
 
 ### Activate the bundle

@@ -1,6 +1,14 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+2.0
+
+* Migrate `sckenhancedselection` field type to database storage
+
+1.1.2 (24.05.2015)
+
+* Specifically require `enhancedselection2` 1.x versions
+
 1.1.1 (07.05.2015)
 ------------------
 
