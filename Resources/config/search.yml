@@ -1,0 +1,9 @@
+parameters:
+    ezpublish.persistence.legacy.search.gateway.criterion_handler.common.enhanced_selection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\Search\Common\Gateway\CriterionHandler\EnhancedSelection
+
+services:
+    ezpublish.persistence.legacy.search.gateway.criterion_handler.common.enhanced_selection:
+        parent: ezpublish.persistence.legacy.search.gateway.criterion_handler.field_base
+        class: %ezpublish.persistence.legacy.search.gateway.criterion_handler.common.enhanced_selection.class%
+        tags:
+            - {name: ezpublish.persistence.legacy.search.gateway.criterion_handler.common}
