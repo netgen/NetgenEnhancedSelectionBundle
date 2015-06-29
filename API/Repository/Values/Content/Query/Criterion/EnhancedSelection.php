@@ -16,23 +16,6 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
  */
 class EnhancedSelection extends Criterion implements CriterionInterface
 {
-    /**
-     * Creates a new EnhancedSelection criterion
-     *
-     * @param string $target Field definition identifier
-     * @param string|null $operator
-     *        The operator the Criterion uses. If null is given, will default to Operator::IN if $value is an array,
-     *        Operator::EQ if it is not.
-     * @param string|string[] $value One or more identifiers that must be matched
-     *
-     * @throws \InvalidArgumentException if a non string identifier is given
-     * @throws \InvalidArgumentException if the value type doesn't match the operator
-     */
-    public function __construct( $target, $operator, $value )
-    {
-        parent::__construct( $target, $operator, $value );
-    }
-
     public function getSpecifications()
     {
         return array(
