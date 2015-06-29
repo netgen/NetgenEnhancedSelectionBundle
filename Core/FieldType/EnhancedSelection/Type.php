@@ -150,7 +150,11 @@ class Type extends FieldType
      */
     protected function createValueFromInput( $inputValue )
     {
-        if ( is_array( $inputValue ) )
+        if ( is_string( $inputValue ) )
+        {
+            $inputValue = new Value( array( $inputValue ) );
+        }
+        else if ( is_array( $inputValue ) )
         {
             foreach ( $inputValue as $inputValueItem )
             {
