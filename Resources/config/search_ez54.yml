@@ -1,5 +1,5 @@
 parameters:
-    ezpublish.search.legacy.gateway.criterion_handler.common.enhanced_selection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\Search\Common\Gateway\CriterionHandler\EnhancedSelection
+    ezpublish.search.legacy.gateway.criterion_handler.common.enhanced_selection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler\EnhancedSelection
 
 services:
     ezpublish.search.legacy.gateway.criterion_handler.common.enhanced_selection:
