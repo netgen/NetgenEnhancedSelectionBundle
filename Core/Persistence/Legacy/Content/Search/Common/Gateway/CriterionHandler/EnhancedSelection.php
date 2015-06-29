@@ -3,7 +3,6 @@
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\Search\Common\Gateway\CriterionHandler;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\Search\Common\Gateway\CriterionHandler;
-use eZ\Publish\Core\Persistence\Legacy\Content\Search\Common\Gateway\CriterionHandler\FieldBase;
 use eZ\Publish\Core\Persistence\Legacy\Content\Search\Common\Gateway\CriteriaConverter;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
@@ -13,7 +12,7 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 /**
  * EnhancedSelection criterion handler
  */
-class EnhancedSelection extends FieldBase
+class EnhancedSelection extends CriterionHandler
 {
     /**
      * Check if this criterion handler accepts to handle the given criterion.
@@ -40,7 +39,7 @@ class EnhancedSelection extends FieldBase
      */
     public function handle( CriteriaConverter $converter, SelectQuery $query, Criterion $criterion )
     {
-        $fieldDefinitionIds = $this->getFieldDefinitionIds( $criterion->target );
+        $this->checkSearchableFields( $criterion->target );
 
         $subSelect = $query->subSelect();
         $subSelect
@@ -62,15 +61,9 @@ class EnhancedSelection extends FieldBase
                 )
             )
             ->where(
-                $subSelect->expr->lAnd(
-                    $subSelect->expr->eq(
-                        $this->dbHandler->quoteColumn( 'version', 'ezcontentobject_attribute' ),
-                        $this->dbHandler->quoteColumn( 'current_version', 'ezcontentobject' )
-                    ),
-                    $subSelect->expr->in(
-                        $this->dbHandler->quoteColumn( 'contentclassattribute_id', 'ezcontentobject_attribute' ),
-                        $fieldDefinitionIds
-                    )
+                $subSelect->expr->eq(
+                    $this->dbHandler->quoteColumn( 'version', 'ezcontentobject_attribute' ),
+                    $this->dbHandler->quoteColumn( 'current_version', 'ezcontentobject' )
                 )
             );
 
@@ -81,43 +74,45 @@ class EnhancedSelection extends FieldBase
     }
 
     /**
-     * Returns a list of IDs of searchable field definitions for the given criterion target
+     * Checks if there are searchable fields for the Criterion
      *
      * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException If no searchable fields are found for the given $fieldIdentifier.
      *
      * @param string $fieldIdentifier
-     *
-     * @return array
      */
-    protected function getFieldDefinitionIds( $fieldIdentifier )
+    protected function checkSearchableFields( $fieldIdentifier )
     {
-        $fieldDefinitionIdList = array();
-        $fieldMap = $this->contentTypeHandler->getSearchableFieldMap();
-
-        foreach ( $fieldMap as $contentTypeIdentifier => $fieldIdentifierMap )
-        {
-            // First check if field exists in the current content type, there is nothing to do if it doesn't
-            if (
-                !(
-                    isset( $fieldIdentifierMap[$fieldIdentifier] )
-                    && $fieldIdentifierMap[$fieldIdentifier]["field_type_identifier"] === "sckenhancedselection"
+        $query = $this->dbHandler->createSelectQuery();
+        $query
+            ->select( $this->dbHandler->quoteColumn( 'id', 'ezcontentclass_attribute' ) )
+            ->from( $this->dbHandler->quoteTable( 'ezcontentclass_attribute' ) )
+            ->where(
+                $query->expr->lAnd(
+                    $query->expr->eq(
+                        $this->dbHandler->quoteColumn( 'is_searchable', 'ezcontentclass_attribute' ),
+                        $query->bindValue( 1, null, \PDO::PARAM_INT )
+                    ),
+                    $query->expr->eq(
+                        $this->dbHandler->quoteColumn( 'data_type_string', 'ezcontentclass_attribute' ),
+                        $query->bindValue( "sckenhancedselection" )
+                    ),
+                    $query->expr->eq(
+                        $this->dbHandler->quoteColumn( 'identifier', 'ezcontentclass_attribute' ),
+                        $query->bindValue( $fieldIdentifier )
+                    )
                 )
-            )
-            {
-                continue;
-            }
+            );
 
-            $fieldDefinitionIdList[] = $fieldIdentifierMap[$fieldIdentifier]["field_definition_id"];
-        }
+        $statement = $query->prepare();
+        $statement->execute();
+        $fieldDefinitionIds = $statement->fetchAll( \PDO::FETCH_COLUMN );
 
-        if ( empty( $fieldDefinitionIdList ) )
+        if ( empty( $fieldDefinitionIds ) )
         {
             throw new InvalidArgumentException(
                 "\$criterion->target",
                 "No searchable fields found for the given criterion target '{$fieldIdentifier}'."
             );
         }
-
-        return $fieldDefinitionIdList;
     }
 }
