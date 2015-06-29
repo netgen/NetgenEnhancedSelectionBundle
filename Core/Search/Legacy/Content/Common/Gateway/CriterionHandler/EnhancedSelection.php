@@ -38,7 +38,7 @@ class EnhancedSelection extends FieldBase
      *
      * @return \eZ\Publish\Core\Persistence\Database\Expression
      */
-    public function handle( CriteriaConverter $converter, SelectQuery $query, Criterion $criterion )
+    public function handle( CriteriaConverter $converter, SelectQuery $query, Criterion $criterion, array $fieldFilters = null )
     {
         $fieldDefinitionIds = $this->getFieldDefinitionIds( $criterion->target );
 
