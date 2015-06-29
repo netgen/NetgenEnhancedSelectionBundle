@@ -71,6 +71,10 @@ class EnhancedSelection extends FieldBase
                     $subSelect->expr->in(
                         $this->dbHandler->quoteColumn( 'contentclassattribute_id', 'ezcontentobject_attribute' ),
                         $fieldDefinitionIds
+                    ),
+                    $subSelect->expr->in(
+                        $this->dbHandler->quoteColumn( 'identifier', 'sckenhancedselection' ),
+                        $criterion->value
                     )
                 )
             );

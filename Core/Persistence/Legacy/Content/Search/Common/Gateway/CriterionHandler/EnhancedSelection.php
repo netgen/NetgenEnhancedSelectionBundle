@@ -61,9 +61,15 @@ class EnhancedSelection extends CriterionHandler
                 )
             )
             ->where(
-                $subSelect->expr->eq(
-                    $this->dbHandler->quoteColumn( 'version', 'ezcontentobject_attribute' ),
-                    $this->dbHandler->quoteColumn( 'current_version', 'ezcontentobject' )
+                $subSelect->expr->lAnd(
+                    $subSelect->expr->eq(
+                        $this->dbHandler->quoteColumn( 'version', 'ezcontentobject_attribute' ),
+                        $this->dbHandler->quoteColumn( 'current_version', 'ezcontentobject' )
+                    ),
+                    $subSelect->expr->in(
+                        $this->dbHandler->quoteColumn( 'identifier', 'sckenhancedselection' ),
+                        $criterion->value
+                    )
                 )
             );
 
