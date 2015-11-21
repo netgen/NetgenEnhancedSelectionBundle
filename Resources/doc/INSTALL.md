@@ -4,7 +4,7 @@ Netgen Enhanced Selection Bundle installation instructions
 Requirements
 ------------
 
-* Recent version of eZ Publish 5
+* eZ Publish 5.4+ / eZ Publish Community 2014.11+ / eZ Platform 1.0+
 
 Installation steps
 ------------------
@@ -54,7 +54,7 @@ CREATE TABLE `sckenhancedselection` (
 
 ### Clear the caches
 
-Clear eZ Publish 5 caches.
+Clear eZ Publish caches.
 
 ```bash
 php ezpublish/console cache:clear
