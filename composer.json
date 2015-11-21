@@ -13,7 +13,6 @@
         "netgen/enhancedselection2": "~2.0"
     },
     "autoload": {
-        "psr-0": { "Netgen\\Bundle\\EnhancedSelectionBundle": "" }
-    },
-    "target-dir": "Netgen/Bundle/EnhancedSelectionBundle"
+        "psr-4": { "Netgen\\Bundle\\EnhancedSelectionBundle\\": "" }
+    }
 }
