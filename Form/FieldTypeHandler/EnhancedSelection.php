@@ -25,7 +25,10 @@ class EnhancedSelection extends FieldTypeHandler
      */
     public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
-        $isMultiple = $fieldDefinition->getFieldSettings()['isMultiple'];
+        $isMultiple = true;
+        if ( null !== $fieldDefinition ) {
+            $isMultiple = $fieldDefinition->getFieldSettings()['isMultiple'];
+        }
 
         if ( !$isMultiple )
         {
