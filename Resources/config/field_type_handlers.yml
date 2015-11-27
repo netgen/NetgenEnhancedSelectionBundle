@@ -1,8 +1,0 @@
-parameters:
-    netgen.ezforms.form.fieldtype_handler.sckenhancedselection.class: Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection
-
-services:
-    netgen.ezforms.form.fieldtype_handler.sckenhancedselection:
-        class: %netgen.ezforms.form.fieldtype_handler.sckenhancedselection.class%
-        tags:
-            - {name: netgen.ezforms.form.fieldtype_handler, alias: sckenhancedselection}

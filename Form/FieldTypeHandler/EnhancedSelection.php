@@ -3,7 +3,6 @@
 namespace Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
@@ -11,44 +10,54 @@ use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value as EnhancedSelectionValue;
 use Symfony\Component\Validator\Constraints;
 
-/**
- * Class EnhancedSelection
- *
- * @package Netgen\EnhancedSelectionBundle\FieldType\FormBuilder
- */
 class EnhancedSelection extends FieldTypeHandler
 {
     /**
-     * {@inheritdoc}
+     * Converts the eZ Publish field type value to a format that can be accepted by the form.
      *
-     * @param EnhancedSelectionValue $value
+     * @param \eZ\Publish\SPI\FieldType\Value $value
+     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
+     *
+     * @return mixed
      */
     public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         $isMultiple = true;
-        if ( null !== $fieldDefinition ) {
-            $isMultiple = $fieldDefinition->getFieldSettings()['isMultiple'];
+        if ( $fieldDefinition !== null )
+        {
+            $fieldSettings = $fieldDefinition->getFieldSettings();
+            $isMultiple = $fieldSettings['isMultiple'];
         }
 
         if ( !$isMultiple )
         {
-            return array_pop($value->identifiers);
+            return $value->identifiers[0];
         }
 
         return $value->identifiers;
     }
 
     /**
-     * {@inheritdoc}
+     * Converts the form data to a format that can be accepted by eZ Publish field type.
+     *
+     * @param mixed $data
+     *
+     * @return mixed
      */
     public function convertFieldValueFromForm( $data )
     {
-
-        return new EnhancedSelectionValue( (array)$data );
+        return new EnhancedSelectionValue( is_array( $data ) ? $data : array( $data ) );
     }
 
     /**
-     * {@inheritdoc}
+     * In most cases implementations of methods {@link self::buildCreateFieldForm()}
+     * and {@link self::buildUpdateFieldForm()} will be the same, therefore default
+     * handler implementation of those falls back to this method.
+     *
+     * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
+     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
+     * @param string $languageCode
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
@@ -59,14 +68,14 @@ class EnhancedSelection extends FieldTypeHandler
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
 
-        $optionsValues = $fieldDefinition->getFieldSettings()['options'];
-        $values = $this->getValues($optionsValues);
+        $fieldSettings = $fieldDefinition->getFieldSettings();
+        $optionsValues = $fieldSettings['options'];
 
         $options['expanded'] = false;
-        $options['multiple'] = $fieldDefinition->getFieldSettings()["isMultiple"];
-        $options['choice_list'] = new ChoiceList( array_keys($values), array_values($values) );
+        $options['multiple'] = $fieldSettings['isMultiple'];
+        $options['choices'] = $this->getValues( $optionsValues );
 
-        $formBuilder->add( $fieldDefinition->identifier, "choice", $options );
+        $formBuilder->add( $fieldDefinition->identifier, 'choice', $options );
     }
 
     /**
