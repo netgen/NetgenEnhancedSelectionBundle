@@ -1,6 +1,12 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+2.1 (17.12.2015)
+----------------
+
+* Implemented enhanced selection field type handler for NetgenEzFormsBundle (thanks @MarioBlazek)
+* Switch coding standards to PSR-2
+
 2.0 (29.06.2015)
 ----------------
 
