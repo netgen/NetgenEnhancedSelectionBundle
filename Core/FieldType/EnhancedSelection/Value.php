@@ -7,21 +7,20 @@ use eZ\Publish\Core\FieldType\Value as BaseValue;
 class Value extends BaseValue
 {
     /**
-     * The list of selection identifiers
+     * The list of selection identifiers.
      *
      * @var string[]
      */
     public $identifiers = array();
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string[] $identifiers
      */
-    public function __construct( $identifiers = null )
+    public function __construct($identifiers = null)
     {
-        if ( is_array( $identifiers ) )
-        {
+        if (is_array($identifiers)) {
             $this->identifiers = $identifiers;
         }
     }
@@ -33,6 +32,6 @@ class Value extends BaseValue
      */
     public function __toString()
     {
-        return implode( ", ", $this->identifiers );
+        return implode(', ', $this->identifiers);
     }
 }

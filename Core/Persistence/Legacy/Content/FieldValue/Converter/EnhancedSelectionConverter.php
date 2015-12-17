@@ -13,155 +13,145 @@ use DOMDocument;
 class EnhancedSelectionConverter implements Converter
 {
     /**
-     * Factory for current class
+     * Factory for current class.
      *
      * @note Class should instead be configured as service if it gains dependencies.
      *
      * @return \Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\EnhancedSelectionConverter
      */
-    static public function create()
+    public static function create()
     {
-        return new self;
+        return new self();
     }
 
     /**
-     * Converts data from $value to $storageFieldValue
+     * Converts data from $value to $storageFieldValue.
      *
      * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $value
      * @param \eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue $storageFieldValue
      */
-    public function toStorageValue( FieldValue $value, StorageFieldValue $storageFieldValue )
+    public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue)
     {
     }
 
     /**
-     * Converts data from $value to $fieldValue
+     * Converts data from $value to $fieldValue.
      *
      * @param \eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue $value
      * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
      */
-    public function toFieldValue( StorageFieldValue $value, FieldValue $fieldValue )
+    public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue)
     {
     }
 
     /**
-     * Converts field definition data in $fieldDef into $storageFieldDef
+     * Converts field definition data in $fieldDef into $storageFieldDef.
      *
      * @param \eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition $fieldDef
      * @param \eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition $storageDef
      */
-    public function toStorageFieldDefinition( FieldDefinition $fieldDef, StorageFieldDefinition $storageDef )
+    public function toStorageFieldDefinition(FieldDefinition $fieldDef, StorageFieldDefinition $storageDef)
     {
         $fieldSettings = $fieldDef->fieldTypeConstraints->fieldSettings;
 
-        $xml = new DOMDocument( "1.0", "utf-8" );
+        $xml = new DOMDocument('1.0', 'utf-8');
         $xml->appendChild(
-            $selection = $xml->createElement( "content" )
+            $selection = $xml->createElement('content')
         );
 
         // Options
-        if ( !empty( $fieldSettings["options"] ) )
-        {
+        if (!empty($fieldSettings['options'])) {
             $selection->appendChild(
-                $options = $xml->createElement( "options" )
+                $options = $xml->createElement('options')
             );
 
-            foreach ( $fieldSettings["options"] as $key => $option )
-            {
+            foreach ($fieldSettings['options'] as $key => $option) {
                 $options->appendChild(
-                    $optionNode = $xml->createElement( "option" )
+                    $optionNode = $xml->createElement('option')
                 );
 
-                $optionNode->setAttribute( "id", (string)( $key + 1 ) );
-                $optionNode->setAttribute( "name", (string)$option["name"] );
-                $optionNode->setAttribute( "identifier", (string)$option["identifier"] );
-                $optionNode->setAttribute( "priority", (string)$option["priority"] );
+                $optionNode->setAttribute('id', (string)($key + 1));
+                $optionNode->setAttribute('name', (string)$option['name']);
+                $optionNode->setAttribute('identifier', (string)$option['identifier']);
+                $optionNode->setAttribute('priority', (string)$option['priority']);
             }
         }
 
         // Multiselect
         $multiSelectNode = $xml->createElement(
-            "multiselect",
-            !empty( $fieldSettings["isMultiple"] ) ? "1" : "0"
+            'multiselect',
+            !empty($fieldSettings['isMultiple']) ? '1' : '0'
         );
-        $selection->appendChild( $multiSelectNode );
+        $selection->appendChild($multiSelectNode);
 
         // Delimiter
-        if ( !empty( $fieldSettings["delimiter"] ) )
-        {
-            $delimiterElement = $xml->createElement( "delimiter" );
-            $delimiterElement->appendChild( $xml->createCDATASection( $fieldSettings["delimiter"] ) );
-            $selection->appendChild( $delimiterElement );
+        if (!empty($fieldSettings['delimiter'])) {
+            $delimiterElement = $xml->createElement('delimiter');
+            $delimiterElement->appendChild($xml->createCDATASection($fieldSettings['delimiter']));
+            $selection->appendChild($delimiterElement);
         }
 
         // DB query
-        if ( !empty( $fieldSettings["query"] ) )
-        {
-            $queryElement = $xml->createElement( "query" );
-            $queryElement->appendChild( $xml->createCDATASection( $fieldSettings["query"] ) );
-            $selection->appendChild( $queryElement );
+        if (!empty($fieldSettings['query'])) {
+            $queryElement = $xml->createElement('query');
+            $queryElement->appendChild($xml->createCDATASection($fieldSettings['query']));
+            $selection->appendChild($queryElement);
         }
 
         $storageDef->dataText5 = $xml->saveXML();
     }
 
     /**
-     * Converts field definition data in $storageDef into $fieldDef
+     * Converts field definition data in $storageDef into $fieldDef.
      *
      * @param \eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition $storageDef
      * @param \eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition $fieldDef
      */
-    public function toFieldDefinition( StorageFieldDefinition $storageDef, FieldDefinition $fieldDef )
+    public function toFieldDefinition(StorageFieldDefinition $storageDef, FieldDefinition $fieldDef)
     {
-        $simpleXml = simplexml_load_string( $storageDef->dataText5 );
+        $simpleXml = simplexml_load_string($storageDef->dataText5);
         $options = array();
         $isMultiple = false;
-        $delimiter = "";
-        $query = "";
+        $delimiter = '';
+        $query = '';
 
-        if ( $simpleXml !== false )
-        {
-            if ( !empty( $simpleXml->options ) )
-            {
-                foreach ( $simpleXml->options->option as $option )
-                {
+        if ($simpleXml !== false) {
+            if (!empty($simpleXml->options)) {
+                foreach ($simpleXml->options->option as $option) {
                     $options[] = array(
-                        "id" => (int)$option["id"],
-                        "name" => (string)$option["name"],
-                        "identifier" => (string)$option["identifier"],
-                        "priority" => (int)$option["priority"]
+                        'id' => (int)$option['id'],
+                        'name' => (string)$option['name'],
+                        'identifier' => (string)$option['identifier'],
+                        'priority' => (int)$option['priority'],
                     );
                 }
             }
 
-            if ( !empty( $simpleXml->multiselect ) )
-            {
+            if (!empty($simpleXml->multiselect)) {
                 $isMultiple = true;
             }
 
-            if ( !empty( $simpleXml->delimiter ) )
-            {
+            if (!empty($simpleXml->delimiter)) {
                 $delimiter = (string)$simpleXml->delimiter;
             }
 
-            if ( !empty( $simpleXml->query ) )
-            {
+            if (!empty($simpleXml->query)) {
                 $query = (string)$simpleXml->query;
             }
         }
 
         $fieldDef->fieldTypeConstraints->fieldSettings = new FieldSettings(
             array(
-                "isMultiple" => $isMultiple,
-                "delimiter" => $delimiter,
-                "options" => $options,
-                "query" => $query,
+                'isMultiple' => $isMultiple,
+                'delimiter' => $delimiter,
+                'options' => $options,
+                'query' => $query,
             )
         );
     }
 
     /**
-     * Returns the name of the index column in the attribute table
+     * Returns the name of the index column in the attribute table.
      *
      * Returns the name of the index column the datatype uses, which is either
      * "sort_key_int" or "sort_key_string". This column is then used for

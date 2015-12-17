@@ -16,6 +16,6 @@
         "psr-4": { "Netgen\\Bundle\\EnhancedSelectionBundle\\": "" }
     },
     "suggest": {
-        "netgen/ez-forms-bundle": "Allows use of EnhancedSelection field type with Symfony forms"
+        "netgen/ez-forms-bundle": "Allows use of enhanced selection field type with Symfony forms"
     }
 }

@@ -8,7 +8,6 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value as EnhancedSelectionValue;
-use Symfony\Component\Validator\Constraints;
 
 class EnhancedSelection extends FieldTypeHandler
 {
@@ -20,17 +19,15 @@ class EnhancedSelection extends FieldTypeHandler
      *
      * @return mixed
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         $isMultiple = true;
-        if ( $fieldDefinition !== null )
-        {
+        if ($fieldDefinition !== null) {
             $fieldSettings = $fieldDefinition->getFieldSettings();
             $isMultiple = $fieldSettings['isMultiple'];
         }
 
-        if ( !$isMultiple )
-        {
+        if (!$isMultiple) {
             return $value->identifiers[0];
         }
 
@@ -44,9 +41,9 @@ class EnhancedSelection extends FieldTypeHandler
      *
      * @return mixed
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        return new EnhancedSelectionValue( is_array( $data ) ? $data : array( $data ) );
+        return new EnhancedSelectionValue(is_array($data) ? $data : array($data));
     }
 
     /**
@@ -64,35 +61,32 @@ class EnhancedSelection extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $fieldSettings = $fieldDefinition->getFieldSettings();
         $optionsValues = $fieldSettings['options'];
 
         $options['expanded'] = false;
         $options['multiple'] = $fieldSettings['isMultiple'];
-        $options['choices'] = $this->getValues( $optionsValues );
+        $options['choices'] = $this->getValues($optionsValues);
 
-        $formBuilder->add( $fieldDefinition->identifier, 'choice', $options );
+        $formBuilder->add($fieldDefinition->identifier, 'choice', $options);
     }
 
     /**
-     * Get key value array for display on form
+     * Get key value array for display on form.
      *
      * @param array $options
      *
      * @return array
      */
-    protected function getValues( $options )
+    protected function getValues($options)
     {
         $values = array();
 
-        foreach( $options as $option )
-        {
-            if ( !empty( $option['identifier'] ) && !empty( $option['name'] ) )
-            {
+        foreach ($options as $option) {
+            if (!empty($option['identifier']) && !empty($option['name'])) {
                 $values[$option['identifier']] = $option['name'];
             }
         }
