@@ -9,8 +9,10 @@
         }
     ],
     "require": {
-        "ezsystems/ezpublish-kernel": "*",
-        "netgen/enhancedselection2": "~2.0"
+        "ezsystems/ezpublish-kernel": "*"
+    },
+    "suggest": {
+        "netgen/enhancedselection2": "To edit this field type in legacy administration interface"
     },
     "autoload": {
         "psr-4": { "Netgen\\Bundle\\EnhancedSelectionBundle\\": "" }

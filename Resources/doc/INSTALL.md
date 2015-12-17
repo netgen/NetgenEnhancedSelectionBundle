@@ -14,24 +14,20 @@ Installation steps
 Run the following command from your project root to install the bundle:
 
 ```bash
-$ composer require netgen/enhanced-selection-bundle:~2.0
+$ composer require netgen/enhanced-selection-bundle:~2.0 netgen/enhancedselection2:~2.0
 ```
 
 ### Activate the bundle
 
-Activate the bundle in `ezpublish/EzPublishKernel.php` file.
+Activate the bundle in `app/AppKernel.php` file.
 
 ```php
-use Netgen\Bundle\EnhancedSelectionBundle\NetgenEnhancedSelectionBundle;
-
-...
-
 public function registerBundles()
 {
    $bundles = array(
-       new FrameworkBundle(),
+       new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
        ...
-       new NetgenEnhancedSelectionBundle()
+       new Netgen\Bundle\EnhancedSelectionBundle\NetgenEnhancedSelectionBundle()
    );
 
    ...
@@ -57,7 +53,7 @@ CREATE TABLE `sckenhancedselection` (
 Clear eZ Publish caches.
 
 ```bash
-php ezpublish/console cache:clear
+php app/console cache:clear
 ```
 
 ### Use the bundle
