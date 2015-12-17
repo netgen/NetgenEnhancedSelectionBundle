@@ -12,12 +12,10 @@
         "ezsystems/ezpublish-kernel": "*"
     },
     "suggest": {
-        "netgen/enhancedselection2": "To edit this field type in legacy administration interface"
+        "netgen/enhancedselection2": "To edit this field type in legacy administration interface",
+        "netgen/ez-forms-bundle": "Allows use of enhanced selection field type with Symfony forms"
     },
     "autoload": {
         "psr-4": { "Netgen\\Bundle\\EnhancedSelectionBundle\\": "" }
-    },
-    "suggest": {
-        "netgen/ez-forms-bundle": "Allows use of enhanced selection field type with Symfony forms"
     }
 }
