@@ -4,7 +4,7 @@ parameters:
 services:
     ezpublish.persistence.legacy.search.gateway.criterion_handler.common.enhanced_selection:
         parent: ezpublish.persistence.legacy.search.gateway.criterion_handler.base
-        class: %ezpublish.persistence.legacy.search.gateway.criterion_handler.common.enhanced_selection.class%
+        class: "%ezpublish.persistence.legacy.search.gateway.criterion_handler.common.enhanced_selection.class%"
         tags:
             - {name: ezpublish.persistence.legacy.search.gateway.criterion_handler.content}
             - {name: ezpublish.persistence.legacy.search.gateway.criterion_handler.location}

@@ -4,11 +4,11 @@ parameters:
 
 services:
     ezpublish.fieldType.sckenhancedselection.converter:
-        class: %ezpublish.fieldType.sckenhancedselection.converter.class%
+        class: "%ezpublish.fieldType.sckenhancedselection.converter.class%"
         tags:
             - {name: ezpublish.storageEngine.legacy.converter, alias: sckenhancedselection, lazy: true, callback: "::create"}
 
     ezpublish.fieldType.sckenhancedselection.storage_gateway:
-        class: %ezpublish.fieldType.sckenhancedselection.storage_gateway.class%
+        class: "%ezpublish.fieldType.sckenhancedselection.storage_gateway.class%"
         tags:
             - {name: ezpublish.fieldType.externalStorageHandler.gateway, alias: sckenhancedselection, identifier: LegacyStorage}

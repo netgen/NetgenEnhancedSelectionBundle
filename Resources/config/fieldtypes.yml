@@ -6,22 +6,22 @@ parameters:
 
 services:
     ezpublish.fieldType.sckenhancedselection:
-        class: %ezpublish.fieldType.sckenhancedselection.class%
+        class: "%ezpublish.fieldType.sckenhancedselection.class%"
         parent: ezpublish.fieldType
         tags:
             - {name: ezpublish.fieldType, alias: sckenhancedselection}
 
     ezpublish.fieldType.sckenhancedselection.externalStorage:
-        class: %ezpublish.fieldType.sckenhancedselection.externalStorage.class%
+        class: "%ezpublish.fieldType.sckenhancedselection.externalStorage.class%"
         tags:
             - {name: ezpublish.fieldType.externalStorageHandler, alias: sckenhancedselection}
 
     ezpublish.fieldType.indexable.sckenhancedselection:
-        class: %ezpublish.fieldType.indexable.sckenhancedselection.class%
+        class: "%ezpublish.fieldType.indexable.sckenhancedselection.class%"
         tags:
             - {name: ezpublish.fieldType.indexable, alias: sckenhancedselection}
 
     ezpublish.fieldType.form.fieldtype_handler.sckenhancedselection:
-        class: %ezpublish.fieldType.form.fieldtype_handler.sckenhancedselection.class%
+        class: "%ezpublish.fieldType.form.fieldtype_handler.sckenhancedselection.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: sckenhancedselection}
