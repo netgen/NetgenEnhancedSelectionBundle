@@ -1,7 +1,7 @@
 parameters:
     ezpublish.fieldType.sckenhancedselection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type
     ezpublish.fieldType.sckenhancedselection.externalStorage.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage
-    ezpublish.fieldType.indexable.sckenhancedselection.class: eZ\Publish\Core\FieldType\Unindexed
+    ezpublish.fieldType.indexable.sckenhancedselection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\SearchField
     ezpublish.fieldType.form.fieldtype_handler.sckenhancedselection.class: Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection
 
 services:
