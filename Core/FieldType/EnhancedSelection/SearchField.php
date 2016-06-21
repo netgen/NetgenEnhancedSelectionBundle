@@ -31,17 +31,17 @@ class SearchField implements Indexable
 
         return [
             new Search\Field(
-                'enhanced_selection_identifiers',
+                'identifiers',
                 $selectionKeys,
                 new Search\FieldType\MultipleStringField()
             ),
             new Search\Field(
-                'enhanced_selection_ids',
+                'ids',
                 $selectionIds,
                 new Search\FieldType\MultipleIntegerField()
             ),
             new Search\Field(
-                'enhanced_selection_text',
+                'names',
                 implode(' ', $selectionNames),
                 new Search\FieldType\TextField()
             ),
@@ -60,9 +60,9 @@ class SearchField implements Indexable
     public function getIndexDefinition()
     {
         return [
-            'enhanced_selection_identifiers' => new Search\FieldType\MultipleStringField(),
-            'enhanced_selection_ids' => new Search\FieldType\MultipleIntegerField(),
-            'enhanced_selection_text' => new Search\FieldType\TextField(),
+            'identifiers' => new Search\FieldType\MultipleStringField(),
+            'ids' => new Search\FieldType\MultipleIntegerField(),
+            'names' => new Search\FieldType\TextField(),
             'fulltext' => new Search\FieldType\FullTextField(),
         ];
     }
@@ -73,7 +73,7 @@ class SearchField implements Indexable
      */
     public function getDefaultMatchField()
     {
-        return 'enhanced_selection_identifiers';
+        return 'identifiers';
     }
     /**
      * Get name of the default field to be used for sorting.
