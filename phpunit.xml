@@ -1,0 +1,25 @@
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         colors="true"
+>
+    <testsuites>
+        <testsuite name="Netgen\EnhancedSelectionBundle\Tests">
+            <directory>Tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>.</directory>
+            <exclude>
+                <directory>DependencyInjection</directory>
+                <directory>Resources</directory>
+                <directory>Tests</directory>
+                <directory>vendor</directory>
+                <file>NetgenEnhancedSelectionBundle.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

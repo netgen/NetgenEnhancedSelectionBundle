@@ -11,6 +11,9 @@
     "require": {
         "ezsystems/ezpublish-kernel": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
     "suggest": {
         "netgen/enhancedselection2": "To edit this field type in legacy administration interface",
         "netgen/ez-forms-bundle": "Allows use of enhanced selection field type with Symfony forms"
