@@ -1,9 +1,11 @@
 <?php
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
+
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Indexable;
 use eZ\Publish\SPI\Search;
+
 class SearchField implements Indexable
 {
     /**
@@ -26,6 +28,7 @@ class SearchField implements Indexable
                 $selectionNames[] = $option['name'];
             }
         }
+
         return [
             new Search\Field(
                 'enhanced_selection_identifiers',
