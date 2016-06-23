@@ -8,8 +8,23 @@ use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Cr
 
 class EnhancedSelectionTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var EnhancedSelection
+     */
+    private $criterion;
+
+    public function setUp()
+    {
+        $this->criterion = new EnhancedSelection('some_field', Operator::EQ, 'some_value');
+    }
+
     public function testInstanceOfCriterionInterface()
     {
-        $this->assertInstanceOf(CriterionInterface::class, new EnhancedSelection('some_field', Operator::EQ, 'some_value'));
+        $this->assertInstanceOf(CriterionInterface::class, $this->criterion);
+    }
+
+    public function testCreateFromQueryBuilderMethod()
+    {
+        $this->assertEquals($this->criterion, EnhancedSelection::createFromQueryBuilder('some_field', Operator::EQ, 'some_value'));
     }
 }
