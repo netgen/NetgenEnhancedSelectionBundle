@@ -19,6 +19,7 @@
                 <directory>Tests</directory>
                 <directory>vendor</directory>
                 <file>Core/Search/Legacy/Content/Common/Gateway/CriterionHandler/EnhancedSelection.php</file>
+                <file>Core/FieldType/EnhancedSelection/SearchField.php</file>
                 <file>NetgenEnhancedSelectionBundle.php</file>
             </exclude>
         </whitelist>
