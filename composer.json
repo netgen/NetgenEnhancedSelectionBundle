@@ -12,7 +12,8 @@
         "ezsystems/ezpublish-kernel": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "netgen/ez-forms-bundle": "*"
     },
     "suggest": {
         "netgen/enhancedselection2": "To edit this field type in legacy administration interface",
