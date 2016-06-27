@@ -13,7 +13,7 @@ class EnhancedSelectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var EnhancedSelection
      */
-    private $handler;
+    protected $handler;
 
     public function setUp()
     {
@@ -43,7 +43,7 @@ class EnhancedSelectionTest extends \PHPUnit_Framework_TestCase
             array(
                 'fieldSettings' => array(
                     'isMultiple' => true,
-                )
+                ),
             )
         );
 
@@ -60,7 +60,7 @@ class EnhancedSelectionTest extends \PHPUnit_Framework_TestCase
             array(
                 'fieldSettings' => array(
                     'isMultiple' => false,
-                )
+                ),
             )
         );
 
@@ -108,7 +108,7 @@ class EnhancedSelectionTest extends \PHPUnit_Framework_TestCase
                         ),
                     ),
                     'isMultiple' => true,
-                )
+                ),
             )
         );
 

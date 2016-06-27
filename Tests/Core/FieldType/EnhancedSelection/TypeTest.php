@@ -13,22 +13,22 @@ class TypeTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Type
      */
-    private $type;
+    protected $type;
 
     /**
      * @var array
      */
-    private $identifiers = array('identifier0', 'identifier1');
+    protected $identifiers = array('identifier0', 'identifier1');
 
     /**
      * @var Value
      */
-    private $value;
+    protected $value;
 
     /**
      * @var Value
      */
-    private $emptyValue;
+    protected $emptyValue;
 
     public function setUp()
     {

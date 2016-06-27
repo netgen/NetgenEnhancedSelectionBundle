@@ -18,17 +18,17 @@ class EnhancedSelectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var EnhancedSelection
      */
-    private $handler;
+    protected $handler;
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    private $db;
+    protected $db;
 
     /**
      * @var EnhancedSelectionCriterion
      */
-    private $criterion;
+    protected $criterion;
 
     public function setUp()
     {

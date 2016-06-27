@@ -13,14 +13,14 @@ class EnhancedSelectionStorageTest extends \PHPUnit_Framework_TestCase
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    private $gateway;
+    protected $gateway;
 
     /**
      * @var EnhancedSelectionStorage
      */
-    private $storage;
-    
-    public function setUp() 
+    protected $storage;
+
+    public function setUp()
     {
         $this->gateway = $this->getMockBuilder(EnhancedSelectionStorage\Gateway\LegacyStorage::class)
             ->disableOriginalConstructor()
@@ -58,9 +58,9 @@ class EnhancedSelectionStorageTest extends \PHPUnit_Framework_TestCase
                 'id' => 'some_id',
                 'value' => new FieldValue(
                     array(
-                        'externalData' => 'some_data'
+                        'externalData' => 'some_data',
                     )
-                )
+                ),
             )
         );
 
@@ -84,9 +84,9 @@ class EnhancedSelectionStorageTest extends \PHPUnit_Framework_TestCase
                 'id' => 'some_id',
                 'value' => new FieldValue(
                     array(
-                        'externalData' => 'some_data'
+                        'externalData' => 'some_data',
                     )
-                )
+                ),
             )
         );
 

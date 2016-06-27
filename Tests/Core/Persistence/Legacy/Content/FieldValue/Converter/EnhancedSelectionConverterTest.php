@@ -14,7 +14,7 @@ class EnhancedSelectionConverterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Converter
      */
-    private $converter;
+    protected $converter;
 
     public function setUp()
     {
@@ -83,8 +83,8 @@ class EnhancedSelectionConverterTest extends \PHPUnit_Framework_TestCase
     {
         $fieldDefinition = new FieldDefinition();
         $storageDefinition = new StorageFieldDefinition();
-        $storageDefinition->dataText5 = "<?xml version=\"1.0\"?>
-            <content><options><option id=\"3\" name=\"None\" identifier=\"none\" priority=\"0\"/><option id=\"1\" name=\"Include\" identifier=\"include\" priority=\"1\"/><option id=\"2\" name=\"Exclude\" identifier=\"exclude\" priority=\"2\"/></options><multiselect>1</multiselect><delimiter><![CDATA[]]></delimiter><query><![CDATA[]]></query></content>";
+        $storageDefinition->dataText5 = '<?xml version="1.0"?>
+            <content><options><option id="3" name="None" identifier="none" priority="0"/><option id="1" name="Include" identifier="include" priority="1"/><option id="2" name="Exclude" identifier="exclude" priority="2"/></options><multiselect>1</multiselect><delimiter><![CDATA[]]></delimiter><query><![CDATA[]]></query></content>';
 
         $this->converter->toFieldDefinition($storageDefinition, $fieldDefinition);
     }

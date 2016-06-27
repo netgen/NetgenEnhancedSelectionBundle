@@ -20,12 +20,12 @@ class LegacyStorageTest extends \PHPUnit_Framework_TestCase
     /**
      * @var LegacyStorage
      */
-    private $storage;
+    protected $storage;
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    private $connection;
+    protected $connection;
 
     public function setUp()
     {
@@ -75,7 +75,7 @@ class LegacyStorageTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(array('execute'))
             ->getMock();
-        
+
         $query->expects($this->once())
             ->method('prepare')
             ->willReturn($statement);
@@ -127,8 +127,8 @@ class LegacyStorageTest extends \PHPUnit_Framework_TestCase
                 'value' => new FieldValue(
                     array(
                         'externalData' => array(
-                            'identifier'
-                        )
+                            'identifier',
+                        ),
                     )
                 ),
             )
@@ -162,7 +162,7 @@ class LegacyStorageTest extends \PHPUnit_Framework_TestCase
             ->method('execute');
 
         $result = array(
-            array('identifier' => 'some_identifier')
+            array('identifier' => 'some_identifier'),
         );
         $statement->expects($this->once())
             ->method('fetchAll')
@@ -180,8 +180,8 @@ class LegacyStorageTest extends \PHPUnit_Framework_TestCase
                 'value' => new FieldValue(
                     array(
                         'externalData' => array(
-                            'identifier'
-                        )
+                            'identifier',
+                        ),
                     )
                 ),
             )

@@ -7,13 +7,13 @@ use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value
 
 class ValueTest extends \PHPUnit_Framework_TestCase
 {
-    private $value;
+    protected $value;
 
     public function setUp()
     {
         $this->value = new Value(
             array(
-                'identifier0', 'identifier1'
+                'identifier0', 'identifier1',
             )
         );
     }

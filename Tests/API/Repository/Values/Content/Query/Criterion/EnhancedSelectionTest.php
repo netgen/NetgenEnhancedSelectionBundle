@@ -11,7 +11,7 @@ class EnhancedSelectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var EnhancedSelection
      */
-    private $criterion;
+    protected $criterion;
 
     public function setUp()
     {
