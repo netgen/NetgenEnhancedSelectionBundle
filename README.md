@@ -1,6 +1,8 @@
 Netgen Enhanced Selection Bundle
 ================================
 
+[![Build Status](https://img.shields.io/travis/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](https://travis-ci.org/netgen/NetgenEnhancedSelectionBundle)
+
 Netgen Enhanced Selection Bundle is an eZ Publish / eZ Platform bundle that provides a field type that reimplements `ezselection` field type.
 
 This repository represents is a rewrite of the original eZ Publish 4 extension called `enhancedselection2`.
