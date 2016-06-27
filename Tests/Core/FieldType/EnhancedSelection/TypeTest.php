@@ -195,9 +195,6 @@ class TypeTest extends \PHPUnit_Framework_TestCase
         $fieldSettings = array(
             'options' => array(
                 array(
-//                    'name' => 'name',
-//                    'identifier' => 'id',
-//                    'priority' => 10,
                 ),
             ),
             'isMultiple' => false,
@@ -292,11 +289,58 @@ class TypeTest extends \PHPUnit_Framework_TestCase
         );
 
         $errors = $this->type->validateFieldSettings($fieldSettings);
-        
+
         $this->assertEquals($validationError1, $errors[0]);
         $this->assertEquals($validationError2, $errors[1]);
         $this->assertEquals($validationError3, $errors[2]);
         $this->assertEquals($validationError4, $errors[3]);
         $this->assertEquals($validationError5, $errors[4]);
+    }
+
+    public function testAcceptValueWithSingle()
+    {
+        $value = new Value(array('1'));
+
+        $returnedValue = $this->type->acceptValue('1');
+
+        $this->assertEquals($value, $returnedValue);
+    }
+
+    public function testAcceptValueWithValidArray()
+    {
+        $returnedValue = $this->type->acceptValue($this->identifiers);
+
+        $this->assertEquals($this->value, $returnedValue);
+    }
+
+    /**
+     * @expectedException \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     */
+    public function testAcceptValueWithInvalidArray()
+    {
+        $returnedValue = $this->type->acceptValue(array(1));
+
+        $this->assertEquals(1, $returnedValue);
+    }
+
+    /**
+     * @expectedException \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     */
+    public function testAcceptValueWithValueObject()
+    {
+        $value = new Value(array(true, true));
+
+        $this->type->acceptValue($value);
+    }
+
+    /**
+     * @expectedException \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
+     */
+    public function testAcceptValueWithValueObjectAndIndentifiersAsString()
+    {
+        $value = new Value();
+        $value->identifiers = 'test';
+
+        $this->type->acceptValue($value);
     }
 }
