@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\FieldType\EnhancedSelection;
 
 use eZ\Publish\Core\FieldType\FieldType;
+use eZ\Publish\Core\FieldType\ValidationError;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
@@ -112,5 +113,190 @@ class TypeTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals($fieldValue, $this->type->toPersistenceValue($this->value));
+    }
+
+    public function testValidateFieldSettingsWithEmptyFieldSettings()
+    {
+        $errors = $this->type->validateFieldSettings('test');
+
+        $this->assertEquals(new ValidationError('Field settings must be in form of an array'), $errors[0]);
+    }
+
+    public function testValidateFieldSettingsWithMissingFieldSettings()
+    {
+        $validationError = new ValidationError(
+            "Setting '%setting%' is unknown",
+            null,
+            array(
+                'setting' => 'test',
+            )
+        );
+
+        $fieldSettings = array(
+            'test' => array(),
+        );
+
+        $errors = $this->type->validateFieldSettings($fieldSettings);
+
+        $this->assertEquals($validationError, $errors[0]);
+    }
+
+    public function testValidateFieldSettingsWithInvalidFieldSettings()
+    {
+        $fieldSettings = array(
+            'options' => 'test',
+            'isMultiple' => 'test',
+            'delimiter' => false,
+            'query' => false,
+        );
+
+        $validationError1 = new ValidationError(
+            "Setting '%setting%' value must be of array type",
+            null,
+            array(
+                'setting' => 'options',
+            )
+        );
+
+        $validationError2 = new ValidationError(
+            "Setting '%setting%' value must be of boolean type",
+            null,
+            array(
+                'setting' => 'isMultiple',
+            )
+        );
+
+        $validationError3 = new ValidationError(
+            "Setting '%setting%' value must be of string type",
+            null,
+            array(
+                'setting' => 'delimiter',
+            )
+        );
+
+        $validationError4 = new ValidationError(
+            "Setting '%setting%' value must be of string type",
+            null,
+            array(
+                'setting' => 'query',
+            )
+        );
+
+        $errors = $this->type->validateFieldSettings($fieldSettings);
+
+        $this->assertEquals($validationError1, $errors[0]);
+        $this->assertEquals($validationError2, $errors[1]);
+        $this->assertEquals($validationError3, $errors[2]);
+        $this->assertEquals($validationError4, $errors[3]);
+    }
+
+    public function testValidateFieldSettingsWithMissingOptionsInFieldSettings()
+    {
+        $fieldSettings = array(
+            'options' => array(
+                array(
+//                    'name' => 'name',
+//                    'identifier' => 'id',
+//                    'priority' => 10,
+                ),
+            ),
+            'isMultiple' => false,
+            'delimiter' => 'delimiter',
+            'query' => 'query',
+        );
+
+        $validationError1 = new ValidationError(
+            "Setting '%setting%' value item must have a 'name' property",
+            null,
+            array(
+                'setting' => 'options',
+            )
+        );
+
+        $validationError2 = new ValidationError(
+            "Setting '%setting%' value item must have an 'identifier' property",
+            null,
+            array(
+                'setting' => 'options',
+            )
+        );
+
+        $validationError3 = new ValidationError(
+            "Setting '%setting%' value item must have an 'priority' property",
+            null,
+            array(
+                'setting' => 'options',
+            )
+        );
+
+        $errors = $this->type->validateFieldSettings($fieldSettings);
+
+        $this->assertEquals($validationError1, $errors[0]);
+        $this->assertEquals($validationError2, $errors[1]);
+        $this->assertEquals($validationError3, $errors[2]);
+    }
+
+    public function testValidateFieldSettingsWithInvalidOptionsInFieldSettings()
+    {
+        $fieldSettings = array(
+            'options' => array(
+                array(
+                    'name' => false,
+                    'identifier' => false,
+                    'priority' => 'test',
+                ),
+            ),
+            'isMultiple' => false,
+            'delimiter' => 'delimiter',
+            'query' => 'query',
+        );
+
+        $validationError1 = new ValidationError(
+            "Setting '%setting%' value item's 'name' property must be of string value",
+            null,
+            array(
+                'setting' => 'options',
+            )
+        );
+
+        $validationError2 = new ValidationError(
+            "Setting '%setting%' value item's 'name' property must have a value",
+            null,
+            array(
+                'setting' => 'options',
+            )
+        );
+
+        $validationError3 = new ValidationError(
+            "Setting '%setting%' value item's 'identifier' property must be of string value",
+            null,
+            array(
+                'setting' => 'options',
+            )
+        );
+
+        $validationError4 = new ValidationError(
+            "Setting '%setting%' value item's 'identifier' property must have a value",
+            null,
+            array(
+                'setting' => 'options',
+            )
+        );
+
+        $validationError5 = new ValidationError(
+            "Setting '%setting%' value item's 'priority' property must be of integer value",
+            null,
+            array(
+                'setting' => 'options',
+            )
+        );
+
+        $errors = $this->type->validateFieldSettings($fieldSettings);
+        
+        $this->assertEquals($validationError1, $errors[0]);
+        $this->assertEquals($validationError2, $errors[1]);
+        $this->assertEquals($validationError3, $errors[2]);
+        $this->assertEquals($validationError4, $errors[3]);
+        $this->assertEquals($validationError5, $errors[4]);
     }
 }
