@@ -20,14 +20,14 @@ branches:
 # make sure to update composer to latest available version
 before_install:
     - phpenv config-add travis.php.ini
-    - phpenv config-rm xdebug.ini
 
 # install dependencies
-install: composer install
+install:
+    - travis_wait composer install
 
 # execute phpunit as the script command
 script:
-  - ./vendor/bin/phpunit -d memory_limit=-1 --colors -c phpunit.xml
+  - ./vendor/bin/phpunit -d memory_limit=-1 --colors -c phpunit.xml --coverage-clover=coverage.xml
 
 # disable mail notifications
 notification:
@@ -39,3 +39,7 @@ git:
 
 # we don't need sudo
 sudo: false
+
+# send coverage to codecov.io
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
