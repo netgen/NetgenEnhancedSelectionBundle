@@ -71,7 +71,7 @@ class EnhancedSelection extends FieldTypeHandler
         $fieldSettings = $fieldDefinition->getFieldSettings();
         $optionsValues = $fieldSettings['options'];
 
-        $options['expanded'] = true;
+        $options['expanded'] = false;
         $options['multiple'] = $fieldSettings['isMultiple'];
         $options['choices'] = $this->getValues($optionsValues);
 
