@@ -35,6 +35,23 @@ class EnhancedSelectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($identifiers, $converted);
     }
 
+    public function testconvertFieldValueToFormWithIdentifiersArrayEmpty()
+    {
+        $identifiers = array();
+        $selection = new EnhancedSelectionValue($identifiers);
+        $fieldDefinition = new FieldDefinition(
+            array(
+                'fieldSettings' => array(
+                    'isMultiple' => false,
+                ),
+            )
+        );
+
+        $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
+
+        $this->assertEquals('', $converted);
+    }
+
     public function testConvertFieldValueToFormWithFieldDefinitionMultiple()
     {
         $identifiers = array('identifier1', 'identifier2');

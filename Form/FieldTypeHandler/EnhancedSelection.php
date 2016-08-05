@@ -28,7 +28,11 @@ class EnhancedSelection extends FieldTypeHandler
         }
 
         if (!$isMultiple) {
-            return $value->identifiers[0];
+            if (empty($value->identifiers)) {
+                return '';
+            } else {
+                return $value->identifiers[0];
+            }
         }
 
         return $value->identifiers;
