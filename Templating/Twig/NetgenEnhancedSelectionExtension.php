@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -68,10 +69,18 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
 
         }
 
+        try {
 
-        $contentType = $this->contentTypeService->loadContentType(
-            $content->contentInfo->contentTypeId
-        );
+            $contentType = $this->contentTypeService->loadContentType(
+                $content->contentInfo->contentTypeId
+            );
+
+        } catch (NotFoundException $e) {
+
+            return $names;
+
+        }
+
 
         $fieldDefinitions = $contentType->fieldDefinitions;
 
