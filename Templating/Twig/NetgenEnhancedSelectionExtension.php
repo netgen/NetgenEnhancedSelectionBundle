@@ -1,8 +1,11 @@
 <?php
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
+
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
+use eZ\Publish\Core\Helper\TranslationHelper;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
 
 /**
@@ -17,13 +20,20 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
     protected $contentTypeService;
 
     /**
+     * @var TranslationHelper
+     */
+    protected $translationHelper;
+
+    /**
      * NetgenEnhancedSelectionExtension constructor.
      *
      * @param ContentTypeService $contentTypeService
+     * @param TranslationHelper $translationHelper
      */
-    public function __construct(ContentTypeService $contentTypeService)
+    public function __construct(ContentTypeService $contentTypeService, TranslationHelper $translationHelper)
     {
         $this->contentTypeService = $contentTypeService;
+        $this->translationHelper = $translationHelper;
     }
 
     /**
@@ -40,18 +50,27 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
     }
 
     /**
-     * Returns selection name by given identifier
+     * Returns selection names
      *
-     * @param Value $value
-     * @param VersionInfo $versionInfo
+     * @param Content $content
      * @param string $fieldDefIdentifier
-     *
-     * @return string
+     * @param null|string $selectionIdentifier
+     * @return array
      */
-    public function getSelectionName(Value $value, VersionInfo $versionInfo, $fieldDefIdentifier)
+    public function getSelectionName(Content $content, $fieldDefIdentifier, $selectionIdentifier = null)
     {
+        $names = array();
+
+        if (empty($selectionIdentifier)) {
+
+            $field = $this->translationHelper->getTranslatedField($content, $fieldDefIdentifier);
+            $identifiers = $field->value->identifiers;
+
+        }
+
+
         $contentType = $this->contentTypeService->loadContentType(
-            $versionInfo->contentInfo->contentTypeId
+            $content->contentInfo->contentTypeId
         );
 
         $fieldDefinitions = $contentType->fieldDefinitions;
@@ -61,15 +80,21 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
 
                 foreach ($fieldDefinition->fieldSettings['options'] as $option) {
 
-                    if ($option['identifier'] === $value->identifiers[0]) {
-                        return $option['name'];
+                    if (!is_null($selectionIdentifier) && $option['identifier'] === $selectionIdentifier) {
+
+                        return array($option['name']);
+
+                    } else if (in_array($option['identifier'], $identifiers)) {
+
+                        $names[] = $option['name'];
+
                     }
 
                 }
             }
         }
 
-        return '';
+        return $names;
     }
 
     /**

@@ -6,5 +6,6 @@ services:
         class: '%netgen.enhanced_selection.templating.twig.extension.class%'
         arguments:
             - '@ezpublish.api.service.content_type'
+            - '@ezpublish.translation_helper'
         tags:
             - { name: twig.extension }
