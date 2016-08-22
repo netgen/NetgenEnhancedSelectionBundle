@@ -63,22 +63,16 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
         $names = array();
 
         if (empty($selectionIdentifier)) {
-
             $field = $this->translationHelper->getTranslatedField($content, $fieldDefIdentifier);
             $identifiers = $field->value->identifiers;
-
         }
 
         try {
-
             $contentType = $this->contentTypeService->loadContentType(
                 $content->contentInfo->contentTypeId
             );
-
         } catch (NotFoundException $e) {
-
             return $names;
-
         }
 
 
@@ -86,19 +80,12 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
 
         foreach ($fieldDefinitions as $fieldDefinition) {
             if ($fieldDefinition->identifier === $fieldDefIdentifier) {
-
                 foreach ($fieldDefinition->fieldSettings['options'] as $option) {
-
                     if (!is_null($selectionIdentifier) && $option['identifier'] === $selectionIdentifier) {
-
                         return array($option['name']);
-
                     } else if (in_array($option['identifier'], $identifiers)) {
-
                         $names[] = $option['name'];
-
                     }
-
                 }
             }
         }
