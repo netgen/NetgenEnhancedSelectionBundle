@@ -1,0 +1,10 @@
+parameters:
+    netgen.enhanced_selection.templating.twig.extension.class: Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionExtension
+
+services:
+    netgen.enhanced_selection.templating.twig.extension:
+        class: '%netgen.enhanced_selection.templating.twig.extension.class%'
+        arguments:
+            - '@ezpublish.api.service.content_type'
+        tags:
+            - { name: twig.extension }
