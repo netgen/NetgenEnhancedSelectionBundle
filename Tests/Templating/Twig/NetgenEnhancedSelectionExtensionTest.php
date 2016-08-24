@@ -173,13 +173,9 @@ class NetgenEnhancedSelectionExtensionTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->extension->getSelectionName($content, $fieldIdentifier, 'some_name');
 
-        $this->assertTrue(is_array($result));
+        $this->assertTrue(is_string($result));
 
-        $expectedResult = array(
-            'some_name' => 'Some name',
-        );
-
-        $this->assertEquals($expectedResult, $result);
+        $this->assertEquals('Some name', $result);
     }
 
     public function testGetSelectionNameWithNotFoundException()

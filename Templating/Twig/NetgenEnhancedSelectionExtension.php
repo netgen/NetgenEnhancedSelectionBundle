@@ -4,32 +4,28 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
+use Twig_SimpleFunction;
+use Twig_Extension;
 
-/**
- * Class NetgenEnhancedSelectionExtension
- * @package Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig
- */
-class NetgenEnhancedSelectionExtension extends \Twig_Extension
+class NetgenEnhancedSelectionExtension extends Twig_Extension
 {
     /**
-     * @var ContentTypeService
+     * @var \eZ\Publish\API\Repository\ContentTypeService
      */
     protected $contentTypeService;
 
     /**
-     * @var TranslationHelper
+     * @var \eZ\Publish\Core\Helper\TranslationHelper
      */
     protected $translationHelper;
 
     /**
      * NetgenEnhancedSelectionExtension constructor.
      *
-     * @param ContentTypeService $contentTypeService
-     * @param TranslationHelper $translationHelper
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
      */
     public function __construct(ContentTypeService $contentTypeService, TranslationHelper $translationHelper)
     {
@@ -43,7 +39,7 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction(
+            new Twig_SimpleFunction(
                 'netgen_enhanced_selection_name',
                 array($this, 'getSelectionName')
             ),
@@ -53,10 +49,11 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
     /**
      * Returns selection names
      *
-     * @param Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      * @param string $fieldDefIdentifier
      * @param null|string $selectionIdentifier
-     * @return array
+     *
+     * @return array|string
      */
     public function getSelectionName(Content $content, $fieldDefIdentifier, $selectionIdentifier = null)
     {
@@ -82,7 +79,7 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
             if ($fieldDefinition->identifier === $fieldDefIdentifier) {
                 foreach ($fieldDefinition->fieldSettings['options'] as $option) {
                     if (!is_null($selectionIdentifier) && $option['identifier'] === $selectionIdentifier) {
-                        return array($option['identifier'] => $option['name']);
+                        return $option['name'];
                     } else if (in_array($option['identifier'], $identifiers)) {
                         $names[$option['identifier']] = $option['name'];
                     }
