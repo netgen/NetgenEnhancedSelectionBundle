@@ -82,9 +82,9 @@ class NetgenEnhancedSelectionExtension extends \Twig_Extension
             if ($fieldDefinition->identifier === $fieldDefIdentifier) {
                 foreach ($fieldDefinition->fieldSettings['options'] as $option) {
                     if (!is_null($selectionIdentifier) && $option['identifier'] === $selectionIdentifier) {
-                        return array($option['name']);
+                        return array($option['identifier'] => $option['name']);
                     } else if (in_array($option['identifier'], $identifiers)) {
-                        $names[] = $option['name'];
+                        $names[$option['identifier']] = $option['name'];
                     }
                 }
             }
