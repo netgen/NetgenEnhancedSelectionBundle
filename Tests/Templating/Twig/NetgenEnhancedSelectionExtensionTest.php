@@ -121,7 +121,7 @@ class NetgenEnhancedSelectionExtensionTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->extension->getSelectionName($content, $fieldIdentifier);
 
-        $this->assertTrue(is_array($result));
+        $this->assertInternalType('array', $result);
 
         $expectedResult = array(
             'some_name' => 'Some name',
@@ -173,37 +173,53 @@ class NetgenEnhancedSelectionExtensionTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->extension->getSelectionName($content, $fieldIdentifier, 'some_name');
 
-        $this->assertTrue(is_string($result));
+        $this->assertInternalType('string', $result);
 
         $this->assertEquals('Some name', $result);
     }
 
-    public function testGetSelectionNameWithNotFoundException()
+    public function testGetSelectionNameForNonExistingOne()
     {
         $fieldIdentifier = 'some_field';
-        $contentTypeId = '12345';
-
-        $contentInfo = new ContentInfo(array('contentTypeId' => $contentTypeId));
+        $contentInfo = new ContentInfo(array('contentTypeId' => 12345));
 
         $versionInfo = new VersionInfo(array('contentInfo' => $contentInfo));
 
         $content = new Content(array('versionInfo' => $versionInfo));
 
-        $selectionValue = new Value(array(1, 2, 3));
-        $field = new Field(array('value' => $selectionValue));
+        $fieldSettings = array(
+            'options' => array(
+                array(
+                    'id' => 1,
+                    'name' => 'Some name',
+                    'identifier' => 'some_name',
+                    'priority' => 1,
+                ),
+                array(
+                    'id' => 2,
+                    'name' => 'Some name 2',
+                    'identifier' => 'some_name_2',
+                    'priority' => 1,
+                ),
+            ),
+        );
 
-        $this->translationHelper->expects($this->once())
-            ->method('getTranslatedField')
-            ->with($content, $fieldIdentifier)
-            ->willReturn($field);
+        $fieldDefinition = new FieldDefinition(
+            array(
+                'identifier' => $fieldIdentifier,
+                'fieldSettings' => $fieldSettings,
+            )
+        );
+
+        $contentType = new ContentType(array('fieldDefinitions' => array($fieldDefinition)));
 
         $this->contentTypeService->expects($this->once())
             ->method('loadContentType')
             ->with($content->contentInfo->contentTypeId)
-            ->willThrowException(new NotFoundException('ContentType', $contentTypeId));
+            ->willReturn($contentType);
 
-        $result = $this->extension->getSelectionName($content, $fieldIdentifier);
+        $result = $this->extension->getSelectionName($content, $fieldIdentifier, 'some_non_existent');
 
-        $this->assertTrue(is_array($result));
+        $this->assertNull($result);
     }
 }
