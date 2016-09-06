@@ -23,6 +23,7 @@ class NetgenEnhancedSelectionExtension extends Extension implements PrependExten
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('fieldtypes.yml');
         $loader->load('storage_engines.yml');
+        $loader->load('templating.yml');
 
         if ($container->hasParameter('ezpublish.persistence.legacy.search.gateway.sort_clause_handler.common.field.class')) {
             $loader->load('search.yml');
