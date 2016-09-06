@@ -58,6 +58,7 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
     public function getSelectionName(Content $content, $fieldDefIdentifier, $selectionIdentifier = null)
     {
         $names = null;
+        $identifiers = array($selectionIdentifier);
 
         if (is_null($selectionIdentifier)) {
             $field = $this->translationHelper->getTranslatedField($content, $fieldDefIdentifier);
@@ -68,19 +69,16 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
             $content->contentInfo->contentTypeId
         );
 
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefIdentifier);
 
-        $fieldDefinitions = $contentType->fieldDefinitions;
-
-        foreach ($fieldDefinitions as $fieldDefinition) {
-            if ($fieldDefinition->identifier === $fieldDefIdentifier) {
-                foreach ($fieldDefinition->fieldSettings['options'] as $option) {
-                    if (is_null($selectionIdentifier) && in_array($option['identifier'], $identifiers)) {
-                        $names[$option['identifier']] = $option['name'];
-                    } else if (!is_null($selectionIdentifier) && $option['identifier'] === $selectionIdentifier) {
-                        return $option['name'];
-                    }
-                }
+        foreach ($fieldDefinition->fieldSettings['options'] as $option) {
+            if (in_array($option['identifier'], $identifiers)) {
+                $names[$option['identifier']] = $option['name'];
             }
+        }
+
+        if (!is_null($selectionIdentifier)) {
+            return !empty($names) ? $names[$selectionIdentifier] : null;
         }
 
         return $names;
