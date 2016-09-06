@@ -57,7 +57,7 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
      */
     public function getSelectionName(Content $content, $fieldDefIdentifier, $selectionIdentifier = null)
     {
-        $names = null;
+        $names = array();
         $identifiers = array($selectionIdentifier);
 
         if (is_null($selectionIdentifier)) {
@@ -65,7 +65,7 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
             $identifiers = $field->value->identifiers;
         }
 
-       $contentType = $this->contentTypeService->loadContentType(
+        $contentType = $this->contentTypeService->loadContentType(
             $content->contentInfo->contentTypeId
         );
 
