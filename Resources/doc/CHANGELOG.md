@@ -1,6 +1,14 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+2.2 (06.09.2016)
+----------------
+
+* Add `Indexable` implementation for Solr support (thanks @jxn)
+* Full test coverage (thanks @MarioBlazek)
+* Added Twig function for fetching name of selection identifier (thanks @MarioBlazek)
+* Bug fixes
+
 2.1 (17.12.2015)
 ----------------
 
