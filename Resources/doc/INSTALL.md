@@ -72,9 +72,34 @@ Add the following template code into your template:
 {% endif %}
 ```
 
-Replace the text: "selection" with your own content type field identifier as needed.
+There is also Twig function available for fetching selection name based on selection identifier:
+
+```twig
+{% if not ez_is_field_empty( content, "selection" ) %}
+    Selection name: {{ netgen_enhanced_selection_name( content, "selection", "selection_identifier") }}
+{% else %}
+       Empty selection
+{% endif %}
+```
+
+Or you can fetch all selected selection names (in case of multiple selection):
+
+```twig
+{% if not ez_is_field_empty( content, "selection" ) %}
+    {% set selection_data = netgen_enhanced_selection_name( content, "bio" ) %}
+    {% for identifier, name in selection_data %}
+        Selection identifier : {{ identifier }}
+        Selection name : {{ name }}
+    {% endfor %}
+{% else %}
+       Empty selection
+{% endif %}
+```
+
+Replace the text: "selection" with your own content type field identifier and "selection_identifier" with some of your own selection identifiers as needed.
 
 Save these additions to your custom template and clear caches as required.
+
 
 Custom usage
 ------------
