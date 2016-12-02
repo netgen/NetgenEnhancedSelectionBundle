@@ -17,3 +17,4 @@ services:
         tags:
             - { name: ezpublish.search.solr.query.content.criterion_visitor }
             - { name: ezpublish.search.solr.query.location.criterion_visitor }
+            
