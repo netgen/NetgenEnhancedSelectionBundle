@@ -1,6 +1,11 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+2.3 (07.12.2016)
+----------------
+
+* Add Solr visitor for `EnhancedSelection` criterion (thanks @MarioBlazek)
+
 2.2 (06.09.2016)
 ----------------
 
