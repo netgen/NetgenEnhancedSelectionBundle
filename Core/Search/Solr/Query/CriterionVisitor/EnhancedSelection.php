@@ -46,15 +46,6 @@ class EnhancedSelection extends Field
             }
         }
 
-        switch ($criterion->operator) {
-            case Operator::EQ:
-                $op = ' AND ';
-                break;
-            case Operator::IN:
-            default:
-                $op = ' OR ';
-        }
-
-        return '(' . implode($op, $queries) . ')';
+        return '(' . implode(' OR ', $queries) . ')';
     }
 }
