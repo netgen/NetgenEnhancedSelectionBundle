@@ -16,11 +16,7 @@ class EnhancedSelection extends Field
      */
     public function canVisit(Criterion $criterion)
     {
-        return
-            $criterion instanceof EnhancedSelectionCriterion &&
-            (($criterion->operator ?: Operator::IN) === Operator::IN
-                || $criterion->operator === Operator::CONTAINS
-                || $criterion->operator === Operator::EQ);
+        return $criterion instanceof EnhancedSelectionCriterion;
     }
 
     /**
@@ -51,11 +47,10 @@ class EnhancedSelection extends Field
         }
 
         switch ($criterion->operator) {
-            case Operator::CONTAINS:
+            case Operator::EQ:
                 $op = ' AND ';
                 break;
             case Operator::IN:
-            case Operator::EQ:
             default:
                 $op = ' OR ';
         }
