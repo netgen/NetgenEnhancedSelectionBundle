@@ -20,7 +20,8 @@
         "netgen/ez-forms-bundle": "Allows use of enhanced selection field type with Symfony forms"
     },
     "conflict": {
-        "netgen/enhancedselection2": "<2.0"
+        "netgen/enhancedselection2": "<2.0",
+        "ezsystems/ezplatform-solr-search-engine": "1.2.0"
     },
     "autoload": {
         "psr-4": { "Netgen\\Bundle\\EnhancedSelectionBundle\\": "" }
