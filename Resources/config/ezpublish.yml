@@ -2,3 +2,5 @@ system:
     default:
         field_templates:
             - {template: "NetgenEnhancedSelectionBundle::sckenhancedselection_content_field.html.twig", priority: 10}
+        fielddefinition_settings_templates:
+            - {template: "NetgenEnhancedSelectionBundle:platformui/content_type/view:sckenhancedselection.html.twig", priority: 10}
