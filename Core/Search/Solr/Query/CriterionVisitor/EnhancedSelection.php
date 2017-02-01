@@ -6,13 +6,12 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use EzSystems\EzPlatformSolrSearchEngine\Query\CriterionVisitor;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
 use EzSystems\EzPlatformSolrSearchEngine\Query\Content\CriterionVisitor\Field;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 
 class EnhancedSelection extends Field
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function canVisit(Criterion $criterion)
     {
@@ -20,7 +19,7 @@ class EnhancedSelection extends Field
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function visit(Criterion $criterion, CriterionVisitor $subVisitor = null)
     {

@@ -142,7 +142,7 @@ class Type extends FieldType
      *
      * @param mixed $inputValue
      *
-     * @return mixed The potentially converted input value.
+     * @return mixed The potentially converted input value
      */
     protected function createValueFromInput($inputValue)
     {
@@ -170,7 +170,7 @@ class Type extends FieldType
      *
      * This is an operation method for {@see acceptValue()}.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure.
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure
      *
      * @param \eZ\Publish\Core\FieldType\Value|\Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value $value
      */

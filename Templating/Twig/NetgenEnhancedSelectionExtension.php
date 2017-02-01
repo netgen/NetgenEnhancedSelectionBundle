@@ -3,7 +3,6 @@
 namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use Twig_SimpleFunction;
@@ -34,7 +33,7 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
@@ -47,7 +46,7 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
     }
 
     /**
-     * Returns selection names
+     * Returns selection names.
      *
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      * @param string $fieldDefIdentifier

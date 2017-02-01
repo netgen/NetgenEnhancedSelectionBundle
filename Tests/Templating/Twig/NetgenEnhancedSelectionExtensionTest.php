@@ -2,7 +2,6 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Templating\Twig;
 
-use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\Core\Repository\Values\Content\Content;
@@ -55,7 +54,6 @@ class NetgenEnhancedSelectionExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('netgen_enhanced_selection', $this->extension->getName());
     }
-
 
     public function testGetFunctions()
     {

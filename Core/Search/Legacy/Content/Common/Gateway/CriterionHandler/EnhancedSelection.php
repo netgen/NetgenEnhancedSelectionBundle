@@ -87,7 +87,7 @@ class EnhancedSelection extends FieldBase
     /**
      * Returns a list of IDs of searchable field definitions for the given criterion target.
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException If no searchable fields are found for the given $fieldIdentifier.
+     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException If no searchable fields are found for the given $fieldIdentifier
      *
      * @param string $fieldIdentifier
      *

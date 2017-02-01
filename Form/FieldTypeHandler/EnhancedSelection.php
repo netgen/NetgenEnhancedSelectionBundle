@@ -31,7 +31,7 @@ class EnhancedSelection extends FieldTypeHandler
             if (empty($value->identifiers)) {
                 return '';
             }
-            
+
             return $value->identifiers[0];
         }
 
