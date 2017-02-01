@@ -1,6 +1,21 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+2.3.3 (01.02.2017)
+------------------
+
+* Fix broken installation on eZ Publish 5.4.x (thanks @ernestob)
+
+2.3.2 (17.01.2017)
+------------------
+
+* Add dummy `sckenhancedselection` field definition settings template in order not to crash Platform UI
+
+2.3.1 (16.12.2016)
+------------------
+
+* Add a conflict with eZ Platform Solr Search Bundle 1.2.0 due to breaking change in API (thanks @MarioBlazek)
+
 2.3 (07.12.2016)
 ----------------
 
