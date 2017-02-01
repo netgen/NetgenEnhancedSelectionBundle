@@ -1,6 +1,6 @@
 parameters:
     ezpublish.search.legacy.gateway.criterion_handler.common.enhanced_selection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler\EnhancedSelection
-    ezpublish.search.solr.criterion_visitor.enhanced_selection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Solr\Query\CriterionVisitor\EnhancedSelection
+
 services:
     ezpublish.search.legacy.gateway.criterion_handler.common.enhanced_selection:
         parent: ezpublish.search.legacy.gateway.criterion_handler.field_base
@@ -8,12 +8,3 @@ services:
         tags:
             - { name: ezpublish.search.legacy.gateway.criterion_handler.content }
             - { name: ezpublish.search.legacy.gateway.criterion_handler.location }
-
-    ezpublish.search.solr.criterion_visitor.enhanced_selection:
-        class: '%ezpublish.search.solr.criterion_visitor.enhanced_selection.class%'
-        arguments:
-            - "@ezpublish.search.common.field_name_resolver"
-            - "@ezpublish.search.common.field_value_mapper.aggregate"
-        tags:
-            - { name: ezpublish.search.solr.query.content.criterion_visitor }
-            - { name: ezpublish.search.solr.query.location.criterion_visitor }

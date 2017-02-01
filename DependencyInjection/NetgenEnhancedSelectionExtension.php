@@ -25,10 +25,16 @@ class NetgenEnhancedSelectionExtension extends Extension implements PrependExten
         $loader->load('storage_engines.yml');
         $loader->load('templating.yml');
 
+        $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
+
         if ($container->hasParameter('ezpublish.persistence.legacy.search.gateway.sort_clause_handler.common.field.class')) {
-            $loader->load('search.yml');
-        } else {
-            $loader->load('search_ez54.yml');
+            $loader->load('search/legacy_old_namespaces.yml');
+        } elseif (in_array('EzPublishLegacySearchEngineBundle', $activatedBundles)) {
+            $loader->load('legacy.yml');
+        }
+
+        if (in_array('EzSystemsEzPlatformSolrSearchEngineBundle', $activatedBundles)) {
+            $loader->load('solr.yml');
         }
     }
 
