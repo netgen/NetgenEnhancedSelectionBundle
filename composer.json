@@ -1,6 +1,7 @@
 {
     "name": "netgen/enhanced-selection-bundle",
     "description": "Netgen Enhanced Selection bundle for eZ Publish",
+    "type": "ezplatform-bundle",
     "license": "GPL-2.0",
     "authors": [
         {
