@@ -1,9 +1,10 @@
 <?php
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
 use eZ\Publish\Core\FieldType\GatewayBasedStorage;
-use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use eZ\Publish\SPI\Persistence\Content\Field;
+use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 
 /**
  * Converter for EnhancedSelection field type external storage.

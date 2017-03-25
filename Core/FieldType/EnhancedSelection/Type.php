@@ -2,12 +2,12 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
+use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\Core\FieldType\FieldType;
+use eZ\Publish\Core\FieldType\ValidationError;
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 use eZ\Publish\SPI\FieldType\Value as SPIValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
-use eZ\Publish\Core\FieldType\ValidationError;
 
 class Type extends FieldType
 {
@@ -67,7 +67,7 @@ class Type extends FieldType
      */
     public function getName(SPIValue $value)
     {
-        return (string)$value;
+        return (string) $value;
     }
 
     /**
@@ -133,90 +133,6 @@ class Type extends FieldType
     }
 
     /**
-     * Inspects given $inputValue and potentially converts it into a dedicated value object.
-     *
-     * If given $inputValue could not be converted or is already an instance of dedicate value object,
-     * the method should simply return it.
-     *
-     * This is an operation method for {@see acceptValue()}.
-     *
-     * @param mixed $inputValue
-     *
-     * @return mixed The potentially converted input value
-     */
-    protected function createValueFromInput($inputValue)
-    {
-        if (is_string($inputValue)) {
-            $inputValue = new Value(array($inputValue));
-        } elseif (is_array($inputValue)) {
-            foreach ($inputValue as $inputValueItem) {
-                if (!is_string($inputValueItem)) {
-                    return $inputValue;
-                }
-            }
-
-            $inputValue = new Value($inputValue);
-        }
-
-        return $inputValue;
-    }
-
-    /**
-     * Throws an exception if value structure is not of expected format.
-     *
-     * Note that this does not include validation after the rules
-     * from validators, but only plausibility checks for the general data
-     * format.
-     *
-     * This is an operation method for {@see acceptValue()}.
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure
-     *
-     * @param \eZ\Publish\Core\FieldType\Value|\Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value $value
-     */
-    protected function checkValueStructure(BaseValue $value)
-    {
-        if (!is_array($value->identifiers)) {
-            throw new InvalidArgumentType(
-                '$value->identifiers',
-                'array',
-                $value->identifiers
-            );
-        }
-
-        foreach ($value->identifiers as $identifier) {
-            if (!is_string($identifier)) {
-                throw new InvalidArgumentType(
-                    "$identifier",
-                    'Netgen\\Bundle\\EnhancedSelectionBundle\\Core\\FieldType\\EnhancedSelection\\Value',
-                    $identifier
-                );
-            }
-        }
-    }
-
-    /**
-     * Returns information for FieldValue->$sortKey relevant to the field type.
-     *
-     * Return value is mixed. It should be something which is sensible for
-     * sorting.
-     *
-     * It is up to the persistence implementation to handle those values.
-     * Common string and integer values are safe.
-     *
-     * For the legacy storage it is up to the field converters to set this
-     * value in either sort_key_string or sort_key_int.
-     *
-     * @param \eZ\Publish\Core\FieldType\Value $value
-     *
-     * @return mixed
-     */
-    protected function getSortInfo(BaseValue $value)
-    {
-        return false;
-    }
-
-    /**
      * Converts a $value to a persistence value.
      *
      * @param \eZ\Publish\SPI\FieldType\Value|\Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value $value
@@ -259,7 +175,7 @@ class Type extends FieldType
      */
     public function isEmptyValue(SPIValue $value)
     {
-        return $value === null || $value->identifiers == $this->getEmptyValue()->identifiers;
+        return $value === null || $value->identifiers === $this->getEmptyValue()->identifiers;
     }
 
     /**
@@ -432,5 +348,90 @@ class Type extends FieldType
     public function isSearchable()
     {
         return true;
+    }
+
+    /**
+     * Inspects given $inputValue and potentially converts it into a dedicated value object.
+     *
+     * If given $inputValue could not be converted or is already an instance of dedicate value object,
+     * the method should simply return it.
+     *
+     * This is an operation method for {@see acceptValue()}.
+     *
+     * @param mixed $inputValue
+     *
+     * @return mixed The potentially converted input value
+     */
+    protected function createValueFromInput($inputValue)
+    {
+        if (is_string($inputValue)) {
+            $inputValue = new Value(array($inputValue));
+        } elseif (is_array($inputValue)) {
+            foreach ($inputValue as $inputValueItem) {
+                if (!is_string($inputValueItem)) {
+                    return $inputValue;
+                }
+            }
+
+            $inputValue = new Value($inputValue);
+        }
+
+        return $inputValue;
+    }
+
+    /**
+     * Throws an exception if value structure is not of expected format.
+     *
+     * Note that this does not include validation after the rules
+     * from validators, but only plausibility checks for the general data
+     * format.
+     *
+     * This is an operation method for {@see acceptValue()}.
+     *
+     *
+     * @param \eZ\Publish\Core\FieldType\Value|\Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value $value
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException If the value does not match the expected structure
+     */
+    protected function checkValueStructure(BaseValue $value)
+    {
+        if (!is_array($value->identifiers)) {
+            throw new InvalidArgumentType(
+                '$value->identifiers',
+                'array',
+                $value->identifiers
+            );
+        }
+
+        foreach ($value->identifiers as $identifier) {
+            if (!is_string($identifier)) {
+                throw new InvalidArgumentType(
+                    "$identifier",
+                    'Netgen\\Bundle\\EnhancedSelectionBundle\\Core\\FieldType\\EnhancedSelection\\Value',
+                    $identifier
+                );
+            }
+        }
+    }
+
+    /**
+     * Returns information for FieldValue->$sortKey relevant to the field type.
+     *
+     * Return value is mixed. It should be something which is sensible for
+     * sorting.
+     *
+     * It is up to the persistence implementation to handle those values.
+     * Common string and integer values are safe.
+     *
+     * For the legacy storage it is up to the field converters to set this
+     * value in either sort_key_string or sort_key_int.
+     *
+     * @param \eZ\Publish\Core\FieldType\Value $value
+     *
+     * @return mixed
+     */
+    protected function getSortInfo(BaseValue $value)
+    {
+        return false;
     }
 }

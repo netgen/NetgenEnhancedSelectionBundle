@@ -2,13 +2,13 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter;
 
+use DOMDocument;
 use eZ\Publish\Core\FieldType\FieldSettings;
 use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
 use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition;
 use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
-use DOMDocument;
 
 class EnhancedSelectionConverter implements Converter
 {
@@ -70,10 +70,10 @@ class EnhancedSelectionConverter implements Converter
                     $optionNode = $xml->createElement('option')
                 );
 
-                $optionNode->setAttribute('id', (string)($key + 1));
-                $optionNode->setAttribute('name', (string)$option['name']);
-                $optionNode->setAttribute('identifier', (string)$option['identifier']);
-                $optionNode->setAttribute('priority', (string)$option['priority']);
+                $optionNode->setAttribute('id', (string) ($key + 1));
+                $optionNode->setAttribute('name', (string) $option['name']);
+                $optionNode->setAttribute('identifier', (string) $option['identifier']);
+                $optionNode->setAttribute('priority', (string) $option['priority']);
             }
         }
 
@@ -119,10 +119,10 @@ class EnhancedSelectionConverter implements Converter
             if (!empty($simpleXml->options)) {
                 foreach ($simpleXml->options->option as $option) {
                     $options[] = array(
-                        'id' => (int)$option['id'],
-                        'name' => (string)$option['name'],
-                        'identifier' => (string)$option['identifier'],
-                        'priority' => (int)$option['priority'],
+                        'id' => (int) $option['id'],
+                        'name' => (string) $option['name'],
+                        'identifier' => (string) $option['identifier'],
+                        'priority' => (int) $option['priority'],
                     );
                 }
             }
@@ -132,11 +132,11 @@ class EnhancedSelectionConverter implements Converter
             }
 
             if (!empty($simpleXml->delimiter)) {
-                $delimiter = (string)$simpleXml->delimiter;
+                $delimiter = (string) $simpleXml->delimiter;
             }
 
             if (!empty($simpleXml->query)) {
-                $query = (string)$simpleXml->query;
+                $query = (string) $simpleXml->query;
             }
         }
 

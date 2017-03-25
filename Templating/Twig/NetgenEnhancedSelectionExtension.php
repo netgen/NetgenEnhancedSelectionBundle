@@ -3,10 +3,10 @@
 namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use Twig_SimpleFunction;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use Twig_Extension;
+use Twig_SimpleFunction;
 
 class NetgenEnhancedSelectionExtension extends Twig_Extension
 {
@@ -71,7 +71,7 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
         $fieldDefinition = $contentType->getFieldDefinition($fieldDefIdentifier);
 
         foreach ($fieldDefinition->fieldSettings['options'] as $option) {
-            if (in_array($option['identifier'], $identifiers)) {
+            if (in_array($option['identifier'], $identifiers, true)) {
                 $names[$option['identifier']] = $option['name'];
             }
         }

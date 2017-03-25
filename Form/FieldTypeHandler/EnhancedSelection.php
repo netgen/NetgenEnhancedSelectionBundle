@@ -2,12 +2,12 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler;
 
-use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
-use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value as EnhancedSelectionValue;
+use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class EnhancedSelection extends FieldTypeHandler
 {

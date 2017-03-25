@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\FieldType\EnhancedSel
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Statement;
+use eZ\Publish\Core\Persistence\Database\DatabaseHandler;
 use eZ\Publish\Core\Persistence\Doctrine\ConnectionHandler;
 use eZ\Publish\Core\Persistence\Doctrine\DeleteDoctrineQuery;
 use eZ\Publish\Core\Persistence\Doctrine\InsertDoctrineQuery;
@@ -13,7 +14,6 @@ use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway\LegacyStorage;
-use eZ\Publish\Core\Persistence\Database\DatabaseHandler;
 
 class LegacyStorageTest extends \PHPUnit_Framework_TestCase
 {

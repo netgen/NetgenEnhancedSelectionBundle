@@ -2,12 +2,12 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 
-use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
+use eZ\Publish\Core\Persistence\Database\DatabaseHandler;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
-use eZ\Publish\Core\Persistence\Database\DatabaseHandler;
-use RuntimeException;
+use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 use PDO;
+use RuntimeException;
 
 class LegacyStorage extends Gateway
 {
@@ -21,10 +21,11 @@ class LegacyStorage extends Gateway
     /**
      * Sets the data storage connection to use.
      *
-     * @throws \RuntimeException if $connection is not an instance of
-     *         {@link \eZ\Publish\Core\Persistence\Database\DatabaseHandler}
      *
      * @param \eZ\Publish\Core\Persistence\Database\DatabaseHandler $connection
+     *
+     * @throws \RuntimeException if $connection is not an instance of
+     *         {@link \eZ\Publish\Core\Persistence\Database\DatabaseHandler}
      */
     public function setConnection($connection)
     {
@@ -37,22 +38,6 @@ class LegacyStorage extends Gateway
         }
 
         $this->connection = $connection;
-    }
-
-    /**
-     * Returns the active connection.
-     *
-     * @throws \RuntimeException if no connection has been set, yet
-     *
-     * @return \eZ\Publish\Core\Persistence\Database\DatabaseHandler
-     */
-    protected function getConnection()
-    {
-        if ($this->connection === null) {
-            throw new RuntimeException('Missing database connection.');
-        }
-
-        return $this->connection;
     }
 
     /**
@@ -123,6 +108,22 @@ class LegacyStorage extends Gateway
             );
 
         $query->prepare()->execute();
+    }
+
+    /**
+     * Returns the active connection.
+     *
+     * @throws \RuntimeException if no connection has been set, yet
+     *
+     * @return \eZ\Publish\Core\Persistence\Database\DatabaseHandler
+     */
+    protected function getConnection()
+    {
+        if ($this->connection === null) {
+            throw new RuntimeException('Missing database connection.');
+        }
+
+        return $this->connection;
     }
 
     /**

@@ -2,11 +2,11 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Templating\Twig;
 
-use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
+use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\Persistence\Content\ContentInfo;
 use eZ\Publish\SPI\Persistence\Content\Field;

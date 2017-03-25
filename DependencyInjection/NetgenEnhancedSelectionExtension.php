@@ -2,12 +2,12 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Config\Resource\FileResource;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Yaml\Yaml;
 
 class NetgenEnhancedSelectionExtension extends Extension implements PrependExtensionInterface
@@ -29,11 +29,11 @@ class NetgenEnhancedSelectionExtension extends Extension implements PrependExten
 
         if ($container->hasParameter('ezpublish.persistence.legacy.search.gateway.sort_clause_handler.common.field.class')) {
             $loader->load('search/legacy_old_namespaces.yml');
-        } elseif (in_array('EzPublishLegacySearchEngineBundle', $activatedBundles)) {
+        } elseif (in_array('EzPublishLegacySearchEngineBundle', $activatedBundles, true)) {
             $loader->load('search/legacy.yml');
         }
 
-        if (in_array('EzSystemsEzPlatformSolrSearchEngineBundle', $activatedBundles)) {
+        if (in_array('EzSystemsEzPlatformSolrSearchEngineBundle', $activatedBundles, true)) {
             $loader->load('search/solr.yml');
         }
     }
