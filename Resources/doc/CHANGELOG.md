@@ -1,6 +1,19 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+2.3.5 (21.04.2017)
+------------------
+
+* Compatibility with Symfony 3.x
+
+2.3.4 (21.04.2017)
+------------------
+
+* Priority of the field template set to 0 to ease overriding
+* Marked the bundle as `ezplatform-bundle`
+* Migrated to PHP CS Fixer 2.0
+* Unit tests improvements
+
 2.3.3 (01.02.2017)
 ------------------
 
