@@ -7,7 +7,9 @@ use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value as EnhancedSelectionValue;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class EnhancedSelection extends FieldTypeHandler
 {
@@ -73,9 +75,14 @@ class EnhancedSelection extends FieldTypeHandler
 
         $options['expanded'] = false;
         $options['multiple'] = $fieldSettings['isMultiple'];
+        $options['choices_as_values'] = true;
         $options['choices'] = $this->getValues($optionsValues);
 
-        $formBuilder->add($fieldDefinition->identifier, 'choice', $options);
+        $formBuilder->add(
+            $fieldDefinition->identifier,
+            Kernel::VERSION_ID < 20800 ? 'choice' : ChoiceType::class,
+            $options
+        );
     }
 
     /**
@@ -91,7 +98,7 @@ class EnhancedSelection extends FieldTypeHandler
 
         foreach ($options as $option) {
             if (!empty($option['identifier']) && !empty($option['name'])) {
-                $values[$option['identifier']] = $option['name'];
+                $values[$option['name']] = $option['identifier'];
             }
         }
 
