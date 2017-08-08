@@ -7,6 +7,7 @@ Netgen Enhanced Selection Bundle
 [![Downloads](https://img.shields.io/packagist/dt/netgen/enhanced-selection-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/enhanced-selection-bundle)
 [![Latest stable](https://img.shields.io/packagist/v/netgen/enhanced-selection-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/enhanced-selection-bundle)
 [![License](https://img.shields.io/packagist/l/netgen/enhanced-selection-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/enhanced-selection-bundle)
+[![PHP](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg?style=flat-square)](https://secure.php.net/)
 
 Netgen Enhanced Selection Bundle is an eZ Publish / eZ Platform bundle that provides a field type that reimplements `ezselection` field type.
 
