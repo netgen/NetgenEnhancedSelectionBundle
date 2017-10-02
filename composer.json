@@ -27,5 +27,10 @@
     },
     "autoload": {
         "psr-4": { "Netgen\\Bundle\\EnhancedSelectionBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
     }
 }
