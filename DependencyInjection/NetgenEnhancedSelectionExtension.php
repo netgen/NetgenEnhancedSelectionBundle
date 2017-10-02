@@ -17,14 +17,16 @@ class NetgenEnhancedSelectionExtension extends Extension implements PrependExten
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $loader = new Loader\YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../Resources/config')
+        );
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('field_types.yml');
         $loader->load('templating.yml');
 
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
+
         if (in_array('EzPublishLegacySearchEngineBundle', $activatedBundles, true)) {
             $loader->load('search/legacy.yml');
         }
