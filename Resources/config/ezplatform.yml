@@ -1,6 +1,6 @@
 system:
     default:
         field_templates:
-            - {template: "NetgenEnhancedSelectionBundle::sckenhancedselection_content_field.html.twig", priority: 0}
+            - {template: "@NetgenEnhancedSelection/sckenhancedselection_content_field.html.twig", priority: 0}
         fielddefinition_settings_templates:
-            - {template: "NetgenEnhancedSelectionBundle:platformui/content_type/view:sckenhancedselection.html.twig", priority: 0}
+            - {template: "@NetgenEnhancedSelection/platformui/content_type/view/sckenhancedselection.html.twig", priority: 0}
