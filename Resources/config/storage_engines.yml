@@ -1,6 +1,6 @@
 parameters:
     ezpublish.fieldType.sckenhancedselection.converter.class: Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\EnhancedSelectionConverter
-    ezpublish.fieldType.sckenhancedselection.storage_gateway.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway\LegacyStorage
+    ezpublish.fieldType.sckenhancedselection.storage_gateway.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway\DoctrineStorage
 
 services:
     ezpublish.fieldType.sckenhancedselection.converter:
@@ -11,4 +11,4 @@ services:
     ezpublish.fieldType.sckenhancedselection.storage_gateway:
         class: "%ezpublish.fieldType.sckenhancedselection.storage_gateway.class%"
         arguments:
-            - "@ezpublish.api.storage_engine.legacy.dbhandler"
+            - "@ezpublish.api.storage_engine.legacy.connection"

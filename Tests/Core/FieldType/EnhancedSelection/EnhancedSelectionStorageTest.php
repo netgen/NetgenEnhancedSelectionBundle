@@ -22,7 +22,7 @@ class EnhancedSelectionStorageTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->gateway = $this->getMockBuilder(EnhancedSelectionStorage\Gateway\LegacyStorage::class)
+        $this->gateway = $this->getMockBuilder(EnhancedSelectionStorage\Gateway\DoctrineStorage::class)
             ->disableOriginalConstructor()
             ->setMethods(array('deleteFieldData', 'storeFieldData', 'getFieldData'))
             ->getMock();
