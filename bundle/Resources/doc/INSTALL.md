@@ -4,7 +4,7 @@ Netgen Enhanced Selection Bundle installation instructions
 Requirements
 ------------
 
-* eZ Publish 5.4+ / eZ Publish Community 2014.11+ / eZ Platform 1.0+
+* eZ Platform 1.11+
 
 Installation steps
 ------------------
@@ -14,7 +14,7 @@ Installation steps
 Run the following command from your project root to install the bundle:
 
 ```bash
-$ composer require netgen/enhanced-selection-bundle:~2.0 netgen/enhancedselection2:~2.0
+$ composer require netgen/enhanced-selection-bundle netgen/enhancedselection2
 ```
 
 ### Activate the bundle
