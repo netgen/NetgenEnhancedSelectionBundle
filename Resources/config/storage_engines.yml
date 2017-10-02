@@ -10,5 +10,5 @@ services:
 
     ezpublish.fieldType.sckenhancedselection.storage_gateway:
         class: "%ezpublish.fieldType.sckenhancedselection.storage_gateway.class%"
-        tags:
-            - {name: ezpublish.fieldType.externalStorageHandler.gateway, alias: sckenhancedselection, identifier: LegacyStorage}
+        arguments:
+            - "@ezpublish.api.storage_engine.legacy.dbhandler"

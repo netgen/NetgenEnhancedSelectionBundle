@@ -13,6 +13,8 @@ services:
 
     ezpublish.fieldType.sckenhancedselection.externalStorage:
         class: "%ezpublish.fieldType.sckenhancedselection.externalStorage.class%"
+        arguments:
+            - "@ezpublish.fieldType.sckenhancedselection.storage_gateway"
         tags:
             - {name: ezpublish.fieldType.externalStorageHandler, alias: sckenhancedselection}
 

@@ -7,37 +7,22 @@ use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 use PDO;
-use RuntimeException;
 
 class LegacyStorage extends Gateway
 {
     /**
-     * Connection.
-     *
      * @var \eZ\Publish\Core\Persistence\Database\DatabaseHandler
      */
-    protected $connection;
+    protected $dbHandler;
 
     /**
-     * Sets the data storage connection to use.
+     * Constructor.
      *
-     *
-     * @param \eZ\Publish\Core\Persistence\Database\DatabaseHandler $connection
-     *
-     * @throws \RuntimeException if $connection is not an instance of
-     *         {@link \eZ\Publish\Core\Persistence\Database\DatabaseHandler}
+     * @param \eZ\Publish\Core\Persistence\Database\DatabaseHandler $dbHandler
      */
-    public function setConnection($connection)
+    public function __construct(DatabaseHandler $dbHandler)
     {
-        // This obviously violates the Liskov substitution Principle, but with
-        // the given class design there is no sane other option. Actually the
-        // dbHandler *should* be passed to the constructor, and there should
-        // not be the need to post-inject it.
-        if (!$connection instanceof DatabaseHandler) {
-            throw new RuntimeException('Invalid connection passed');
-        }
-
-        $this->connection = $connection;
+        $this->dbHandler = $dbHandler;
     }
 
     /**
@@ -48,20 +33,18 @@ class LegacyStorage extends Gateway
      */
     public function storeFieldData(VersionInfo $versionInfo, Field $field)
     {
-        $connection = $this->getConnection();
-
         foreach ($field->value->externalData as $identifier) {
-            $insertQuery = $connection->createInsertQuery();
+            $insertQuery = $this->dbHandler->createInsertQuery();
             $insertQuery
-                ->insertInto($connection->quoteTable('sckenhancedselection'))
+                ->insertInto($this->dbHandler->quoteTable('sckenhancedselection'))
                 ->set(
-                    $connection->quoteColumn('contentobject_attribute_id'),
+                    $this->dbHandler->quoteColumn('contentobject_attribute_id'),
                     $insertQuery->bindValue($field->id, null, PDO::PARAM_INT)
                 )->set(
-                    $connection->quoteColumn('contentobject_attribute_version'),
+                    $this->dbHandler->quoteColumn('contentobject_attribute_version'),
                     $insertQuery->bindValue($versionInfo->versionNo, null, PDO::PARAM_INT)
                 )->set(
-                    $connection->quoteColumn('identifier'),
+                    $this->dbHandler->quoteColumn('identifier'),
                     $insertQuery->bindValue($identifier)
                 );
 
@@ -89,41 +72,23 @@ class LegacyStorage extends Gateway
      */
     public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds)
     {
-        $connection = $this->getConnection();
-
-        $query = $connection->createDeleteQuery();
+        $query = $this->dbHandler->createDeleteQuery();
         $query
-            ->deleteFrom($connection->quoteTable('sckenhancedselection'))
+            ->deleteFrom($this->dbHandler->quoteTable('sckenhancedselection'))
             ->where(
                 $query->expr->lAnd(
                     $query->expr->in(
-                        $connection->quoteColumn('contentobject_attribute_id'),
+                        $this->dbHandler->quoteColumn('contentobject_attribute_id'),
                         $fieldIds
                     ),
                     $query->expr->eq(
-                        $connection->quoteColumn('contentobject_attribute_version'),
+                        $this->dbHandler->quoteColumn('contentobject_attribute_version'),
                         $query->bindValue($versionInfo->versionNo, null, PDO::PARAM_INT)
                     )
                 )
             );
 
         $query->prepare()->execute();
-    }
-
-    /**
-     * Returns the active connection.
-     *
-     * @throws \RuntimeException if no connection has been set, yet
-     *
-     * @return \eZ\Publish\Core\Persistence\Database\DatabaseHandler
-     */
-    protected function getConnection()
-    {
-        if ($this->connection === null) {
-            throw new RuntimeException('Missing database connection.');
-        }
-
-        return $this->connection;
     }
 
     /**
@@ -136,20 +101,18 @@ class LegacyStorage extends Gateway
      */
     protected function loadFieldData($fieldId, $versionNo)
     {
-        $connection = $this->getConnection();
-
-        $query = $connection->createSelectQuery();
+        $query = $this->dbHandler->createSelectQuery();
         $query
             ->selectDistinct('identifier')
-            ->from($connection->quoteTable('sckenhancedselection'))
+            ->from($this->dbHandler->quoteTable('sckenhancedselection'))
             ->where(
                 $query->expr->lAnd(
                     $query->expr->eq(
-                        $connection->quoteColumn('contentobject_attribute_id', 'sckenhancedselection'),
+                        $this->dbHandler->quoteColumn('contentobject_attribute_id', 'sckenhancedselection'),
                         $query->bindValue($fieldId, null, PDO::PARAM_INT)
                     ),
                     $query->expr->eq(
-                        $connection->quoteColumn('contentobject_attribute_version', 'sckenhancedselection'),
+                        $this->dbHandler->quoteColumn('contentobject_attribute_version', 'sckenhancedselection'),
                         $query->bindValue($versionNo, null, PDO::PARAM_INT)
                     )
                 )

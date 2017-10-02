@@ -24,12 +24,10 @@ class EnhancedSelectionStorageTest extends \PHPUnit_Framework_TestCase
     {
         $this->gateway = $this->getMockBuilder(EnhancedSelectionStorage\Gateway\LegacyStorage::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setConnection', 'deleteFieldData', 'storeFieldData', 'getFieldData'))
+            ->setMethods(array('deleteFieldData', 'storeFieldData', 'getFieldData'))
             ->getMock();
 
-        $gateways = array('enhancedselection' => $this->gateway);
-
-        $this->storage = new EnhancedSelectionStorage($gateways);
+        $this->storage = new EnhancedSelectionStorage($this->gateway);
     }
 
     public function testHasFieldData()

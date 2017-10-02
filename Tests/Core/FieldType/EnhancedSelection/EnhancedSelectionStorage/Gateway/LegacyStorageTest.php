@@ -34,30 +34,12 @@ class LegacyStorageTest extends \PHPUnit_Framework_TestCase
             ->setMethods(array('createDeleteQuery', 'quoteColumn', 'createInsertQuery', 'createSelectQuery'))
             ->getMock();
 
-        $this->storage = new LegacyStorage();
+        $this->storage = new LegacyStorage($this->connection);
     }
 
     public function testInstanceOfGateway()
     {
         $this->assertInstanceOf(Gateway::class, $this->storage);
-    }
-
-    public function testConnectionHandling()
-    {
-        $handler = $this->getMockForAbstractClass(DatabaseHandler::class);
-
-        $this->storage->setConnection($handler);
-    }
-
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Invalid connection passed
-     */
-    public function testConnectionHandlingWithInvalidConnection()
-    {
-        $handler = new \stdClass();
-
-        $this->storage->setConnection($handler);
     }
 
     public function testDeleteFieldData()
@@ -90,7 +72,6 @@ class LegacyStorageTest extends \PHPUnit_Framework_TestCase
         $versionInfo = new VersionInfo();
         $fields = array(1, 2, 3);
 
-        $this->storage->setConnection($this->connection);
         $this->storage->deleteFieldData($versionInfo, $fields);
     }
 
@@ -134,7 +115,6 @@ class LegacyStorageTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->storage->setConnection($this->connection);
         $this->storage->storeFieldData($versionInfo, $field);
     }
 
@@ -187,18 +167,6 @@ class LegacyStorageTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->storage->setConnection($this->connection);
         $this->storage->getFieldData($versionInfo, $field);
-    }
-
-    /**
-     * @expectedException \RuntimeException
-     */
-    public function testGetConnection()
-    {
-        $versionInfo = new VersionInfo();
-        $fields = array(1, 2, 3);
-
-        $this->storage->deleteFieldData($versionInfo, $fields);
     }
 }

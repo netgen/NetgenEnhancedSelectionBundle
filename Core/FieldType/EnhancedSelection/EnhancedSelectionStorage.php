@@ -2,7 +2,7 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
-use eZ\Publish\Core\FieldType\GatewayBasedStorage;
+use eZ\Publish\SPI\FieldType\GatewayBasedStorage;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 
@@ -22,12 +22,9 @@ class EnhancedSelectionStorage extends GatewayBasedStorage
      */
     public function storeFieldData(VersionInfo $versionInfo, Field $field, array $context)
     {
-        /** @var \Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway $gateway */
-        $gateway = $this->getGateway($context);
-
-        $gateway->deleteFieldData($versionInfo, array($field->id));
+        $this->gateway->deleteFieldData($versionInfo, array($field->id));
         if (!empty($field->value->externalData)) {
-            $gateway->storeFieldData($versionInfo, $field);
+            $this->gateway->storeFieldData($versionInfo, $field);
         }
     }
 
@@ -40,9 +37,7 @@ class EnhancedSelectionStorage extends GatewayBasedStorage
      */
     public function getFieldData(VersionInfo $versionInfo, Field $field, array $context)
     {
-        /** @var \Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway $gateway */
-        $gateway = $this->getGateway($context);
-        $gateway->getFieldData($versionInfo, $field);
+        $this->gateway->getFieldData($versionInfo, $field);
     }
 
     /**
@@ -57,9 +52,7 @@ class EnhancedSelectionStorage extends GatewayBasedStorage
      */
     public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds, array $context)
     {
-        /** @var \Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway $gateway */
-        $gateway = $this->getGateway($context);
-        $gateway->deleteFieldData($versionInfo, $fieldIds);
+        $this->gateway->deleteFieldData($versionInfo, $fieldIds);
     }
 
     /**
