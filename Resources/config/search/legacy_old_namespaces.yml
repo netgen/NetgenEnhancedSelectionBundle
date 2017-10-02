@@ -1,7 +1,0 @@
-services:
-    ezpublish.persistence.legacy.search.gateway.criterion_handler.common.enhanced_selection:
-        parent: ezpublish.persistence.legacy.search.gateway.criterion_handler.base
-        class: Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\Search\Common\Gateway\CriterionHandler\EnhancedSelection
-        tags:
-            - {name: ezpublish.persistence.legacy.search.gateway.criterion_handler.content}
-            - {name: ezpublish.persistence.legacy.search.gateway.criterion_handler.location}
