@@ -1,29 +1,23 @@
-parameters:
-    ezpublish.fieldType.sckenhancedselection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type
-    ezpublish.fieldType.sckenhancedselection.externalStorage.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage
-    ezpublish.fieldType.indexable.sckenhancedselection.class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\SearchField
-    ezpublish.fieldType.form.fieldtype_handler.sckenhancedselection.class: Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection
-
 services:
     ezpublish.fieldType.sckenhancedselection:
-        class: "%ezpublish.fieldType.sckenhancedselection.class%"
+        class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type
         parent: ezpublish.fieldType
         tags:
             - {name: ezpublish.fieldType, alias: sckenhancedselection}
 
     ezpublish.fieldType.sckenhancedselection.externalStorage:
-        class: "%ezpublish.fieldType.sckenhancedselection.externalStorage.class%"
+        class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage
         arguments:
             - "@ezpublish.fieldType.sckenhancedselection.storage_gateway"
         tags:
             - {name: ezpublish.fieldType.externalStorageHandler, alias: sckenhancedselection}
 
     ezpublish.fieldType.indexable.sckenhancedselection:
-        class: "%ezpublish.fieldType.indexable.sckenhancedselection.class%"
+        class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\SearchField
         tags:
             - {name: ezpublish.fieldType.indexable, alias: sckenhancedselection}
 
     ezpublish.fieldType.form.fieldtype_handler.sckenhancedselection:
-        class: "%ezpublish.fieldType.form.fieldtype_handler.sckenhancedselection.class%"
+        class: Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: sckenhancedselection}
