@@ -6,9 +6,10 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value as EnhancedSelectionValue;
 use Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class EnhancedSelectionTest extends \PHPUnit_Framework_TestCase
+class EnhancedSelectionTest extends TestCase
 {
     /**
      * @var EnhancedSelection

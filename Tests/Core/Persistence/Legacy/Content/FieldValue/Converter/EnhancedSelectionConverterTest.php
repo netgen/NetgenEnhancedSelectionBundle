@@ -8,8 +8,9 @@ use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\EnhancedSelectionConverter;
+use PHPUnit\Framework\TestCase;
 
-class EnhancedSelectionConverterTest extends \PHPUnit_Framework_TestCase
+class EnhancedSelectionConverterTest extends TestCase
 {
     /**
      * @var Converter

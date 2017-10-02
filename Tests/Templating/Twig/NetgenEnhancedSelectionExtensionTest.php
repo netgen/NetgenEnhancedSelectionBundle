@@ -12,8 +12,9 @@ use eZ\Publish\SPI\Persistence\Content\ContentInfo;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionExtension;
+use PHPUnit\Framework\TestCase;
 
-class NetgenEnhancedSelectionExtensionTest extends \PHPUnit_Framework_TestCase
+class NetgenEnhancedSelectionExtensionTest extends TestCase
 {
     /**
      * @var NetgenEnhancedSelectionExtension
@@ -52,7 +53,7 @@ class NetgenEnhancedSelectionExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetName()
     {
-        $this->assertEquals('netgen_enhanced_selection', $this->extension->getName());
+        $this->assertEquals(NetgenEnhancedSelectionExtension::class, $this->extension->getName());
     }
 
     public function testGetFunctions()

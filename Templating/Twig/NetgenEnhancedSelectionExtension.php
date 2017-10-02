@@ -90,6 +90,6 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
      */
     public function getName()
     {
-        return 'netgen_enhanced_selection';
+        return self::class;
     }
 }

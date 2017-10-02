@@ -4,7 +4,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Solr\Query\Criterion
 
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformSolrSearchEngine\Query\Content\CriterionVisitor\Field;
+use EzSystems\EzPlatformSolrSearchEngine\Query\Common\CriterionVisitor\Field;
 use EzSystems\EzPlatformSolrSearchEngine\Query\CriterionVisitor;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
 
