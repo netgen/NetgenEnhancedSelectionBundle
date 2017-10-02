@@ -4,8 +4,9 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\FieldType\EnhancedSel
 
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
+use PHPUnit\Framework\TestCase;
 
-class ValueTest extends \PHPUnit_Framework_TestCase
+class ValueTest extends TestCase
 {
     protected $value;
 

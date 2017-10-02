@@ -7,8 +7,9 @@ use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage;
+use PHPUnit\Framework\TestCase;
 
-class EnhancedSelectionStorageTest extends \PHPUnit_Framework_TestCase
+class EnhancedSelectionStorageTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
