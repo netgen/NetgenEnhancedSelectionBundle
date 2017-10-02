@@ -1,5 +1,5 @@
 services:
-    ezpublish.search.solr.criterion_visitor.enhanced_selection:
+    netgen.enhanced_selection.search.solr.criterion_visitor.enhanced_selection:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Solr\Query\CriterionVisitor\EnhancedSelection
         arguments:
             - "@ezpublish.search.common.field_name_resolver"
