@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php"
          backupGlobals="false"
          backupStaticAttributes="false"
@@ -5,24 +6,32 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          colors="true"
+         verbose="true"
+         processIsolation="false"
+         stopOnFailure="false"
 >
     <testsuites>
         <testsuite name="Netgen\EnhancedSelectionBundle\Tests">
-            <directory>Tests</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory>.</directory>
+            <directory suffix=".php">bundle</directory>
             <exclude>
-                <directory>DependencyInjection</directory>
-                <directory>Resources</directory>
-                <directory>Tests</directory>
+                <directory>bundle/DependencyInjection</directory>
+                <directory>bundle/Resources</directory>
                 <directory>vendor</directory>
-                <file>Core/Search/Legacy/Content/Common/Gateway/CriterionHandler/EnhancedSelection.php</file>
-                <file>Core/FieldType/EnhancedSelection/SearchField.php</file>
-                <file>NetgenEnhancedSelectionBundle.php</file>
+                <file>bundle/Core/Search/Legacy/Content/Common/Gateway/CriterionHandler/EnhancedSelection.php</file>
+                <file>bundle/Core/FieldType/EnhancedSelection/SearchField.php</file>
+                <file>bundle/NetgenEnhancedSelectionBundle.php</file>
             </exclude>
         </whitelist>
     </filter>
+    <logging>
+        <log type="junit" target="build/report.junit.xml"/>
+        <log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/>
+        <log type="coverage-text" target="build/coverage.txt"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
 </phpunit>

@@ -1,6 +1,6 @@
 filter:
     excluded_paths:
-        - 'Tests/*'
+        - 'tests/*'
         - 'vendor/*'
 tools:
     external_code_coverage: true
