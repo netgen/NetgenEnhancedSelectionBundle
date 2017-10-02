@@ -4,7 +4,6 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\FieldType\EnhancedSel
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Statement;
-use eZ\Publish\Core\Persistence\Database\DatabaseHandler;
 use eZ\Publish\Core\Persistence\Doctrine\ConnectionHandler;
 use eZ\Publish\Core\Persistence\Doctrine\DeleteDoctrineQuery;
 use eZ\Publish\Core\Persistence\Doctrine\InsertDoctrineQuery;

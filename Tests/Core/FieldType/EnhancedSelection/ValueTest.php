@@ -27,6 +27,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     {
         $identifiers = 'identifier0, identifier1';
 
-        $this->assertEquals($identifiers, strval($this->value));
+        $this->assertEquals($identifiers, (string) ($this->value));
     }
 }

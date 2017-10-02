@@ -59,7 +59,7 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
         $names = array();
         $identifiers = array($selectionIdentifier);
 
-        if (is_null($selectionIdentifier)) {
+        if ($selectionIdentifier === null) {
             $field = $this->translationHelper->getTranslatedField($content, $fieldDefIdentifier);
             $identifiers = $field->value->identifiers;
         }
@@ -76,7 +76,7 @@ class NetgenEnhancedSelectionExtension extends Twig_Extension
             }
         }
 
-        if (!is_null($selectionIdentifier)) {
+        if ($selectionIdentifier !== null) {
             return !empty($names) ? $names[$selectionIdentifier] : null;
         }
 
