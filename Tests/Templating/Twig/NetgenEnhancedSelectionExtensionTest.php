@@ -52,7 +52,7 @@ class NetgenEnhancedSelectionExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetName()
     {
-        $this->assertEquals('netgen_enhanced_selection', $this->extension->getName());
+        $this->assertEquals(NetgenEnhancedSelectionExtension::class, $this->extension->getName());
     }
 
     public function testGetFunctions()
