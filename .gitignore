@@ -2,6 +2,7 @@
 CodeCoverage/
 vendor/
 var/
+build/
 composer.phar
 composer.lock
 phpunit.phar
