@@ -13,6 +13,7 @@ Netgen Enhanced Selection Bundle changelog
 * Changed bundle structure to use PSR-4
 * Renamed all Symfony services to have `netgen.enhanced_selection` prefix
 * Removed all Symfony DI `*.class` parameters
+* Removed support for PHP 5.5 and PHP 7.0
 * Improvements to tests
 
 2.3.5 (21.04.2017)
