@@ -1,6 +1,20 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+3.0.0 (xx.xx.xxxx)
+------------------
+
+* Replaced the field type legacy storage gateway with Doctrine storage gateway
+* Removed usage of deprecated gateway based storage API
+* Removed usage of deprecated base field criterion visitor from eZ Solr bundle
+* Use Twig paths to reference Twig templates
+* Removed support for eZ Publish 5 and eZ Platform <= 1.10
+* Minimum supported eZ Solr Search Engine version is now 1.4
+* Changed bundle structure to use PSR-4
+* Renamed all Symfony services to have `netgen.enhanced_selection` prefix
+* Removed all Symfony DI `*.class` parameters
+* Improvements to tests
+
 2.3.5 (21.04.2017)
 ------------------
 
