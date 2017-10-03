@@ -31,7 +31,7 @@
     },
     "conflict": {
         "netgen/enhancedselection2": "<2.0",
-        "ezsystems/ezplatform-solr-search-engine": "<1.2.0"
+        "ezsystems/ezplatform-solr-search-engine": "<1.4.0"
     },
     "autoload": {
         "psr-4": {
