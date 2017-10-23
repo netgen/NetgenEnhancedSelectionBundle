@@ -1,6 +1,7 @@
 services:
     netgen.enhanced_selection.templating.twig.extension:
         class: Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionExtension
+        public: false
         arguments:
             - "@ezpublish.api.service.content_type"
             - "@ezpublish.translation_helper"

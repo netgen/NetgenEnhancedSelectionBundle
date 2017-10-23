@@ -2,11 +2,15 @@ services:
     netgen.enhanced_selection.field_type:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type
         parent: ezpublish.fieldType
+        # Field type services in eZ Platform need to be public
+        public: true
         tags:
             - {name: ezpublish.fieldType, alias: sckenhancedselection}
 
     netgen.enhanced_selection.field_type.external_storage:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage
+        # External storage services in eZ Platform need to be public
+        public: true
         arguments:
             - "@netgen.enhanced_selection.field_type.storage_gateway"
         tags:
@@ -14,20 +18,24 @@ services:
 
     netgen.enhanced_selection.field_type.converter:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\EnhancedSelectionConverter
+        public: false
         tags:
             - {name: ezpublish.storageEngine.legacy.converter, alias: sckenhancedselection, lazy: true, callback: "::create"}
 
     netgen.enhanced_selection.field_type.storage_gateway:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway\DoctrineStorage
+        public: false
         arguments:
             - "@ezpublish.api.storage_engine.legacy.connection"
 
     netgen.enhanced_selection.field_type.indexable:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\SearchField
+        public: false
         tags:
             - {name: ezpublish.fieldType.indexable, alias: sckenhancedselection}
 
     netgen.enhanced_selection.field_type.form.fieldtype_handler:
         class: Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection
+        public: false
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: sckenhancedselection}
