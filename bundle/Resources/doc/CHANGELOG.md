@@ -1,7 +1,7 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
-3.0.0 (xx.xx.xxxx)
+3.0.0 (27.10.2017)
 ------------------
 
 * Replaced the field type legacy storage gateway with Doctrine storage gateway
