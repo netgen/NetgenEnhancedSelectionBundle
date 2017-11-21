@@ -1,6 +1,11 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+3.0.1 (21.11.2017)
+------------------
+
+* Allow installing on eZ kernel 7.0
+
 3.0.0 (27.10.2017)
 ------------------
 
