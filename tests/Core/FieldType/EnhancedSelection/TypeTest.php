@@ -129,7 +129,7 @@ class TypeTest extends TestCase
             "'%setting%' setting is unknown",
             null,
             array(
-                'setting' => 'test',
+                '%setting%' => 'test',
             )
         );
 
@@ -155,7 +155,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value must be of array type",
             null,
             array(
-                'setting' => 'options',
+                '%setting%' => 'options',
             )
         );
 
@@ -163,7 +163,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value must be of boolean type",
             null,
             array(
-                'setting' => 'isMultiple',
+                '%setting%' => 'isMultiple',
             )
         );
 
@@ -171,7 +171,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value must be of string type",
             null,
             array(
-                'setting' => 'delimiter',
+                '%setting%' => 'delimiter',
             )
         );
 
@@ -179,7 +179,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value must be of string type",
             null,
             array(
-                'setting' => 'query',
+                '%setting%' => 'query',
             )
         );
 
@@ -207,7 +207,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value item must have a 'name' property",
             null,
             array(
-                'setting' => 'options',
+                '%setting%' => 'options',
             )
         );
 
@@ -215,7 +215,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value item must have an 'identifier' property",
             null,
             array(
-                'setting' => 'options',
+                '%setting%' => 'options',
             )
         );
 
@@ -223,7 +223,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value item must have an 'priority' property",
             null,
             array(
-                'setting' => 'options',
+                '%setting%' => 'options',
             )
         );
 
@@ -253,7 +253,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value item's 'name' property must be of string value",
             null,
             array(
-                'setting' => 'options',
+                '%setting%' => 'options',
             )
         );
 
@@ -261,7 +261,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value item's 'name' property must have a value",
             null,
             array(
-                'setting' => 'options',
+                '%setting%' => 'options',
             )
         );
 
@@ -269,7 +269,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value item's 'identifier' property must be of string value",
             null,
             array(
-                'setting' => 'options',
+                '%setting%' => 'options',
             )
         );
 
@@ -277,7 +277,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value item's 'identifier' property must have a value",
             null,
             array(
-                'setting' => 'options',
+                '%setting%' => 'options',
             )
         );
 
@@ -285,7 +285,7 @@ class TypeTest extends TestCase
             "'%setting%' setting value item's 'priority' property must be of numeric value",
             null,
             array(
-                'setting' => 'options',
+                '%setting%' => 'options',
             )
         );
 
