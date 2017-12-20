@@ -126,7 +126,7 @@ class TypeTest extends TestCase
     public function testValidateFieldSettingsWithMissingFieldSettings()
     {
         $validationError = new ValidationError(
-            "Setting '%setting%' is unknown",
+            "'%setting%' setting is unknown",
             null,
             array(
                 'setting' => 'test',
@@ -152,7 +152,7 @@ class TypeTest extends TestCase
         );
 
         $validationError1 = new ValidationError(
-            "Setting '%setting%' value must be of array type",
+            "'%setting%' setting value must be of array type",
             null,
             array(
                 'setting' => 'options',
@@ -160,7 +160,7 @@ class TypeTest extends TestCase
         );
 
         $validationError2 = new ValidationError(
-            "Setting '%setting%' value must be of boolean type",
+            "'%setting%' setting value must be of boolean type",
             null,
             array(
                 'setting' => 'isMultiple',
@@ -168,7 +168,7 @@ class TypeTest extends TestCase
         );
 
         $validationError3 = new ValidationError(
-            "Setting '%setting%' value must be of string type",
+            "'%setting%' setting value must be of string type",
             null,
             array(
                 'setting' => 'delimiter',
@@ -176,7 +176,7 @@ class TypeTest extends TestCase
         );
 
         $validationError4 = new ValidationError(
-            "Setting '%setting%' value must be of string type",
+            "'%setting%' setting value must be of string type",
             null,
             array(
                 'setting' => 'query',
@@ -204,7 +204,7 @@ class TypeTest extends TestCase
         );
 
         $validationError1 = new ValidationError(
-            "Setting '%setting%' value item must have a 'name' property",
+            "'%setting%' setting value item must have a 'name' property",
             null,
             array(
                 'setting' => 'options',
@@ -212,7 +212,7 @@ class TypeTest extends TestCase
         );
 
         $validationError2 = new ValidationError(
-            "Setting '%setting%' value item must have an 'identifier' property",
+            "'%setting%' setting value item must have an 'identifier' property",
             null,
             array(
                 'setting' => 'options',
@@ -220,7 +220,7 @@ class TypeTest extends TestCase
         );
 
         $validationError3 = new ValidationError(
-            "Setting '%setting%' value item must have an 'priority' property",
+            "'%setting%' setting value item must have an 'priority' property",
             null,
             array(
                 'setting' => 'options',
@@ -250,7 +250,7 @@ class TypeTest extends TestCase
         );
 
         $validationError1 = new ValidationError(
-            "Setting '%setting%' value item's 'name' property must be of string value",
+            "'%setting%' setting value item's 'name' property must be of string value",
             null,
             array(
                 'setting' => 'options',
@@ -258,7 +258,7 @@ class TypeTest extends TestCase
         );
 
         $validationError2 = new ValidationError(
-            "Setting '%setting%' value item's 'name' property must have a value",
+            "'%setting%' setting value item's 'name' property must have a value",
             null,
             array(
                 'setting' => 'options',
@@ -266,7 +266,7 @@ class TypeTest extends TestCase
         );
 
         $validationError3 = new ValidationError(
-            "Setting '%setting%' value item's 'identifier' property must be of string value",
+            "'%setting%' setting value item's 'identifier' property must be of string value",
             null,
             array(
                 'setting' => 'options',
@@ -274,7 +274,7 @@ class TypeTest extends TestCase
         );
 
         $validationError4 = new ValidationError(
-            "Setting '%setting%' value item's 'identifier' property must have a value",
+            "'%setting%' setting value item's 'identifier' property must have a value",
             null,
             array(
                 'setting' => 'options',
@@ -282,7 +282,7 @@ class TypeTest extends TestCase
         );
 
         $validationError5 = new ValidationError(
-            "Setting '%setting%' value item's 'priority' property must be of integer value",
+            "'%setting%' setting value item's 'priority' property must be of numeric value",
             null,
             array(
                 'setting' => 'options',
