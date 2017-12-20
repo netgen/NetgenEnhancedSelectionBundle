@@ -406,8 +406,8 @@ class Type extends FieldType
         foreach ($value->identifiers as $identifier) {
             if (!is_string($identifier)) {
                 throw new InvalidArgumentType(
-                    "$identifier",
-                    'Netgen\\Bundle\\EnhancedSelectionBundle\\Core\\FieldType\\EnhancedSelection\\Value',
+                    $identifier,
+                    Value::class,
                     $identifier
                 );
             }
