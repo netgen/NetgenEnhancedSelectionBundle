@@ -1,0 +1,39 @@
+{% trans_default_domain "ezrepoforms_content_type" %}
+
+{% block sckenhancedselection_field_definition_edit %}
+    {% import '@NetgenEnhancedSelection/field_definition/edit/macros.html.twig' as macros %}
+
+    <div class="sckenhancedselection-settings options{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        <div class="multientry" data-prototype="{{ macros.option_prototype(form.options.vars.prototype)|e }}">
+            {{- form_label(form.options) -}}
+            {{- form_errors(form.options) -}}
+
+            <div class="multientry-items">
+                {% for option in form.options %}
+                    {{- form_errors(option) -}}
+                    {{- macros.option_prototype(option) -}}
+                {% endfor %}
+            </div>
+
+            <a href="#" class="multientry_add">{{ 'field_definition.sckenhancedselection.settings.options.add_option'|trans }}</a>
+        </div>
+    </div>
+
+    <div class="sckenhancedselection-settings is-multiple{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_label(form.isMultiple) -}}
+        {{- form_errors(form.isMultiple) -}}
+        {{- form_widget(form.isMultiple) -}}
+    </div>
+
+    <div class="sckenhancedselection-settings delimiter{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_label(form.delimiter) -}}
+        {{- form_errors(form.delimiter) -}}
+        {{- form_widget(form.delimiter) -}}
+    </div>
+
+    <div class="sckenhancedselection-settings query{% if group_class is not empty %} {{ group_class }}{% endif %}">
+        {{- form_label(form.query) -}}
+        {{- form_errors(form.query) -}}
+        {{- form_widget(form.query) -}}
+    </div>
+{% endblock %}

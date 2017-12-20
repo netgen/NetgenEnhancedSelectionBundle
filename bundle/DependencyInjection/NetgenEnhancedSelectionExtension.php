@@ -34,6 +34,10 @@ class NetgenEnhancedSelectionExtension extends Extension implements PrependExten
         if (in_array('EzSystemsEzPlatformSolrSearchEngineBundle', $activatedBundles, true)) {
             $loader->load('search/solr.yml');
         }
+
+        if (in_array('EzPlatformAdminUiBundle', $activatedBundles, true)) {
+            $loader->load('ezadminui/services.yml');
+        }
     }
 
     /**

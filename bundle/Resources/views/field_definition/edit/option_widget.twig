@@ -1,0 +1,9 @@
+{% trans_default_domain "ezrepoforms_content_type" %}
+
+{% block ezplatform_fieldtype_sckenhancedselection_option_widget %}
+    <div class="form-group row">
+        {{- form_row(form.name) -}}
+        {{- form_row(form.identifier) -}}
+        {{- form_row(form.priority) -}}
+    </div>
+{% endblock %}

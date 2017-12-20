@@ -287,9 +287,9 @@ class Type extends FieldType
                                     )
                                 );
                             } else {
-                                if (!is_int($option['priority'])) {
+                                if (!is_numeric($option['priority'])) {
                                     $validationErrors[] = new ValidationError(
-                                        "'%setting%' setting value item's 'priority' property must be of integer value",
+                                        "'%setting%' setting value item's 'priority' property must be of numeric value",
                                         null,
                                         array(
                                             '%setting%' => $name,

@@ -2,5 +2,7 @@ system:
     default:
         field_templates:
             - { template: "@NetgenEnhancedSelection/sckenhancedselection_content_field.html.twig", priority: 0 }
+        fielddefinition_edit_templates:
+            - { template: "@NetgenEnhancedSelection/field_definition/edit/sckenhancedselection.html.twig", priority: 0 }
         fielddefinition_settings_templates:
             - { template: "@NetgenEnhancedSelection/field_definition/view/sckenhancedselection.html.twig", priority: 0 }

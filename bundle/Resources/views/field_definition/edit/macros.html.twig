@@ -1,0 +1,7 @@
+{% macro option_prototype(form) %}
+    <div class="multientry-item">
+        {% form_theme form '@NetgenEnhancedSelection/field_definition/edit/option_widget.twig' %}
+
+        {{ form_widget(form) }}
+    </div>
+{% endmacro %}

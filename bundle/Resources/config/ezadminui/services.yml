@@ -1,0 +1,18 @@
+services:
+    netgen.enhanced_selection.ezadminui.component.javascripts:
+         parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
+         public: false
+         arguments:
+             - "@twig"
+             - "@@NetgenEnhancedSelection/ezadminui/javascripts.html.twig"
+         tags:
+             - { name: ezplatform.admin_ui.component, group: 'script-body' }
+
+    netgen.enhanced_selection.ezadminui.component.stylesheets:
+         parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
+         public: false
+         arguments:
+             - "@twig"
+             - "@@NetgenEnhancedSelection/ezadminui/stylesheets.html.twig"
+         tags:
+             - { name: ezplatform.admin_ui.component, group: 'stylesheet-head' }
