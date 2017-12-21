@@ -8,14 +8,25 @@
             {{- form_label(form.options) -}}
             {{- form_errors(form.options) -}}
 
-            <div class="multientry-items">
-                {% for option in form.options %}
-                    {{- form_errors(option) -}}
-                    {{- macros.option_prototype(option) -}}
-                {% endfor %}
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{ 'field_definition.sckenhancedselection.settings.options.name'|trans }}</th>
+                        <th>{{ 'field_definition.sckenhancedselection.settings.options.identifier'|trans }}</th>
+                        <th colspan="2">{{ 'field_definition.sckenhancedselection.settings.options.priority'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody class="multientry-items">
+                    {% for option in form.options %}
+                        {{- form_errors(option) -}}
+                        {{- macros.option_prototype(option) -}}
+                    {% endfor %}
+                </tbody>
+            </table>
 
-            <a href="#" class="multientry_add">{{ 'field_definition.sckenhancedselection.settings.options.add_option'|trans }}</a>
+            <div class="form-group">
+                <button class="multientry_add">{{ 'field_definition.sckenhancedselection.settings.options.add_option'|trans }}</button>
+            </div>
         </div>
     </div>
 
