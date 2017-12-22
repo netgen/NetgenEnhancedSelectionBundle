@@ -1,6 +1,13 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+3.1.0 (22.12.2017)
+------------------
+
+* Add support for eZ Platform Admin UI v2
+* Usage of Twig classes switched to namespaces
+* Separated Twig extension definition from its runtime
+
 3.0.1 (21.11.2017)
 ------------------
 
