@@ -13,11 +13,12 @@
     "authors": [
         {
             "name": "Netgen",
-            "homepage": "http://www.netgenlabs.com"
+            "homepage": "https://www.netgenlabs.com"
         }
     ],
     "require": {
         "ezsystems/ezpublish-kernel": "^6.11|^7.0",
+        "ezsystems/repository-forms": "^1.9|^2.0",
         "twig/twig": "^1.35|^2.4.4"
     },
     "require-dev": {
