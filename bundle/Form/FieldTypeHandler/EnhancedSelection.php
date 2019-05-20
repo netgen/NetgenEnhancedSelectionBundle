@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value as EnhancedSelectionValue;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
@@ -13,6 +14,16 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class EnhancedSelection extends FieldTypeHandler
 {
+    /**
+     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
+     */
+    protected $configResolver;
+
+    public function __construct(ConfigResolverInterface $configResolver)
+    {
+        $this->configResolver = $configResolver;
+    }
+
     /**
      * Converts the eZ Publish field type value to a format that can be accepted by the form.
      *
@@ -74,6 +85,10 @@ class EnhancedSelection extends FieldTypeHandler
         $optionsValues = $fieldSettings['options'];
 
         $options['expanded'] = false;
+        if ($this->configResolver->hasParameter('form.handler.expanded', 'netgen.enhanced_selection')) {
+            $options['expanded'] = $this->configResolver
+                ->getParameter('form.handler.expanded', 'netgen.enhanced_selection');
+        }
         $options['multiple'] = $fieldSettings['isMultiple'];
         $options['choices_as_values'] = true;
         $options['choices'] = $this->getValues($optionsValues);
