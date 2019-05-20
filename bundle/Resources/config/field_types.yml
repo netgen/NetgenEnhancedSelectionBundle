@@ -36,6 +36,8 @@ services:
 
     netgen.enhanced_selection.field_type.form.fieldtype_handler:
         class: Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection
+        arguments:
+            - '@ezpublish.config.resolver'
         public: false
         tags:
             - { name: netgen.ezforms.form.fieldtype_handler, alias: sckenhancedselection }
