@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value as EnhancedSelectionValue;
 use Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection;
@@ -16,9 +17,19 @@ class EnhancedSelectionTest extends TestCase
      */
     protected $handler;
 
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $configResolver;
+
     public function setUp()
     {
-        $this->handler = new EnhancedSelection();
+        $this->configResolver = $this->getMockBuilder(ConfigResolverInterface::class)
+            ->setMethods(['hasParameter', 'getParameter', 'setDefaultNamespace', 'getDefaultNamespace'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->handler = new EnhancedSelection($this->configResolver);
     }
 
     public function testInstanceOfFieldTypeHandler()
@@ -106,6 +117,10 @@ class EnhancedSelectionTest extends TestCase
 
         $formBuilder->expects($this->once())
             ->method('add');
+
+        $this->configResolver->expects($this->once())
+            ->method('getParameter')
+            ->willReturn(false);
 
         $fieldDefinition = new FieldDefinition(
             array(
