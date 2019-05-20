@@ -1,2 +1,2 @@
 parameters:
-    netgen.enhanced_selection.form.handler.expanded: false
+    netgen_enhanced_selection.default.form_handler.expanded: false

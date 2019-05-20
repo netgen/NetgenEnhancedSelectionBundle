@@ -84,11 +84,8 @@ class EnhancedSelection extends FieldTypeHandler
         $fieldSettings = $fieldDefinition->getFieldSettings();
         $optionsValues = $fieldSettings['options'];
 
-        $options['expanded'] = false;
-        if ($this->configResolver->hasParameter('form.handler.expanded', 'netgen.enhanced_selection')) {
-            $options['expanded'] = $this->configResolver
-                ->getParameter('form.handler.expanded', 'netgen.enhanced_selection');
-        }
+        $options['expanded'] = $this->configResolver
+            ->getParameter('form_handler.expanded', 'netgen_enhanced_selection');
         $options['multiple'] = $fieldSettings['isMultiple'];
         $options['choices_as_values'] = true;
         $options['choices'] = $this->getValues($optionsValues);
