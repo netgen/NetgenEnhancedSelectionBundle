@@ -4,7 +4,7 @@ Netgen Enhanced Selection Bundle changelog
 3.2.0 (07.06.2019)
 ------------------
 
-* Add parameter to render the form via an expandend Syfmony choice type
+* Add parameter to render the form via an expandend Symfony choice type
 
 3.1.0 (22.12.2017)
 ------------------
