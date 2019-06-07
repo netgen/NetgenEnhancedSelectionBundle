@@ -24,6 +24,7 @@ class NetgenEnhancedSelectionExtension extends Extension implements PrependExten
 
         $loader->load('field_types.yml');
         $loader->load('templating.yml');
+        $loader->load('commands.yml');
         $loader->load('parameters.yml');
 
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
