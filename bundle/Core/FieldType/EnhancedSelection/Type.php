@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\Core\FieldType\FieldType;
 use eZ\Publish\Core\FieldType\ValidationError;
@@ -60,12 +61,8 @@ class Type extends FieldType
      * is designated to be used in the content name/urlAlias pattern.
      *
      * The used $value can be assumed to be already accepted by {@link * acceptValue()}.
-     *
-     * @param \eZ\Publish\SPI\FieldType\Value $value
-     *
-     * @return string
      */
-    public function getName(SPIValue $value)
+    public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
     {
         return (string) $value;
     }
