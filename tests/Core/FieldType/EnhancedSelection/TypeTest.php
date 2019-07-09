@@ -31,7 +31,7 @@ class TypeTest extends TestCase
      */
     protected $emptyValue;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->type = new Type();
         $this->value = new Value($this->identifiers);

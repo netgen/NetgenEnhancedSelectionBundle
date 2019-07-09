@@ -29,7 +29,7 @@ class EnhancedSelectionTest extends TestCase
      */
     protected $criterion;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->markTestIncomplete('Need to switch the tests to new criterion visitor namespaces');
 

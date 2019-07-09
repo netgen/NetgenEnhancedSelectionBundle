@@ -14,7 +14,7 @@ class EnhancedSelectionTest extends TestCase
      */
     protected $criterion;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->criterion = new EnhancedSelection('some_field', Operator::EQ, 'some_value');
     }

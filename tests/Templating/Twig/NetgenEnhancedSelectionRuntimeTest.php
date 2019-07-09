@@ -31,7 +31,7 @@ class NetgenEnhancedSelectionRuntimeTest extends TestCase
      */
     protected $contentTypeService;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->translationHelper = $this->getMockBuilder(TranslationHelper::class)
             ->disableOriginalConstructor()

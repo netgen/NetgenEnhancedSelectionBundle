@@ -22,7 +22,7 @@ class EnhancedSelectionTest extends TestCase
      */
     protected $configResolver;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->configResolver = $this->getMockBuilder(ConfigResolverInterface::class)
             ->setMethods(['hasParameter', 'getParameter', 'setDefaultNamespace', 'getDefaultNamespace'])

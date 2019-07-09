@@ -21,7 +21,7 @@ class EnhancedSelectionStorageTest extends TestCase
      */
     protected $storage;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->gateway = $this->getMockBuilder(EnhancedSelectionStorage\Gateway\DoctrineStorage::class)
             ->disableOriginalConstructor()
