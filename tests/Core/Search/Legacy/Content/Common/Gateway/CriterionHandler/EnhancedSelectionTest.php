@@ -23,7 +23,7 @@ class EnhancedSelectionTest extends TestCase
     protected $handler;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     protected $db;
 

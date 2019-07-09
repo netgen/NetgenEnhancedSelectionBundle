@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class EnhancedSelectionStorageTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     protected $gateway;
 
