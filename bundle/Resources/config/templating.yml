@@ -13,11 +13,3 @@ services:
             - "@ezpublish.translation_helper"
         tags:
             - { name: twig.runtime }
-
-    # Runtime loader for Symfony 2.8
-
-    netgen.enhanced_selection.templating.twig.runtime.loader:
-        class: Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionRuntimeLoader
-        public: false
-        arguments:
-            - "@netgen.enhanced_selection.templating.twig.runtime"
