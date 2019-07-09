@@ -20,12 +20,6 @@ class NetgenEnhancedSelectionRuntime
      */
     protected $translationHelper;
 
-    /**
-     * NetgenEnhancedSelectionExtension constructor.
-     *
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
-     */
     public function __construct(ContentTypeService $contentTypeService, TranslationHelper $translationHelper)
     {
         $this->contentTypeService = $contentTypeService;
@@ -35,13 +29,9 @@ class NetgenEnhancedSelectionRuntime
     /**
      * Returns selection names.
      *
-     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
-     * @param string $fieldDefIdentifier
-     * @param string|null $selectionIdentifier
-     *
      * @return array|string|null
      */
-    public function getSelectionName(Content $content, $fieldDefIdentifier, $selectionIdentifier = null)
+    public function getSelectionName(Content $content, string $fieldDefIdentifier, ?string $selectionIdentifier = null)
     {
         $names = [];
         $identifiers = [$selectionIdentifier];

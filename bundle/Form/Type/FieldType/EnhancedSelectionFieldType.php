@@ -23,13 +23,13 @@ class EnhancedSelectionFieldType extends AbstractType
         $this->fieldTypeService = $fieldTypeService;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['field_definition']);
         $resolver->setAllowedTypes('field_definition', FieldDefinition::class);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition */
         $fieldDefinition = $options['field_definition'];
@@ -57,7 +57,7 @@ class EnhancedSelectionFieldType extends AbstractType
             );
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ezplatform_fieldtype_sckenhancedselection';
     }

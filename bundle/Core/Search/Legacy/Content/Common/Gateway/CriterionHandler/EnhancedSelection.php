@@ -11,19 +11,9 @@ use eZ\Publish\Core\Search\Legacy\Content\Common\Gateway\CriteriaConverter;
 use eZ\Publish\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler\FieldBase;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
 
-/**
- * EnhancedSelection criterion handler.
- */
 class EnhancedSelection extends FieldBase
 {
-    /**
-     * Check if this criterion handler accepts to handle the given criterion.
-     *
-     * @param \eZ\Publish\API\Repository\Values\Content\Query\Criterion $criterion
-     *
-     * @return bool
-     */
-    public function accept(Criterion $criterion)
+    public function accept(Criterion $criterion): bool
     {
         return $criterion instanceof EnhancedSelectionCriterion;
     }
@@ -40,7 +30,7 @@ class EnhancedSelection extends FieldBase
      *
      * @return \eZ\Publish\Core\Persistence\Database\Expression
      */
-    public function handle(CriteriaConverter $converter, SelectQuery $query, Criterion $criterion, array $fieldFilters = null)
+    public function handle(CriteriaConverter $converter, SelectQuery $query, Criterion $criterion, ?array $fieldFilters = null): string
     {
         $fieldDefinitionIds = $this->getFieldDefinitionIds($criterion->target);
 
@@ -86,16 +76,7 @@ class EnhancedSelection extends FieldBase
         );
     }
 
-    /**
-     * Returns a list of IDs of searchable field definitions for the given criterion target.
-     *
-     * @param string $fieldIdentifier
-     *
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException If no searchable fields are found for the given $fieldIdentifier
-     *
-     * @return array
-     */
-    protected function getFieldDefinitionIds($fieldIdentifier)
+    protected function getFieldDefinitionIds(string $fieldIdentifier): array
     {
         $fieldDefinitionIdList = [];
         $fieldMap = $this->contentTypeHandler->getSearchableFieldMap();

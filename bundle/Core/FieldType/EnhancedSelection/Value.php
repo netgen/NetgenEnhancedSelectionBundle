@@ -16,23 +16,14 @@ class Value extends BaseValue
     public $identifiers = [];
 
     /**
-     * Constructor.
-     *
      * @param string[] $identifiers
      */
-    public function __construct($identifiers = null)
+    public function __construct(array $identifiers = [])
     {
-        if (is_array($identifiers)) {
-            $this->identifiers = $identifiers;
-        }
+        $this->identifiers = $identifiers;
     }
 
-    /**
-     * Returns a string representation of the field value.
-     *
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return implode(', ', $this->identifiers);
     }

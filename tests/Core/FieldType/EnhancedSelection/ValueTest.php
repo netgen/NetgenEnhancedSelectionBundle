@@ -21,12 +21,12 @@ class ValueTest extends TestCase
         );
     }
 
-    public function testInstanceOfFieldTypeValue()
+    public function testInstanceOfFieldTypeValue(): void
     {
         self::assertInstanceOf(BaseValue::class, $this->value);
     }
 
-    public function testToStringMethod()
+    public function testToStringMethod(): void
     {
         $identifiers = 'identifier0, identifier1';
 

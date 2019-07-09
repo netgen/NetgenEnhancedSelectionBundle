@@ -11,15 +11,7 @@ use eZ\Publish\SPI\Search;
 
 class SearchField implements Indexable
 {
-    /**
-     * Get index data for field for search backend.
-     *
-     * @param \eZ\Publish\SPI\Persistence\Content\Field $field
-     * @param \eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition $fieldDefinition
-     *
-     * @return \eZ\Publish\SPI\Search\Field[]
-     */
-    public function getIndexData(Field $field, FieldDefinition $fieldDefinition)
+    public function getIndexData(Field $field, FieldDefinition $fieldDefinition): array
     {
         $selectionKeys = (array) $field->value->externalData;
         $selectionIds = [];
@@ -56,12 +48,7 @@ class SearchField implements Indexable
         ];
     }
 
-    /**
-     * Get index field types for search backend.
-     *
-     * @return \eZ\Publish\SPI\Search\FieldType[]
-     */
-    public function getIndexDefinition()
+    public function getIndexDefinition(): array
     {
         return [
             'identifiers' => new Search\FieldType\MultipleStringField(),
@@ -71,22 +58,12 @@ class SearchField implements Indexable
         ];
     }
 
-    /**
-     * Get name of the default field to be used for matching.
-     *
-     * @return string
-     */
-    public function getDefaultMatchField()
+    public function getDefaultMatchField(): string
     {
         return 'identifiers';
     }
 
-    /**
-     * Get name of the default field to be used for sorting.
-     *
-     * @return string
-     */
-    public function getDefaultSortField()
+    public function getDefaultSortField(): string
     {
         return $this->getDefaultMatchField();
     }

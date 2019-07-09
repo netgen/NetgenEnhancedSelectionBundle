@@ -34,12 +34,12 @@ class EnhancedSelectionTest extends TestCase
         $this->handler = new EnhancedSelection($this->configResolver);
     }
 
-    public function testInstanceOfFieldTypeHandler()
+    public function testInstanceOfFieldTypeHandler(): void
     {
         self::assertInstanceOf(FieldTypeHandler::class, $this->handler);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $identifiers = ['identifier1', 'identifier2'];
         $selection = new EnhancedSelectionValue($identifiers);
@@ -49,7 +49,7 @@ class EnhancedSelectionTest extends TestCase
         self::assertSame($identifiers, $converted);
     }
 
-    public function testconvertFieldValueToFormWithIdentifiersArrayEmpty()
+    public function testConvertFieldValueToFormWithIdentifiersArrayEmpty(): void
     {
         $identifiers = [];
         $selection = new EnhancedSelectionValue($identifiers);
@@ -66,7 +66,7 @@ class EnhancedSelectionTest extends TestCase
         self::assertSame('', $converted);
     }
 
-    public function testConvertFieldValueToFormWithFieldDefinitionMultiple()
+    public function testConvertFieldValueToFormWithFieldDefinitionMultiple(): void
     {
         $identifiers = ['identifier1', 'identifier2'];
         $selection = new EnhancedSelectionValue($identifiers);
@@ -83,7 +83,7 @@ class EnhancedSelectionTest extends TestCase
         self::assertSame($identifiers, $converted);
     }
 
-    public function testConvertFieldValueToFormWithFieldDefinitionSingle()
+    public function testConvertFieldValueToFormWithFieldDefinitionSingle(): void
     {
         $identifiers = ['identifier1', 'identifier2'];
         $selection = new EnhancedSelectionValue($identifiers);
@@ -100,7 +100,7 @@ class EnhancedSelectionTest extends TestCase
         self::assertSame($identifiers[0], $converted);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $identifiers = ['identifier1', 'identifier2'];
         $selection = new EnhancedSelectionValue($identifiers);
@@ -110,7 +110,7 @@ class EnhancedSelectionTest extends TestCase
         self::assertSame($selection->identifiers, $converted->identifiers);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

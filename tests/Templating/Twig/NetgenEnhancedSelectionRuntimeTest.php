@@ -48,12 +48,12 @@ class NetgenEnhancedSelectionRuntimeTest extends TestCase
         $this->runtime = new NetgenEnhancedSelectionRuntime($this->contentTypeService, $this->translationHelper);
     }
 
-    public function testInstanceOfTwigExtension()
+    public function testInstanceOfTwigExtension(): void
     {
         self::assertInstanceOf(NetgenEnhancedSelectionRuntime::class, $this->runtime);
     }
 
-    public function testGetSelectionName()
+    public function testGetSelectionName(): void
     {
         $fieldIdentifier = 'some_field';
         $contentInfo = new ContentInfo(['contentTypeId' => 12345]);
@@ -113,7 +113,7 @@ class NetgenEnhancedSelectionRuntimeTest extends TestCase
         self::assertSame($expectedResult, $result);
     }
 
-    public function testGetSelectionNameBySpecifiedIdentifier()
+    public function testGetSelectionNameBySpecifiedIdentifier(): void
     {
         $fieldIdentifier = 'some_field';
         $contentInfo = new ContentInfo(['contentTypeId' => 12345]);
@@ -160,7 +160,7 @@ class NetgenEnhancedSelectionRuntimeTest extends TestCase
         self::assertSame('Some name', $result);
     }
 
-    public function testGetSelectionNameForNonExistingOne()
+    public function testGetSelectionNameForNonExistingOne(): void
     {
         $fieldIdentifier = 'some_field';
         $contentInfo = new ContentInfo(['contentTypeId' => 12345]);

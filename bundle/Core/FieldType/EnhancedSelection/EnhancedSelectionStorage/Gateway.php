@@ -16,7 +16,7 @@ abstract class Gateway extends StorageGateway
      * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $versionInfo
      * @param \eZ\Publish\SPI\Persistence\Content\Field $field
      */
-    abstract public function storeFieldData(VersionInfo $versionInfo, Field $field);
+    abstract public function storeFieldData(VersionInfo $versionInfo, Field $field): void;
 
     /**
      * Gets the identifiers stored in the field.
@@ -24,7 +24,7 @@ abstract class Gateway extends StorageGateway
      * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $versionInfo
      * @param \eZ\Publish\SPI\Persistence\Content\Field $field
      */
-    abstract public function getFieldData(VersionInfo $versionInfo, Field $field);
+    abstract public function getFieldData(VersionInfo $versionInfo, Field $field): void;
 
     /**
      * Deletes field data for all $fieldIds in the version identified by
@@ -33,5 +33,5 @@ abstract class Gateway extends StorageGateway
      * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $versionInfo
      * @param array $fieldIds
      */
-    abstract public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds);
+    abstract public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds): void;
 }

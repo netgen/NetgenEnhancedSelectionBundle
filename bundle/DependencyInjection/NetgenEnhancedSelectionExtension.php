@@ -14,10 +14,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class NetgenEnhancedSelectionExtension extends Extension implements PrependExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new Loader\YamlFileLoader(
             $container,
@@ -43,12 +40,7 @@ class NetgenEnhancedSelectionExtension extends Extension implements PrependExten
         }
     }
 
-    /**
-     * Allow an extension to prepend the extension configurations.
-     *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $configFile = __DIR__ . '/../Resources/config/ezplatform.yml';
         $config = Yaml::parse(file_get_contents($configFile));

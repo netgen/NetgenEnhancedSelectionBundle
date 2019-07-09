@@ -21,12 +21,12 @@ class NetgenEnhancedSelectionExtensionTest extends TestCase
         $this->extension = new NetgenEnhancedSelectionExtension();
     }
 
-    public function testInstanceOfTwigExtension()
+    public function testInstanceOfTwigExtension(): void
     {
         self::assertInstanceOf(AbstractExtension::class, $this->extension);
     }
 
-    public function testGetFunctions()
+    public function testGetFunctions(): void
     {
         foreach ($this->extension->getFunctions() as $function) {
             self::assertInstanceOf(TwigFunction::class, $function);

@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class OptionType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(
@@ -40,7 +40,7 @@ class OptionType extends AbstractType
             );
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ezplatform_fieldtype_sckenhancedselection_option';
     }

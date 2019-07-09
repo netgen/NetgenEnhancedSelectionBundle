@@ -33,12 +33,12 @@ class EnhancedSelectionStorageTest extends TestCase
         $this->storage = new EnhancedSelectionStorage($this->gateway);
     }
 
-    public function testHasFieldData()
+    public function testHasFieldData(): void
     {
         self::assertTrue($this->storage->hasFieldData());
     }
 
-    public function testGetIndexData()
+    public function testGetIndexData(): void
     {
         $versionInfo = $this->getMockBuilder(VersionInfo::class)
             ->disableOriginalConstructor()
@@ -51,7 +51,7 @@ class EnhancedSelectionStorageTest extends TestCase
         self::assertFalse($this->storage->getIndexData($versionInfo, $field, []));
     }
 
-    public function testStoreFieldData()
+    public function testStoreFieldData(): void
     {
         $versionInfo = new VersionInfo();
         $field = new Field(
@@ -77,7 +77,7 @@ class EnhancedSelectionStorageTest extends TestCase
         $this->storage->storeFieldData($versionInfo, $field, $context);
     }
 
-    public function testGetFieldData()
+    public function testGetFieldData(): void
     {
         $versionInfo = new VersionInfo();
         $field = new Field(
@@ -100,7 +100,7 @@ class EnhancedSelectionStorageTest extends TestCase
         $this->storage->getFieldData($versionInfo, $field, $context);
     }
 
-    public function testDeleteFieldData()
+    public function testDeleteFieldData(): void
     {
         $versionInfo = new VersionInfo();
         $fields = ['some_field'];

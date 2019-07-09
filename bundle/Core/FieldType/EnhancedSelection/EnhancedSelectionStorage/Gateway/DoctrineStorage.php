@@ -17,23 +17,12 @@ class DoctrineStorage extends Gateway
      */
     protected $connection;
 
-    /**
-     * Constructor.
-     *
-     * @param \Doctrine\DBAL\Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-    /**
-     * Stores the identifiers in the database based on the given field data.
-     *
-     * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $versionInfo
-     * @param \eZ\Publish\SPI\Persistence\Content\Field $field
-     */
-    public function storeFieldData(VersionInfo $versionInfo, Field $field)
+    public function storeFieldData(VersionInfo $versionInfo, Field $field): void
     {
         foreach ($field->value->externalData as $identifier) {
             $insertQuery = $this->connection->createQueryBuilder();
@@ -54,25 +43,12 @@ class DoctrineStorage extends Gateway
         }
     }
 
-    /**
-     * Gets the identifiers stored in the field.
-     *
-     * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $versionInfo
-     * @param \eZ\Publish\SPI\Persistence\Content\Field $field
-     */
-    public function getFieldData(VersionInfo $versionInfo, Field $field)
+    public function getFieldData(VersionInfo $versionInfo, Field $field): void
     {
         $field->value->externalData = $this->loadFieldData($field->id, $versionInfo->versionNo);
     }
 
-    /**
-     * Deletes field data for all $fieldIds in the version identified by
-     * $versionInfo.
-     *
-     * @param \eZ\Publish\SPI\Persistence\Content\VersionInfo $versionInfo
-     * @param array $fieldIds
-     */
-    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds)
+    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds): void
     {
         $query = $this->connection->createQueryBuilder();
         $query
@@ -97,7 +73,7 @@ class DoctrineStorage extends Gateway
      *
      * @return array
      */
-    protected function loadFieldData($fieldId, $versionNo)
+    protected function loadFieldData($fieldId, $versionNo): array
     {
         $query = $this->connection->createQueryBuilder();
         $query

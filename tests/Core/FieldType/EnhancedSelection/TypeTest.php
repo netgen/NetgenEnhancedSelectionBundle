@@ -42,62 +42,62 @@ class TypeTest extends TestCase
         $this->emptyValue = new Value();
     }
 
-    public function testInstanceOfFieldType()
+    public function testInstanceOfFieldType(): void
     {
         self::assertInstanceOf(FieldType::class, $this->type);
     }
 
-    public function testGetFieldTypeIdentifier()
+    public function testGetFieldTypeIdentifier(): void
     {
         self::assertSame('sckenhancedselection', $this->type->getFieldTypeIdentifier());
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         self::assertSame(implode(', ', $this->identifiers), $this->type->getName($this->value, new FieldDefinition(), 'eng-GB'));
     }
 
-    public function testGetEmptyValue()
+    public function testGetEmptyValue(): void
     {
         self::assertSame($this->emptyValue->identifiers, $this->type->getEmptyValue()->identifiers);
     }
 
-    public function testFromHashWithString()
+    public function testFromHashWithString(): void
     {
         self::assertSame($this->emptyValue->identifiers, $this->type->fromHash('some_hash')->identifiers);
     }
 
-    public function testFromHashWithArray()
+    public function testFromHashWithArray(): void
     {
         self::assertSame($this->value->identifiers, $this->type->fromHash($this->identifiers)->identifiers);
     }
 
-    public function testFromHashWithEmptyArray()
+    public function testFromHashWithEmptyArray(): void
     {
         $value = $this->type->fromHash([1, 2, 3]);
 
         self::assertSame($this->emptyValue->identifiers, $value->identifiers);
     }
 
-    public function testToHash()
+    public function testToHash(): void
     {
         $value = $this->type->fromHash($this->identifiers);
 
         self::assertSame($this->identifiers, $this->type->toHash($value));
     }
 
-    public function testIsEmptyValue()
+    public function testIsEmptyValue(): void
     {
         self::assertFalse($this->type->isEmptyValue($this->value));
         self::assertTrue($this->type->isEmptyValue($this->emptyValue));
     }
 
-    public function testIsSearchableShouldAlwaysReturnTrue()
+    public function testIsSearchableShouldAlwaysReturnTrue(): void
     {
         self::assertTrue($this->type->isSearchable());
     }
 
-    public function testFromPersistenceValue()
+    public function testFromPersistenceValue(): void
     {
         $fieldValue = new FieldValue(
             [
@@ -107,7 +107,7 @@ class TypeTest extends TestCase
         self::assertSame($this->value->identifiers, $this->type->fromPersistenceValue($fieldValue)->identifiers);
     }
 
-    public function testToPersistenceValue()
+    public function testToPersistenceValue(): void
     {
         $fieldValue = new FieldValue(
             [
@@ -120,7 +120,7 @@ class TypeTest extends TestCase
         self::assertSame($fieldValue->externalData, $this->type->toPersistenceValue($this->value)->externalData);
     }
 
-    public function testValidateFieldSettingsWithEmptyFieldSettings()
+    public function testValidateFieldSettingsWithEmptyFieldSettings(): void
     {
         $errors = $this->type->validateFieldSettings('test');
 
@@ -130,7 +130,7 @@ class TypeTest extends TestCase
         self::assertSame((string) $validationError->getTranslatableMessage(), (string) $errors[0]->getTranslatableMessage());
     }
 
-    public function testValidateFieldSettingsWithMissingFieldSettings()
+    public function testValidateFieldSettingsWithMissingFieldSettings(): void
     {
         $validationError = new ValidationError(
             "'%setting%' setting is unknown",
@@ -150,7 +150,7 @@ class TypeTest extends TestCase
         self::assertSame((string) $validationError->getTranslatableMessage(), (string) $errors[0]->getTranslatableMessage());
     }
 
-    public function testValidateFieldSettingsWithInvalidFieldSettings()
+    public function testValidateFieldSettingsWithInvalidFieldSettings(): void
     {
         $fieldSettings = [
             'options' => 'test',
@@ -206,7 +206,7 @@ class TypeTest extends TestCase
         self::assertSame((string) $validationError4->getTranslatableMessage(), (string) $errors[3]->getTranslatableMessage());
     }
 
-    public function testValidateFieldSettingsWithMissingOptionsInFieldSettings()
+    public function testValidateFieldSettingsWithMissingOptionsInFieldSettings(): void
     {
         $fieldSettings = [
             'options' => [
@@ -254,7 +254,7 @@ class TypeTest extends TestCase
         self::assertSame((string) $validationError3->getTranslatableMessage(), (string) $errors[2]->getTranslatableMessage());
     }
 
-    public function testValidateFieldSettingsWithInvalidOptionsInFieldSettings()
+    public function testValidateFieldSettingsWithInvalidOptionsInFieldSettings(): void
     {
         $fieldSettings = [
             'options' => [
@@ -327,7 +327,7 @@ class TypeTest extends TestCase
         self::assertSame((string) $validationError5->getTranslatableMessage(), (string) $errors[4]->getTranslatableMessage());
     }
 
-    public function testAcceptValueWithSingle()
+    public function testAcceptValueWithSingle(): void
     {
         $value = new Value(['1']);
 
@@ -336,14 +336,14 @@ class TypeTest extends TestCase
         self::assertSame($value->identifiers, $returnedValue->identifiers);
     }
 
-    public function testAcceptValueWithValidArray()
+    public function testAcceptValueWithValidArray(): void
     {
         $returnedValue = $this->type->acceptValue($this->identifiers);
 
         self::assertSame($this->value->identifiers, $returnedValue->identifiers);
     }
 
-    public function testAcceptValueWithInvalidArray()
+    public function testAcceptValueWithInvalidArray(): void
     {
         $this->expectException(InvalidArgumentType::class);
 
@@ -352,7 +352,7 @@ class TypeTest extends TestCase
         self::assertSame(1, $returnedValue);
     }
 
-    public function testAcceptValueWithValueObject()
+    public function testAcceptValueWithValueObject(): void
     {
         $this->expectException(InvalidArgumentType::class);
 
@@ -361,7 +361,7 @@ class TypeTest extends TestCase
         $this->type->acceptValue($value);
     }
 
-    public function testAcceptValueWithValueObjectAndIndentifiersAsString()
+    public function testAcceptValueWithValueObjectAndIdentifiersAsString(): void
     {
         $this->expectException(InvalidArgumentType::class);
 

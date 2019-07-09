@@ -17,7 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator\Specificat
  */
 class EnhancedSelection extends Criterion
 {
-    public function getSpecifications()
+    public function getSpecifications(): array
     {
         return [
             new Specifications(

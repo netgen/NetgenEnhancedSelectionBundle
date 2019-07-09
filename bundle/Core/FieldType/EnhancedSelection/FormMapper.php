@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints;
 
 class FormMapper implements FieldDefinitionFormMapperInterface, FieldValueFormMapperInterface
 {
-    public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data)
+    public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data): void
     {
         $fieldForm
             ->add(
@@ -38,7 +38,7 @@ class FormMapper implements FieldDefinitionFormMapperInterface, FieldValueFormMa
             );
     }
 
-    public function mapFieldDefinitionForm(FormInterface $fieldDefinitionForm, FieldDefinitionData $data)
+    public function mapFieldDefinitionForm(FormInterface $fieldDefinitionForm, FieldDefinitionData $data): void
     {
         $fieldDefinitionForm
             ->add(

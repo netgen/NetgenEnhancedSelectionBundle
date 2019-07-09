@@ -26,15 +26,7 @@ class EnhancedSelection extends FieldTypeHandler
         $this->configResolver = $configResolver;
     }
 
-    /**
-     * Converts the eZ Publish field type value to a format that can be accepted by the form.
-     *
-     * @param \eZ\Publish\SPI\FieldType\Value $value
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
-     *
-     * @return mixed
-     */
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): array
     {
         $isMultiple = true;
         if ($fieldDefinition !== null) {
@@ -53,34 +45,17 @@ class EnhancedSelection extends FieldTypeHandler
         return $value->identifiers;
     }
 
-    /**
-     * Converts the form data to a format that can be accepted by eZ Publish field type.
-     *
-     * @param mixed $data
-     *
-     * @return mixed
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): EnhancedSelectionValue
     {
         return new EnhancedSelectionValue(is_array($data) ? $data : [$data]);
     }
 
-    /**
-     * In most cases implementations of methods {@link self::buildCreateFieldForm()}
-     * and {@link self::buildUpdateFieldForm()} will be the same, therefore default
-     * handler implementation of those falls back to this method.
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
-     * @param string $languageCode
-     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
-    ) {
+        ?Content $content = null
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $fieldSettings = $fieldDefinition->getFieldSettings();
@@ -99,14 +74,7 @@ class EnhancedSelection extends FieldTypeHandler
         );
     }
 
-    /**
-     * Get key value array for display on form.
-     *
-     * @param array $options
-     *
-     * @return array
-     */
-    protected function getValues($options)
+    protected function getValues($options): array
     {
         $values = [];
 

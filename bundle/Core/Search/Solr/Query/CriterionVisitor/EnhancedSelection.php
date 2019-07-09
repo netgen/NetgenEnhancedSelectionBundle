@@ -12,18 +12,12 @@ use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Cr
 
 class EnhancedSelection extends Field
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function canVisit(Criterion $criterion)
+    public function canVisit(Criterion $criterion): bool
     {
         return $criterion instanceof EnhancedSelectionCriterion;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function visit(Criterion $criterion, CriterionVisitor $subVisitor = null)
+    public function visit(Criterion $criterion, ?CriterionVisitor $subVisitor = null): string
     {
         $searchFields = $this->getSearchFields($criterion);
 

@@ -24,17 +24,17 @@ class EnhancedSelectionConverterTest extends TestCase
         $this->converter = new EnhancedSelectionConverter();
     }
 
-    public function testInstanceOfConverter()
+    public function testInstanceOfConverter(): void
     {
         self::assertInstanceOf(Converter::class, $this->converter);
     }
 
-    public function testGetIndexColumnMustReturnFalse()
+    public function testGetIndexColumnMustReturnFalse(): void
     {
         self::assertFalse($this->converter->getIndexColumn());
     }
 
-    public function testToStorageValueShouldDoNothing()
+    public function testToStorageValueShouldDoNothing(): void
     {
         $fieldValue = new FieldValue();
         $storageFieldValue = new StorageFieldValue();
@@ -42,7 +42,7 @@ class EnhancedSelectionConverterTest extends TestCase
         $this->converter->toStorageValue($fieldValue, $storageFieldValue);
     }
 
-    public function testToFieldValueShouldDoNothing()
+    public function testToFieldValueShouldDoNothing(): void
     {
         $fieldValue = new FieldValue();
         $storageFieldValue = new StorageFieldValue();
@@ -50,7 +50,7 @@ class EnhancedSelectionConverterTest extends TestCase
         $this->converter->toFieldValue($storageFieldValue, $fieldValue);
     }
 
-    public function testToStorageFieldDefinitionWithEmptyFieldSettings()
+    public function testToStorageFieldDefinitionWithEmptyFieldSettings(): void
     {
         $fieldDefinition = new FieldDefinition();
         $storageDefinition = new StorageFieldDefinition();
@@ -58,7 +58,7 @@ class EnhancedSelectionConverterTest extends TestCase
         $this->converter->toStorageFieldDefinition($fieldDefinition, $storageDefinition);
     }
 
-    public function testToStorageFieldDefinition()
+    public function testToStorageFieldDefinition(): void
     {
         $fieldDefinition = new FieldDefinition();
         $fieldDefinition->fieldTypeConstraints->fieldSettings = [
@@ -77,7 +77,7 @@ class EnhancedSelectionConverterTest extends TestCase
         $this->converter->toStorageFieldDefinition($fieldDefinition, $storageDefinition);
     }
 
-    public function testToFieldDefinition()
+    public function testToFieldDefinition(): void
     {
         $fieldDefinition = new FieldDefinition();
         $storageDefinition = new StorageFieldDefinition();

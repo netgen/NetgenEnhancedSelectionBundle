@@ -45,12 +45,12 @@ class EnhancedSelectionTest extends TestCase
         $this->criterion = new EnhancedSelectionCriterion('some_field', Operator::EQ, 'some_value');
     }
 
-    public function testInstanceOfCriterionHandler()
+    public function testInstanceOfCriterionHandler(): void
     {
         self::assertInstanceOf(CriterionHandler::class, $this->handler);
     }
 
-    public function testAccept()
+    public function testAccept(): void
     {
         self::assertTrue($this->handler->accept($this->criterion));
         $criterion = $this->getMockBuilder(Criterion::class)
@@ -59,7 +59,7 @@ class EnhancedSelectionTest extends TestCase
         self::assertFalse($this->handler->accept($criterion));
     }
 
-    public function testHandleWithoutFieldDefinitions()
+    public function testHandleWithoutFieldDefinitions(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -100,7 +100,7 @@ class EnhancedSelectionTest extends TestCase
         $this->handler->handle($criteriaConverter, $query, $this->criterion);
     }
 
-    public function testHandle()
+    public function testHandle(): void
     {
         $criteriaConverter = $this->getMockBuilder(CriteriaConverter::class)
             ->disableOriginalConstructor()
