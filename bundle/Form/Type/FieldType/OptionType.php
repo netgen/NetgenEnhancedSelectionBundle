@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Form\Type\FieldType;
 
 use Symfony\Component\Form\AbstractType;
@@ -15,26 +17,26 @@ class OptionType extends AbstractType
             ->add(
                 'name',
                 TextType::class,
-                array(
+                [
                     'required' => true,
                     'label' => 'field_definition.sckenhancedselection.settings.options.name',
-                )
+                ]
             )
             ->add(
                 'identifier',
                 TextType::class,
-                array(
+                [
                     'required' => true,
                     'label' => 'field_definition.sckenhancedselection.settings.options.identifier',
-                )
+                ]
             )
             ->add(
                 'priority',
                 NumberType::class,
-                array(
+                [
                     'required' => true,
                     'label' => 'field_definition.sckenhancedselection.settings.options.priority',
-                )
+                ]
             );
     }
 

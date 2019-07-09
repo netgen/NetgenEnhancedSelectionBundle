@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Templating\Twig;
 
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -31,16 +33,16 @@ class NetgenEnhancedSelectionRuntimeTest extends TestCase
      */
     protected $contentTypeService;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->translationHelper = $this->getMockBuilder(TranslationHelper::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getTranslatedField'))
+            ->setMethods(['getTranslatedField'])
             ->getMock();
 
         $this->contentTypeService = $this->getMockBuilder(ContentTypeService::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('loadContentType'))
+            ->setMethods(['loadContentType'])
             ->getMockForAbstractClass();
 
         $this->runtime = new NetgenEnhancedSelectionRuntime($this->contentTypeService, $this->translationHelper);
@@ -48,158 +50,158 @@ class NetgenEnhancedSelectionRuntimeTest extends TestCase
 
     public function testInstanceOfTwigExtension()
     {
-        $this->assertInstanceOf(NetgenEnhancedSelectionRuntime::class, $this->runtime);
+        self::assertInstanceOf(NetgenEnhancedSelectionRuntime::class, $this->runtime);
     }
 
     public function testGetSelectionName()
     {
         $fieldIdentifier = 'some_field';
-        $contentInfo = new ContentInfo(array('contentTypeId' => 12345));
+        $contentInfo = new ContentInfo(['contentTypeId' => 12345]);
 
-        $versionInfo = new VersionInfo(array('contentInfo' => $contentInfo));
+        $versionInfo = new VersionInfo(['contentInfo' => $contentInfo]);
 
-        $content = new Content(array('versionInfo' => $versionInfo));
+        $content = new Content(['versionInfo' => $versionInfo]);
 
-        $selectionValue = new Value(array('some_name', 'some_name_2'));
-        $field = new Field(array('value' => $selectionValue));
+        $selectionValue = new Value(['some_name', 'some_name_2']);
+        $field = new Field(['value' => $selectionValue]);
 
-        $this->translationHelper->expects($this->once())
+        $this->translationHelper->expects(self::once())
             ->method('getTranslatedField')
             ->with($content, $fieldIdentifier)
             ->willReturn($field);
 
-        $fieldSettings = array(
-            'options' => array(
-                array(
+        $fieldSettings = [
+            'options' => [
+                [
                     'id' => 1,
                     'name' => 'Some name',
                     'identifier' => 'some_name',
                     'priority' => 1,
-                ),
-                array(
+                ],
+                [
                     'id' => 2,
                     'name' => 'Some name 2',
                     'identifier' => 'some_name_2',
                     'priority' => 1,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'identifier' => $fieldIdentifier,
                 'fieldSettings' => $fieldSettings,
-            )
+            ]
         );
 
-        $contentType = new ContentType(array('fieldDefinitions' => array($fieldDefinition)));
+        $contentType = new ContentType(['fieldDefinitions' => [$fieldDefinition]]);
 
-        $this->contentTypeService->expects($this->once())
+        $this->contentTypeService->expects(self::once())
             ->method('loadContentType')
             ->with($content->contentInfo->contentTypeId)
             ->willReturn($contentType);
 
         $result = $this->runtime->getSelectionName($content, $fieldIdentifier);
 
-        $this->assertIsArray($result);
+        self::assertIsArray($result);
 
-        $expectedResult = array(
+        $expectedResult = [
             'some_name' => 'Some name',
             'some_name_2' => 'Some name 2',
-        );
+        ];
 
-        $this->assertEquals($expectedResult, $result);
+        self::assertSame($expectedResult, $result);
     }
 
     public function testGetSelectionNameBySpecifiedIdentifier()
     {
         $fieldIdentifier = 'some_field';
-        $contentInfo = new ContentInfo(array('contentTypeId' => 12345));
+        $contentInfo = new ContentInfo(['contentTypeId' => 12345]);
 
-        $versionInfo = new VersionInfo(array('contentInfo' => $contentInfo));
+        $versionInfo = new VersionInfo(['contentInfo' => $contentInfo]);
 
-        $content = new Content(array('versionInfo' => $versionInfo));
+        $content = new Content(['versionInfo' => $versionInfo]);
 
-        $fieldSettings = array(
-            'options' => array(
-                array(
+        $fieldSettings = [
+            'options' => [
+                [
                     'id' => 1,
                     'name' => 'Some name',
                     'identifier' => 'some_name',
                     'priority' => 1,
-                ),
-                array(
+                ],
+                [
                     'id' => 2,
                     'name' => 'Some name 2',
                     'identifier' => 'some_name_2',
                     'priority' => 1,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'identifier' => $fieldIdentifier,
                 'fieldSettings' => $fieldSettings,
-            )
+            ]
         );
 
-        $contentType = new ContentType(array('fieldDefinitions' => array($fieldDefinition)));
+        $contentType = new ContentType(['fieldDefinitions' => [$fieldDefinition]]);
 
-        $this->contentTypeService->expects($this->once())
+        $this->contentTypeService->expects(self::once())
             ->method('loadContentType')
             ->with($content->contentInfo->contentTypeId)
             ->willReturn($contentType);
 
         $result = $this->runtime->getSelectionName($content, $fieldIdentifier, 'some_name');
 
-        $this->assertIsString($result);
+        self::assertIsString($result);
 
-        $this->assertEquals('Some name', $result);
+        self::assertSame('Some name', $result);
     }
 
     public function testGetSelectionNameForNonExistingOne()
     {
         $fieldIdentifier = 'some_field';
-        $contentInfo = new ContentInfo(array('contentTypeId' => 12345));
+        $contentInfo = new ContentInfo(['contentTypeId' => 12345]);
 
-        $versionInfo = new VersionInfo(array('contentInfo' => $contentInfo));
+        $versionInfo = new VersionInfo(['contentInfo' => $contentInfo]);
 
-        $content = new Content(array('versionInfo' => $versionInfo));
+        $content = new Content(['versionInfo' => $versionInfo]);
 
-        $fieldSettings = array(
-            'options' => array(
-                array(
+        $fieldSettings = [
+            'options' => [
+                [
                     'id' => 1,
                     'name' => 'Some name',
                     'identifier' => 'some_name',
                     'priority' => 1,
-                ),
-                array(
+                ],
+                [
                     'id' => 2,
                     'name' => 'Some name 2',
                     'identifier' => 'some_name_2',
                     'priority' => 1,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'identifier' => $fieldIdentifier,
                 'fieldSettings' => $fieldSettings,
-            )
+            ]
         );
 
-        $contentType = new ContentType(array('fieldDefinitions' => array($fieldDefinition)));
+        $contentType = new ContentType(['fieldDefinitions' => [$fieldDefinition]]);
 
-        $this->contentTypeService->expects($this->once())
+        $this->contentTypeService->expects(self::once())
             ->method('loadContentType')
             ->with($content->contentInfo->contentTypeId)
             ->willReturn($contentType);
 
         $result = $this->runtime->getSelectionName($content, $fieldIdentifier, 'some_non_existent');
 
-        $this->assertNull($result);
+        self::assertNull($result);
     }
 }

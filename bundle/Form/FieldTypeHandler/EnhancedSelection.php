@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -60,7 +62,7 @@ class EnhancedSelection extends FieldTypeHandler
      */
     public function convertFieldValueFromForm($data)
     {
-        return new EnhancedSelectionValue(is_array($data) ? $data : array($data));
+        return new EnhancedSelectionValue(is_array($data) ? $data : [$data]);
     }
 
     /**
@@ -106,7 +108,7 @@ class EnhancedSelection extends FieldTypeHandler
      */
     protected function getValues($options)
     {
-        $values = array();
+        $values = [];
 
         foreach ($options as $option) {
             if (!empty($option['identifier']) && !empty($option['name'])) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Form\Type\FieldType;
 
 use eZ\Publish\API\Repository\FieldTypeService;
@@ -23,7 +25,7 @@ class EnhancedSelectionFieldType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired(array('field_definition'));
+        $resolver->setRequired(['field_definition']);
         $resolver->setAllowedTypes('field_definition', FieldDefinition::class);
     }
 
@@ -32,7 +34,7 @@ class EnhancedSelectionFieldType extends AbstractType
         /** @var \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition */
         $fieldDefinition = $options['field_definition'];
 
-        $choices = array();
+        $choices = [];
         foreach ($fieldDefinition->fieldSettings['options'] as $option) {
             $choices[$option['name']] = $option['identifier'];
         }
@@ -41,11 +43,11 @@ class EnhancedSelectionFieldType extends AbstractType
             ->add(
                 'identifiers',
                 ChoiceType::class,
-                array(
+                [
                     'choices' => $choices,
                     'choices_as_values' => true,
                     'multiple' => $fieldDefinition->fieldSettings['isMultiple'],
-                )
+                ]
             )
             ->addModelTransformer(
                 new FieldValueTransformer(

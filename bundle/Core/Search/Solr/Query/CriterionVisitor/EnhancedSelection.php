@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Solr\Query\CriterionVisitor;
 
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
@@ -34,7 +36,7 @@ class EnhancedSelection extends Field
 
         $criterion->value = (array) $criterion->value;
 
-        $queries = array();
+        $queries = [];
         foreach ($searchFields as $name => $fieldType) {
             foreach ($criterion->value as $value) {
                 $preparedValues = (array) $this->mapSearchFieldvalue($value, $fieldType);

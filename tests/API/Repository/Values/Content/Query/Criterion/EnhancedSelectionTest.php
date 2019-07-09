@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\API\Repository\Values\Content\Query\Criterion;
 
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
@@ -14,18 +16,18 @@ class EnhancedSelectionTest extends TestCase
      */
     protected $criterion;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->criterion = new EnhancedSelection('some_field', Operator::EQ, 'some_value');
     }
 
     public function testInstanceOfCriterionInterface()
     {
-        $this->assertInstanceOf(CriterionInterface::class, $this->criterion);
+        self::assertInstanceOf(CriterionInterface::class, $this->criterion);
     }
 
     public function testCreateFromQueryBuilderMethod()
     {
-        $this->assertEquals($this->criterion, EnhancedSelection::createFromQueryBuilder('some_field', Operator::EQ, 'some_value'));
+        self::assertSame($this->criterion, EnhancedSelection::createFromQueryBuilder('some_field', Operator::EQ, 'some_value'));
     }
 }

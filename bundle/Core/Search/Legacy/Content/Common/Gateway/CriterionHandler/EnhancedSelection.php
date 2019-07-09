@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler;
 
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
@@ -49,7 +51,7 @@ class EnhancedSelection extends FieldBase
             ->innerJoin(
                 $this->dbHandler->quoteTable('sckenhancedselection'),
                 $subSelect->expr->lAnd(
-                    array(
+                    [
                         $subSelect->expr->eq(
                             $this->dbHandler->quoteColumn('contentobject_attribute_version', 'sckenhancedselection'),
                             $this->dbHandler->quoteColumn('version', 'ezcontentobject_attribute')
@@ -58,7 +60,7 @@ class EnhancedSelection extends FieldBase
                             $this->dbHandler->quoteColumn('contentobject_attribute_id', 'sckenhancedselection'),
                             $this->dbHandler->quoteColumn('id', 'ezcontentobject_attribute')
                         ),
-                    )
+                    ]
                 )
             )
             ->where(
@@ -87,7 +89,6 @@ class EnhancedSelection extends FieldBase
     /**
      * Returns a list of IDs of searchable field definitions for the given criterion target.
      *
-     *
      * @param string $fieldIdentifier
      *
      * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException If no searchable fields are found for the given $fieldIdentifier
@@ -96,7 +97,7 @@ class EnhancedSelection extends FieldBase
      */
     protected function getFieldDefinitionIds($fieldIdentifier)
     {
-        $fieldDefinitionIdList = array();
+        $fieldDefinitionIdList = [];
         $fieldMap = $this->contentTypeHandler->getSearchableFieldMap();
 
         foreach ($fieldMap as $contentTypeIdentifier => $fieldIdentifierMap) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\FieldType\EnhancedSelection;
 
 use eZ\Publish\Core\FieldType\StorageGateway;
@@ -21,11 +23,11 @@ class EnhancedSelectionStorageTest extends TestCase
      */
     protected $storage;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->gateway = $this->getMockBuilder(EnhancedSelectionStorage\Gateway\DoctrineStorage::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('deleteFieldData', 'storeFieldData', 'getFieldData'))
+            ->setMethods(['deleteFieldData', 'storeFieldData', 'getFieldData'])
             ->getMock();
 
         $this->storage = new EnhancedSelectionStorage($this->gateway);
@@ -33,7 +35,7 @@ class EnhancedSelectionStorageTest extends TestCase
 
     public function testHasFieldData()
     {
-        $this->assertTrue($this->storage->hasFieldData());
+        self::assertTrue($this->storage->hasFieldData());
     }
 
     public function testGetIndexData()
@@ -46,30 +48,30 @@ class EnhancedSelectionStorageTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->assertFalse($this->storage->getIndexData($versionInfo, $field, array()));
+        self::assertFalse($this->storage->getIndexData($versionInfo, $field, []));
     }
 
     public function testStoreFieldData()
     {
         $versionInfo = new VersionInfo();
         $field = new Field(
-            array(
+            [
                 'id' => 'some_id',
                 'value' => new FieldValue(
-                    array(
+                    [
                         'externalData' => 'some_data',
-                    )
+                    ]
                 ),
-            )
+            ]
         );
 
         $connection = $this->getMockForAbstractClass(StorageGateway::class);
-        $context = array('identifier' => 'enhancedselection', 'connection' => $connection);
+        $context = ['identifier' => 'enhancedselection', 'connection' => $connection];
 
-        $this->gateway->expects($this->once())
+        $this->gateway->expects(self::once())
             ->method('deleteFieldData');
 
-        $this->gateway->expects($this->once())
+        $this->gateway->expects(self::once())
             ->method('storeFieldData');
 
         $this->storage->storeFieldData($versionInfo, $field, $context);
@@ -79,20 +81,20 @@ class EnhancedSelectionStorageTest extends TestCase
     {
         $versionInfo = new VersionInfo();
         $field = new Field(
-            array(
+            [
                 'id' => 'some_id',
                 'value' => new FieldValue(
-                    array(
+                    [
                         'externalData' => 'some_data',
-                    )
+                    ]
                 ),
-            )
+            ]
         );
 
         $connection = $this->getMockForAbstractClass(StorageGateway::class);
-        $context = array('identifier' => 'enhancedselection', 'connection' => $connection);
+        $context = ['identifier' => 'enhancedselection', 'connection' => $connection];
 
-        $this->gateway->expects($this->once())
+        $this->gateway->expects(self::once())
             ->method('getFieldData');
 
         $this->storage->getFieldData($versionInfo, $field, $context);
@@ -101,12 +103,12 @@ class EnhancedSelectionStorageTest extends TestCase
     public function testDeleteFieldData()
     {
         $versionInfo = new VersionInfo();
-        $fields = array('some_field');
+        $fields = ['some_field'];
 
         $connection = $this->getMockForAbstractClass(StorageGateway::class);
-        $context = array('identifier' => 'enhancedselection', 'connection' => $connection);
+        $context = ['identifier' => 'enhancedselection', 'connection' => $connection];
 
-        $this->gateway->expects($this->once())
+        $this->gateway->expects(self::once())
             ->method('deleteFieldData');
 
         $this->storage->deleteFieldData($versionInfo, $fields, $context);

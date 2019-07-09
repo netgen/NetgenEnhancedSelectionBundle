@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
@@ -22,7 +24,7 @@ class EnhancedSelectionTest extends TestCase
      */
     protected $configResolver;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->configResolver = $this->getMockBuilder(ConfigResolverInterface::class)
             ->setMethods(['hasParameter', 'getParameter', 'setDefaultNamespace', 'getDefaultNamespace'])
@@ -34,115 +36,115 @@ class EnhancedSelectionTest extends TestCase
 
     public function testInstanceOfFieldTypeHandler()
     {
-        $this->assertInstanceOf(FieldTypeHandler::class, $this->handler);
+        self::assertInstanceOf(FieldTypeHandler::class, $this->handler);
     }
 
     public function testConvertFieldValueToForm()
     {
-        $identifiers = array('identifier1', 'identifier2');
+        $identifiers = ['identifier1', 'identifier2'];
         $selection = new EnhancedSelectionValue($identifiers);
 
         $converted = $this->handler->convertFieldValueToForm($selection);
 
-        $this->assertEquals($identifiers, $converted);
+        self::assertSame($identifiers, $converted);
     }
 
     public function testconvertFieldValueToFormWithIdentifiersArrayEmpty()
     {
-        $identifiers = array();
+        $identifiers = [];
         $selection = new EnhancedSelectionValue($identifiers);
         $fieldDefinition = new FieldDefinition(
-            array(
-                'fieldSettings' => array(
+            [
+                'fieldSettings' => [
                     'isMultiple' => false,
-                ),
-            )
+                ],
+            ]
         );
 
         $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
 
-        $this->assertEquals('', $converted);
+        self::assertSame('', $converted);
     }
 
     public function testConvertFieldValueToFormWithFieldDefinitionMultiple()
     {
-        $identifiers = array('identifier1', 'identifier2');
+        $identifiers = ['identifier1', 'identifier2'];
         $selection = new EnhancedSelectionValue($identifiers);
         $fieldDefinition = new FieldDefinition(
-            array(
-                'fieldSettings' => array(
+            [
+                'fieldSettings' => [
                     'isMultiple' => true,
-                ),
-            )
+                ],
+            ]
         );
 
         $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
 
-        $this->assertEquals($identifiers, $converted);
+        self::assertSame($identifiers, $converted);
     }
 
     public function testConvertFieldValueToFormWithFieldDefinitionSingle()
     {
-        $identifiers = array('identifier1', 'identifier2');
+        $identifiers = ['identifier1', 'identifier2'];
         $selection = new EnhancedSelectionValue($identifiers);
         $fieldDefinition = new FieldDefinition(
-            array(
-                'fieldSettings' => array(
+            [
+                'fieldSettings' => [
                     'isMultiple' => false,
-                ),
-            )
+                ],
+            ]
         );
 
         $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
 
-        $this->assertEquals($identifiers[0], $converted);
+        self::assertSame($identifiers[0], $converted);
     }
 
     public function testConvertFieldValueFromForm()
     {
-        $identifiers = array('identifier1', 'identifier2');
+        $identifiers = ['identifier1', 'identifier2'];
         $selection = new EnhancedSelectionValue($identifiers);
 
         $converted = $this->handler->convertFieldValueFromForm($identifiers);
 
-        $this->assertEquals($selection, $converted);
+        self::assertSame($selection, $converted);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
-        $this->configResolver->expects($this->once())
+        $this->configResolver->expects(self::once())
             ->method('getParameter')
             ->willReturn(false);
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-                'fieldSettings' => array(
-                    'options' => array(
-                        array(
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+                'fieldSettings' => [
+                    'options' => [
+                        [
                             'identifier' => 'identifier0',
                             'name' => 'Identifier0',
-                        ),
-                        array(
+                        ],
+                        [
                             'identifier' => 'identifier1',
                             'name' => 'Identifier1',
-                        ),
-                    ),
+                        ],
+                    ],
                     'isMultiple' => true,
-                ),
-            )
+                ],
+            ]
         );
 
         $languageCode = 'eng-GB';

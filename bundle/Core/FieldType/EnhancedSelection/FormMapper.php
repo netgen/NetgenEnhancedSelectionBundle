@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
 use EzSystems\RepositoryForms\Data\Content\FieldData;
@@ -25,11 +27,11 @@ class FormMapper implements FieldDefinitionFormMapperInterface, FieldValueFormMa
                     ->create(
                         'value',
                         EnhancedSelectionFieldType::class,
-                        array(
+                        [
                             'required' => $data->fieldDefinition->isRequired,
                             'label' => $data->fieldDefinition->getName(),
                             'field_definition' => $data->fieldDefinition,
-                        )
+                        ]
                     )
                     ->setAutoInitialize(false)
                     ->getForm()
@@ -42,49 +44,55 @@ class FormMapper implements FieldDefinitionFormMapperInterface, FieldValueFormMa
             ->add(
                 'options',
                 CollectionType::class,
-                array(
+                [
                     'required' => true,
                     'property_path' => 'fieldSettings[options]',
                     'label' => 'field_definition.sckenhancedselection.settings.options',
                     'entry_type' => OptionType::class,
-                    'entry_options' => array(),
+                    'entry_options' => [],
                     'allow_add' => true,
                     'allow_delete' => true,
                     'delete_empty' => true,
-                )
+                ]
             )
             ->add(
-                'isMultiple', CheckboxType::class, array(
+                'isMultiple',
+                CheckboxType::class,
+                [
                     'required' => false,
                     'property_path' => 'fieldSettings[isMultiple]',
                     'label' => 'field_definition.sckenhancedselection.settings.is_multiple',
-                    'constraints' => array(
-                        new Constraints\Type(array('type' => 'bool')),
+                    'constraints' => [
+                        new Constraints\Type(['type' => 'bool']),
                         new Constraints\NotNull(),
-                    ),
-                )
+                    ],
+                ]
             )
             ->add(
-                'delimiter', TextType::class, array(
+                'delimiter',
+                TextType::class,
+                [
                     'required' => false,
                     'property_path' => 'fieldSettings[delimiter]',
                     'label' => 'field_definition.sckenhancedselection.settings.delimiter',
                     'empty_data' => '',
-                    'constraints' => array(
-                        new Constraints\Type(array('type' => 'string')),
-                    ),
-                )
+                    'constraints' => [
+                        new Constraints\Type(['type' => 'string']),
+                    ],
+                ]
             )
             ->add(
-                'query', TextareaType::class, array(
+                'query',
+                TextareaType::class,
+                [
                     'required' => false,
                     'property_path' => 'fieldSettings[query]',
                     'label' => 'field_definition.sckenhancedselection.settings.query',
                     'empty_data' => '',
-                    'constraints' => array(
-                        new Constraints\Type(array('type' => 'string')),
-                    ),
-                )
+                    'constraints' => [
+                        new Constraints\Type(['type' => 'string']),
+                    ],
+                ]
             );
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter;
 
 use DOMDocument;
@@ -98,7 +100,7 @@ class EnhancedSelectionConverter implements Converter
     public function toFieldDefinition(StorageFieldDefinition $storageDef, FieldDefinition $fieldDef)
     {
         $simpleXml = simplexml_load_string($storageDef->dataText5);
-        $options = array();
+        $options = [];
         $isMultiple = false;
         $delimiter = '';
         $query = '';
@@ -106,12 +108,12 @@ class EnhancedSelectionConverter implements Converter
         if ($simpleXml !== false) {
             if (!empty($simpleXml->options)) {
                 foreach ($simpleXml->options->option as $option) {
-                    $options[] = array(
+                    $options[] = [
                         'id' => (int) $option['id'],
                         'name' => (string) $option['name'],
                         'identifier' => (string) $option['identifier'],
                         'priority' => (int) $option['priority'],
-                    );
+                    ];
                 }
             }
 
@@ -129,12 +131,12 @@ class EnhancedSelectionConverter implements Converter
         }
 
         $fieldDef->fieldTypeConstraints->fieldSettings = new FieldSettings(
-            array(
+            [
                 'isMultiple' => $isMultiple,
                 'delimiter' => $delimiter,
                 'options' => $options,
                 'query' => $query,
-            )
+            ]
         );
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -35,14 +37,14 @@ class NetgenEnhancedSelectionRuntime
      *
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      * @param string $fieldDefIdentifier
-     * @param null|string $selectionIdentifier
+     * @param string|null $selectionIdentifier
      *
      * @return array|string|null
      */
     public function getSelectionName(Content $content, $fieldDefIdentifier, $selectionIdentifier = null)
     {
-        $names = array();
-        $identifiers = array($selectionIdentifier);
+        $names = [];
+        $identifiers = [$selectionIdentifier];
 
         if ($selectionIdentifier === null) {
             $field = $this->translationHelper->getTranslatedField($content, $fieldDefIdentifier);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\Persistence\Legacy\Content\FieldValue\Converter;
 
 use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
@@ -17,19 +19,19 @@ class EnhancedSelectionConverterTest extends TestCase
      */
     protected $converter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->converter = new EnhancedSelectionConverter();
     }
 
     public function testInstanceOfConverter()
     {
-        $this->assertInstanceOf(Converter::class, $this->converter);
+        self::assertInstanceOf(Converter::class, $this->converter);
     }
 
     public function testGetIndexColumnMustReturnFalse()
     {
-        $this->assertFalse($this->converter->getIndexColumn());
+        self::assertFalse($this->converter->getIndexColumn());
     }
 
     public function testToStorageValueShouldDoNothing()
@@ -59,17 +61,17 @@ class EnhancedSelectionConverterTest extends TestCase
     public function testToStorageFieldDefinition()
     {
         $fieldDefinition = new FieldDefinition();
-        $fieldDefinition->fieldTypeConstraints->fieldSettings = array(
-            'options' => array(
-                array(
+        $fieldDefinition->fieldTypeConstraints->fieldSettings = [
+            'options' => [
+                [
                     'name' => 'name',
                     'identifier' => 'id',
                     'priority' => 10,
-                ),
-            ),
+                ],
+            ],
             'delimiter' => ',',
             'query' => 'query',
-        );
+        ];
         $storageDefinition = new StorageFieldDefinition();
 
         $this->converter->toStorageFieldDefinition($fieldDefinition, $storageDefinition);

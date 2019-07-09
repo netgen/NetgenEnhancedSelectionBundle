@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
@@ -19,24 +21,24 @@ class Type extends FieldType
      *
      * @var array
      */
-    protected $settingsSchema = array(
-        'options' => array(
+    protected $settingsSchema = [
+        'options' => [
             'type' => 'array',
-            'default' => array(),
-        ),
-        'isMultiple' => array(
+            'default' => [],
+        ],
+        'isMultiple' => [
             'type' => 'boolean',
             'default' => false,
-        ),
-        'delimiter' => array(
+        ],
+        'delimiter' => [
             'type' => 'string',
             'default' => '',
-        ),
-        'query' => array(
+        ],
+        'query' => [
             'type' => 'string',
             'default' => '',
-        ),
-    );
+        ],
+    ];
 
     /**
      * Returns the field type identifier for this field type.
@@ -100,7 +102,7 @@ class Type extends FieldType
             return new Value();
         }
 
-        $selectionIdentifiers = array();
+        $selectionIdentifiers = [];
         foreach ($hash as $hashItem) {
             if (!is_string($hashItem)) {
                 continue;
@@ -139,11 +141,11 @@ class Type extends FieldType
     public function toPersistenceValue(SPIValue $value)
     {
         return new FieldValue(
-            array(
+            [
                 'data' => null,
                 'externalData' => $this->toHash($value),
                 'sortKey' => $this->getSortInfo($value),
-            )
+            ]
         );
     }
 
@@ -184,7 +186,7 @@ class Type extends FieldType
      */
     public function validateFieldSettings($fieldSettings)
     {
-        $validationErrors = array();
+        $validationErrors = [];
         if (!is_array($fieldSettings)) {
             $validationErrors[] = new ValidationError('Field settings must be in form of an array');
 
@@ -196,10 +198,11 @@ class Type extends FieldType
                 $validationErrors[] = new ValidationError(
                     "'%setting%' setting is unknown",
                     null,
-                    array(
+                    [
                         '%setting%' => $name,
-                    )
+                    ]
                 );
+
                 continue;
             }
 
@@ -209,9 +212,9 @@ class Type extends FieldType
                         $validationErrors[] = new ValidationError(
                             "'%setting%' setting value must be of array type",
                             null,
-                            array(
+                            [
                                 '%setting%' => $name,
-                            )
+                            ]
                         );
                     } else {
                         foreach ($value as $option) {
@@ -219,18 +222,18 @@ class Type extends FieldType
                                 $validationErrors[] = new ValidationError(
                                     "'%setting%' setting value item must have a 'name' property",
                                     null,
-                                    array(
+                                    [
                                         '%setting%' => $name,
-                                    )
+                                    ]
                                 );
                             } else {
                                 if (!is_string($option['name'])) {
                                     $validationErrors[] = new ValidationError(
                                         "'%setting%' setting value item's 'name' property must be of string value",
                                         null,
-                                        array(
+                                        [
                                             '%setting%' => $name,
-                                        )
+                                        ]
                                     );
                                 }
 
@@ -238,9 +241,9 @@ class Type extends FieldType
                                     $validationErrors[] = new ValidationError(
                                         "'%setting%' setting value item's 'name' property must have a value",
                                         null,
-                                        array(
+                                        [
                                             '%setting%' => $name,
-                                        )
+                                        ]
                                     );
                                 }
                             }
@@ -249,18 +252,18 @@ class Type extends FieldType
                                 $validationErrors[] = new ValidationError(
                                     "'%setting%' setting value item must have an 'identifier' property",
                                     null,
-                                    array(
+                                    [
                                         '%setting%' => $name,
-                                    )
+                                    ]
                                 );
                             } else {
                                 if (!is_string($option['identifier'])) {
                                     $validationErrors[] = new ValidationError(
                                         "'%setting%' setting value item's 'identifier' property must be of string value",
                                         null,
-                                        array(
+                                        [
                                             '%setting%' => $name,
-                                        )
+                                        ]
                                     );
                                 }
 
@@ -268,9 +271,9 @@ class Type extends FieldType
                                     $validationErrors[] = new ValidationError(
                                         "'%setting%' setting value item's 'identifier' property must have a value",
                                         null,
-                                        array(
+                                        [
                                             '%setting%' => $name,
-                                        )
+                                        ]
                                     );
                                 }
                             }
@@ -279,18 +282,18 @@ class Type extends FieldType
                                 $validationErrors[] = new ValidationError(
                                     "'%setting%' setting value item must have an 'priority' property",
                                     null,
-                                    array(
+                                    [
                                         '%setting%' => $name,
-                                    )
+                                    ]
                                 );
                             } else {
                                 if (!is_numeric($option['priority'])) {
                                     $validationErrors[] = new ValidationError(
                                         "'%setting%' setting value item's 'priority' property must be of numeric value",
                                         null,
-                                        array(
+                                        [
                                             '%setting%' => $name,
-                                        )
+                                        ]
                                     );
                                 }
                             }
@@ -303,33 +306,36 @@ class Type extends FieldType
                         $validationErrors[] = new ValidationError(
                             "'%setting%' setting value must be of boolean type",
                             null,
-                            array(
+                            [
                                 '%setting%' => $name,
-                            )
+                            ]
                         );
                     }
+
                     break;
                 case 'delimiter':
                     if (!is_string($value)) {
                         $validationErrors[] = new ValidationError(
                             "'%setting%' setting value must be of string type",
                             null,
-                            array(
+                            [
                                 '%setting%' => $name,
-                            )
+                            ]
                         );
                     }
+
                     break;
                 case 'query':
                     if (!is_string($value)) {
                         $validationErrors[] = new ValidationError(
                             "'%setting%' setting value must be of string type",
                             null,
-                            array(
+                            [
                                 '%setting%' => $name,
-                            )
+                            ]
                         );
                     }
+
                     break;
             }
         }
@@ -362,7 +368,7 @@ class Type extends FieldType
     protected function createValueFromInput($inputValue)
     {
         if (is_string($inputValue)) {
-            $inputValue = new Value(array($inputValue));
+            $inputValue = new Value([$inputValue]);
         } elseif (is_array($inputValue)) {
             foreach ($inputValue as $inputValueItem) {
                 if (!is_string($inputValueItem)) {
@@ -384,7 +390,6 @@ class Type extends FieldType
      * format.
      *
      * This is an operation method for {@see acceptValue()}.
-     *
      *
      * @param \eZ\Publish\Core\FieldType\Value|\Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value $value
      *

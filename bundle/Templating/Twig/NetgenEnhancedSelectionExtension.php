@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
 use Twig\Extension\AbstractExtension;
@@ -9,11 +11,11 @@ class NetgenEnhancedSelectionExtension extends AbstractExtension
 {
     public function getFunctions()
     {
-        return array(
+        return [
             new TwigFunction(
                 'netgen_enhanced_selection_name',
-                array(NetgenEnhancedSelectionRuntime::class, 'getSelectionName')
+                [NetgenEnhancedSelectionRuntime::class, 'getSelectionName']
             ),
-        );
+        ];
     }
 }

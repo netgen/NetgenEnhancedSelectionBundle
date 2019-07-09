@@ -3,24 +3,30 @@
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
-        '@Symfony' => true,
-        '@Symfony:risky' => true,
-        'array_syntax' => array('syntax' => 'long'),
-        'combine_consecutive_unsets' => true,
+        '@PhpCsFixer' => true,
+        '@PhpCsFixer:risky' => true,
+
+        // Overrides for rules included in PhpCsFixer rule sets
         'concat_space' => ['spacing' => 'one'],
-        'no_useless_else' => true,
-        'no_useless_return' => true,
-        'ordered_class_elements' => true,
-        'ordered_imports' => true,
-        'phpdoc_add_missing_param_annotation' => true,
+        'method_chaining_indentation' => false,
+        'multiline_whitespace_before_semicolons' => false,
+        'native_function_invocation' => false,
+        'php_unit_internal_class' => false,
+        'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
+        'php_unit_test_class_requires_covers' => false,
         'phpdoc_align' => false,
-        'phpdoc_order' => true,
-        'phpdoc_no_alias_tag' => false,
-        'psr4' => true,
-        'semicolon_after_instruction' => true,
-        'strict_comparison' => true,
-        'strict_param' => true,
+        'phpdoc_types_order' => ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none'],
+        'single_line_comment_style' => false,
+        'visibility_required' => ['elements' => ['property', 'method', 'const']],
         'yoda_style' => false,
+
+        // Additional rules
+        'date_time_immutable' => true,
+        'declare_strict_types' => true,
+        'list_syntax' => ['syntax' => 'short'],
+        'mb_str_functions' => true,
+        'static_lambda' => true,
+        'ternary_to_null_coalescing' => true,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()

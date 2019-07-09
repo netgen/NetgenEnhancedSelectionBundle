@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
 use eZ\Publish\SPI\FieldType\GatewayBasedStorage;
@@ -22,7 +24,7 @@ class EnhancedSelectionStorage extends GatewayBasedStorage
      */
     public function storeFieldData(VersionInfo $versionInfo, Field $field, array $context)
     {
-        $this->gateway->deleteFieldData($versionInfo, array($field->id));
+        $this->gateway->deleteFieldData($versionInfo, [$field->id]);
         if (!empty($field->value->externalData)) {
             $this->gateway->storeFieldData($versionInfo, $field);
         }

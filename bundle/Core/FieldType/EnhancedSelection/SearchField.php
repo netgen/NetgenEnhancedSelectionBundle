@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
 use eZ\Publish\SPI\FieldType\Indexable;
@@ -20,8 +22,8 @@ class SearchField implements Indexable
     public function getIndexData(Field $field, FieldDefinition $fieldDefinition)
     {
         $selectionKeys = (array) $field->value->externalData;
-        $selectionIds = array();
-        $selectionNames = array();
+        $selectionIds = [];
+        $selectionNames = [];
 
         foreach ($fieldDefinition->fieldTypeConstraints->fieldSettings['options'] as $option) {
             if (in_array($option['identifier'], $selectionKeys, true)) {
@@ -30,7 +32,7 @@ class SearchField implements Indexable
             }
         }
 
-        return array(
+        return [
             new Search\Field(
                 'identifiers',
                 $selectionKeys,
@@ -51,7 +53,7 @@ class SearchField implements Indexable
                 implode(' ', $selectionNames),
                 new Search\FieldType\FullTextField()
             ),
-        );
+        ];
     }
 
     /**
@@ -61,12 +63,12 @@ class SearchField implements Indexable
      */
     public function getIndexDefinition()
     {
-        return array(
+        return [
             'identifiers' => new Search\FieldType\MultipleStringField(),
             'ids' => new Search\FieldType\MultipleIntegerField(),
             'names' => new Search\FieldType\TextField(),
             'fulltext' => new Search\FieldType\FullTextField(),
-        );
+        ];
     }
 
     /**

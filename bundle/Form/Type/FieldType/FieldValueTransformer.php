@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Form\Type\FieldType;
 
 use eZ\Publish\API\Repository\FieldType;
@@ -33,7 +35,7 @@ class FieldValueTransformer implements DataTransformerInterface
 
         $hash = $this->fieldType->toHash($value);
 
-        $identifiers = array('identifiers' => null);
+        $identifiers = ['identifiers' => null];
         if ($this->fieldDefinition->fieldSettings['isMultiple']) {
             $identifiers['identifiers'] = $hash;
         } elseif (isset($hash[0])) {
@@ -51,7 +53,7 @@ class FieldValueTransformer implements DataTransformerInterface
 
         $hash = is_array($value['identifiers']) ?
             $value['identifiers'] :
-            array($value['identifiers']);
+            [$value['identifiers']];
 
         return $this->fieldType->fromHash($hash);
     }

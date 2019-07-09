@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
 use eZ\Publish\Core\FieldType\Value as BaseValue;
@@ -11,7 +13,7 @@ class Value extends BaseValue
      *
      * @var string[]
      */
-    public $identifiers = array();
+    public $identifiers = [];
 
     /**
      * Constructor.

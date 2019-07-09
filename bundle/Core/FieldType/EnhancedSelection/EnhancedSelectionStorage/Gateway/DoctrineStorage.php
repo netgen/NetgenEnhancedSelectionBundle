@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 
 use Doctrine\DBAL\Connection;
@@ -38,11 +40,11 @@ class DoctrineStorage extends Gateway
             $insertQuery
                 ->insert($this->connection->quoteIdentifier('sckenhancedselection'))
                 ->values(
-                    array(
+                    [
                         'contentobject_attribute_id' => ':contentobject_attribute_id',
                         'contentobject_attribute_version' => ':contentobject_attribute_version',
                         'identifier' => ':identifier',
-                    )
+                    ]
                 )
                 ->setParameter(':contentobject_attribute_id', $field->id, PDO::PARAM_INT)
                 ->setParameter(':contentobject_attribute_version', $versionInfo->versionNo, PDO::PARAM_INT)
@@ -77,7 +79,7 @@ class DoctrineStorage extends Gateway
             ->delete($this->connection->quoteIdentifier('sckenhancedselection'))
             ->where(
                 $query->expr()->andX(
-                    $query->expr()->in('contentobject_attribute_id', array(':contentobject_attribute_id')),
+                    $query->expr()->in('contentobject_attribute_id', [':contentobject_attribute_id']),
                     $query->expr()->eq('contentobject_attribute_version', ':contentobject_attribute_version')
                 )
             )
@@ -115,7 +117,7 @@ class DoctrineStorage extends Gateway
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return array_map(
-            function (array $row) {
+            static function (array $row) {
                 return $row['identifier'];
             },
             $rows

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler;
 
 use Doctrine\DBAL\Connection;
@@ -30,13 +32,13 @@ class EnhancedSelectionTest extends TestCase
      */
     protected $criterion;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $this->markTestIncomplete('Need to switch the tests to new criterion visitor namespaces');
+        self::markTestIncomplete('Need to switch the tests to new criterion visitor namespaces');
 
         $this->db = $this->getMockBuilder(ConnectionHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('createSelectQuery', 'quoteColumn'))
+            ->setMethods(['createSelectQuery', 'quoteColumn'])
             ->getMock();
 
         $this->handler = new EnhancedSelection($this->db);
@@ -45,16 +47,16 @@ class EnhancedSelectionTest extends TestCase
 
     public function testInstanceOfCriterionHandler()
     {
-        $this->assertInstanceOf(CriterionHandler::class, $this->handler);
+        self::assertInstanceOf(CriterionHandler::class, $this->handler);
     }
 
     public function testAccept()
     {
-        $this->assertTrue($this->handler->accept($this->criterion));
+        self::assertTrue($this->handler->accept($this->criterion));
         $criterion = $this->getMockBuilder(Criterion::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $this->assertFalse($this->handler->accept($criterion));
+        self::assertFalse($this->handler->accept($criterion));
     }
 
     public function testHandleWithoutFieldDefinitions()
@@ -63,7 +65,7 @@ class EnhancedSelectionTest extends TestCase
 
         $criteriaConverter = $this->getMockBuilder(CriteriaConverter::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $connection = $this->getMockBuilder(Connection::class)
@@ -71,27 +73,27 @@ class EnhancedSelectionTest extends TestCase
             ->getMock();
 
         $query = $this->getMockBuilder(SelectDoctrineQuery::class)
-            ->setConstructorArgs(array($connection))
-            ->setMethods(array('prepare'))
+            ->setConstructorArgs([$connection])
+            ->setMethods(['prepare'])
             ->getMock();
 
         $statement = $this->getMockBuilder(Statement::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('execute', 'fetchAll'))
+            ->setMethods(['execute', 'fetchAll'])
             ->getMock();
 
-        $statement->expects($this->once())
+        $statement->expects(self::once())
             ->method('execute');
 
-        $statement->expects($this->once())
+        $statement->expects(self::once())
             ->method('fetchAll')
-            ->willReturn(array());
+            ->willReturn([]);
 
-        $query->expects($this->once())
+        $query->expects(self::once())
             ->method('prepare')
             ->willReturn($statement);
 
-        $this->db->expects($this->once())
+        $this->db->expects(self::once())
             ->method('createSelectQuery')
             ->willReturn($query);
 
@@ -102,7 +104,7 @@ class EnhancedSelectionTest extends TestCase
     {
         $criteriaConverter = $this->getMockBuilder(CriteriaConverter::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $connection = $this->getMockBuilder(Connection::class)
@@ -110,27 +112,27 @@ class EnhancedSelectionTest extends TestCase
             ->getMock();
 
         $query = $this->getMockBuilder(SelectDoctrineQuery::class)
-            ->setConstructorArgs(array($connection))
-            ->setMethods(array('prepare'))
+            ->setConstructorArgs([$connection])
+            ->setMethods(['prepare'])
             ->getMock();
 
         $statement = $this->getMockBuilder(Statement::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('execute', 'fetchAll'))
+            ->setMethods(['execute', 'fetchAll'])
             ->getMock();
 
-        $statement->expects($this->once())
+        $statement->expects(self::once())
             ->method('execute');
 
-        $statement->expects($this->once())
+        $statement->expects(self::once())
             ->method('fetchAll')
-            ->willReturn(array(1, 2, 3));
+            ->willReturn([1, 2, 3]);
 
-        $query->expects($this->once())
+        $query->expects(self::once())
             ->method('prepare')
             ->willReturn($statement);
 
-        $this->db->expects($this->once())
+        $this->db->expects(self::once())
             ->method('createSelectQuery')
             ->willReturn($query);
 
