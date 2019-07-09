@@ -1,7 +1,6 @@
 services:
     netgen.enhanced_selection.ezadminui.component.javascripts:
          parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
-         public: false
          arguments:
              - "@twig"
              - "@@NetgenEnhancedSelection/ezadminui/javascripts.html.twig"
@@ -10,7 +9,6 @@ services:
 
     netgen.enhanced_selection.ezadminui.component.stylesheets:
          parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
-         public: false
          arguments:
              - "@twig"
              - "@@NetgenEnhancedSelection/ezadminui/stylesheets.html.twig"

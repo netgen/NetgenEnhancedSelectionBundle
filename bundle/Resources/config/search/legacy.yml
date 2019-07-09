@@ -2,7 +2,6 @@ services:
     netgen.enhanced_selection.search.legacy.gateway.criterion_handler.common.enhanced_selection:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler\EnhancedSelection
         parent: ezpublish.search.legacy.gateway.criterion_handler.field_base
-        public: false
         tags:
             - { name: ezpublish.search.legacy.gateway.criterion_handler.content }
             - { name: ezpublish.search.legacy.gateway.criterion_handler.location }
