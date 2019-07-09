@@ -7,7 +7,6 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Qu
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator\Specifications;
-use eZ\Publish\API\Repository\Values\Content\Query\CriterionInterface;
 
 /**
  * A criterion that matches content based on identifier that is located in one of the fields.
@@ -16,7 +15,7 @@ use eZ\Publish\API\Repository\Values\Content\Query\CriterionInterface;
  * - IN: matches against a list of identifiers (with OR operator)
  * - EQ: matches against one identifier
  */
-class EnhancedSelection extends Criterion implements CriterionInterface
+class EnhancedSelection extends Criterion
 {
     public function getSpecifications()
     {
@@ -32,10 +31,5 @@ class EnhancedSelection extends Criterion implements CriterionInterface
                 Specifications::TYPE_STRING
             ),
         ];
-    }
-
-    public static function createFromQueryBuilder($target, $operator, $value)
-    {
-        return new self($target, $operator, $value);
     }
 }
