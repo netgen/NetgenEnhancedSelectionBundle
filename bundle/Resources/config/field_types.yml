@@ -5,7 +5,7 @@ services:
         # Field type services in eZ Platform need to be public
         public: true
         tags:
-            - { name: ezpublish.fieldType, alias: sckenhancedselection }
+            - { name: ezplatform.field_type, alias: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.external_storage:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage
@@ -20,7 +20,7 @@ services:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\EnhancedSelectionConverter
         public: false
         tags:
-            - { name: ezpublish.storageEngine.legacy.converter, alias: sckenhancedselection, lazy: true, callback: "::create" }
+            - { name: ezplatform.field_type.legacy_storage.converter, alias: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.storage_gateway:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway\DoctrineStorage
@@ -32,7 +32,7 @@ services:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\SearchField
         public: false
         tags:
-            - { name: ezpublish.fieldType.indexable, alias: sckenhancedselection }
+            - { name: ezplatform.field_type.indexable, alias: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.form.fieldtype_handler:
         class: Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection
@@ -46,8 +46,8 @@ services:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\FormMapper
         public: false
         tags:
-            - { name: ez.fieldFormMapper.definition, fieldType: sckenhancedselection }
-            - { name: ez.fieldFormMapper.value, fieldType: sckenhancedselection }
+            - { name: ezplatform.field_type.form_mapper.definition, fieldType: sckenhancedselection }
+            - { name: ezplatform.field_type.form_mapper.value, fieldType: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.form:
         class: Netgen\Bundle\EnhancedSelectionBundle\Form\Type\FieldType\EnhancedSelectionFieldType
