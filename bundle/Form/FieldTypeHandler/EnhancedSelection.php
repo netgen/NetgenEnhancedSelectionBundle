@@ -26,7 +26,7 @@ class EnhancedSelection extends FieldTypeHandler
         $this->configResolver = $configResolver;
     }
 
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): array
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
         $isMultiple = true;
         if ($fieldDefinition !== null) {
