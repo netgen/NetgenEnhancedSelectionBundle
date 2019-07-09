@@ -1,6 +1,6 @@
 {
     "name": "netgen/enhanced-selection-bundle",
-    "description": "Netgen Enhanced Selection bundle for eZ Publish",
+    "description": "Netgen Enhanced Selection bundle for eZ Platform",
     "type": "ezplatform-bundle",
     "keywords": [
         "ezpublish",
@@ -24,15 +24,15 @@
     "require-dev": {
         "phpunit/phpunit": "^8.2",
         "netgen/ez-forms-bundle": "^2.0",
-        "friendsofphp/php-cs-fixer": "~2.0"
+        "friendsofphp/php-cs-fixer": "^2.15.1"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "suggest": {
-        "netgen/enhancedselection2": "To edit this field type in legacy administration interface",
         "netgen/ez-forms-bundle": "Allows use of enhanced selection field type with Symfony forms",
         "ezsystems/ezplatform-solr-search-engine": "Allows use of EnhancedSelection search criterion with Solr search engine"
     },
     "conflict": {
-        "netgen/enhancedselection2": "<2.0",
         "ezsystems/ezplatform-solr-search-engine": "<2.0"
     },
     "autoload": {
