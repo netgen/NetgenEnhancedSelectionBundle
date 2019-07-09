@@ -107,7 +107,7 @@ class EnhancedSelectionTest extends TestCase
 
         $converted = $this->handler->convertFieldValueFromForm($identifiers);
 
-        self::assertSame($selection, $converted);
+        self::assertSame($selection->identifiers, $converted->identifiers);
     }
 
     public function testBuildFieldCreateForm()
