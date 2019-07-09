@@ -74,7 +74,7 @@ class EnhancedSelection extends FieldTypeHandler
         );
     }
 
-    protected function getValues($options): array
+    protected function getValues(array $options): array
     {
         $values = [];
 
