@@ -117,7 +117,7 @@ class TypeTest extends TestCase
             ]
         );
 
-        self::assertSame($fieldValue->identifiers, $this->type->toPersistenceValue($this->value)->identifiers);
+        self::assertSame($fieldValue->externalData, $this->type->toPersistenceValue($this->value)->externalData);
     }
 
     public function testValidateFieldSettingsWithEmptyFieldSettings()
@@ -127,7 +127,7 @@ class TypeTest extends TestCase
         $validationError = new ValidationError('Field settings must be in form of an array');
 
         self::assertSame($validationError->getTarget(), $errors[0]->getTarget());
-        self::assertSame((string) $validationError->getTarget(), (string) $errors[0]->getTranslatableMessage());
+        self::assertSame((string) $validationError->getTranslatableMessage(), (string) $errors[0]->getTranslatableMessage());
     }
 
     public function testValidateFieldSettingsWithMissingFieldSettings()
@@ -147,7 +147,7 @@ class TypeTest extends TestCase
         $errors = $this->type->validateFieldSettings($fieldSettings);
 
         self::assertSame($validationError->getTarget(), $errors[0]->getTarget());
-        self::assertSame((string) $validationError->getTarget(), (string) $errors[0]->getTranslatableMessage());
+        self::assertSame((string) $validationError->getTranslatableMessage(), (string) $errors[0]->getTranslatableMessage());
     }
 
     public function testValidateFieldSettingsWithInvalidFieldSettings()
@@ -194,16 +194,16 @@ class TypeTest extends TestCase
         $errors = $this->type->validateFieldSettings($fieldSettings);
 
         self::assertSame($validationError1->getTarget(), $errors[0]->getTarget());
-        self::assertSame((string) $validationError1->getTarget(), (string) $errors[0]->getTranslatableMessage());
+        self::assertSame((string) $validationError1->getTranslatableMessage(), (string) $errors[0]->getTranslatableMessage());
 
         self::assertSame($validationError2->getTarget(), $errors[1]->getTarget());
-        self::assertSame((string) $validationError2->getTarget(), (string) $errors[1]->getTranslatableMessage());
+        self::assertSame((string) $validationError2->getTranslatableMessage(), (string) $errors[1]->getTranslatableMessage());
 
         self::assertSame($validationError3->getTarget(), $errors[2]->getTarget());
-        self::assertSame((string) $validationError3->getTarget(), (string) $errors[2]->getTranslatableMessage());
+        self::assertSame((string) $validationError3->getTranslatableMessage(), (string) $errors[2]->getTranslatableMessage());
 
         self::assertSame($validationError4->getTarget(), $errors[3]->getTarget());
-        self::assertSame((string) $validationError4->getTarget(), (string) $errors[3]->getTranslatableMessage());
+        self::assertSame((string) $validationError4->getTranslatableMessage(), (string) $errors[3]->getTranslatableMessage());
     }
 
     public function testValidateFieldSettingsWithMissingOptionsInFieldSettings()
@@ -245,13 +245,13 @@ class TypeTest extends TestCase
         $errors = $this->type->validateFieldSettings($fieldSettings);
 
         self::assertSame($validationError1->getTarget(), $errors[0]->getTarget());
-        self::assertSame((string) $validationError1->getTarget(), (string) $errors[0]->getTranslatableMessage());
+        self::assertSame((string) $validationError1->getTranslatableMessage(), (string) $errors[0]->getTranslatableMessage());
 
         self::assertSame($validationError2->getTarget(), $errors[1]->getTarget());
-        self::assertSame((string) $validationError2->getTarget(), (string) $errors[1]->getTranslatableMessage());
+        self::assertSame((string) $validationError2->getTranslatableMessage(), (string) $errors[1]->getTranslatableMessage());
 
         self::assertSame($validationError3->getTarget(), $errors[2]->getTarget());
-        self::assertSame((string) $validationError3->getTarget(), (string) $errors[2]->getTranslatableMessage());
+        self::assertSame((string) $validationError3->getTranslatableMessage(), (string) $errors[2]->getTranslatableMessage());
     }
 
     public function testValidateFieldSettingsWithInvalidOptionsInFieldSettings()
@@ -312,19 +312,19 @@ class TypeTest extends TestCase
         $errors = $this->type->validateFieldSettings($fieldSettings);
 
         self::assertSame($validationError1->getTarget(), $errors[0]->getTarget());
-        self::assertSame((string) $validationError1->getTarget(), (string) $errors[0]->getTranslatableMessage());
+        self::assertSame((string) $validationError1->getTranslatableMessage(), (string) $errors[0]->getTranslatableMessage());
 
         self::assertSame($validationError2->getTarget(), $errors[1]->getTarget());
-        self::assertSame((string) $validationError2->getTarget(), (string) $errors[1]->getTranslatableMessage());
+        self::assertSame((string) $validationError2->getTranslatableMessage(), (string) $errors[1]->getTranslatableMessage());
 
         self::assertSame($validationError3->getTarget(), $errors[2]->getTarget());
-        self::assertSame((string) $validationError3->getTarget(), (string) $errors[2]->getTranslatableMessage());
+        self::assertSame((string) $validationError3->getTranslatableMessage(), (string) $errors[2]->getTranslatableMessage());
 
         self::assertSame($validationError4->getTarget(), $errors[3]->getTarget());
-        self::assertSame((string) $validationError4->getTarget(), (string) $errors[3]->getTranslatableMessage());
+        self::assertSame((string) $validationError4->getTranslatableMessage(), (string) $errors[3]->getTranslatableMessage());
 
         self::assertSame($validationError5->getTarget(), $errors[4]->getTarget());
-        self::assertSame((string) $validationError5->getTarget(), (string) $errors[4]->getTranslatableMessage());
+        self::assertSame((string) $validationError5->getTranslatableMessage(), (string) $errors[4]->getTranslatableMessage());
     }
 
     public function testAcceptValueWithSingle()
