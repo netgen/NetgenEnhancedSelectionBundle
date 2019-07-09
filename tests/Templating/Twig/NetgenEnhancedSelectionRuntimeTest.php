@@ -101,7 +101,7 @@ class NetgenEnhancedSelectionRuntimeTest extends TestCase
 
         $result = $this->runtime->getSelectionName($content, $fieldIdentifier);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         $expectedResult = array(
             'some_name' => 'Some name',
@@ -153,7 +153,7 @@ class NetgenEnhancedSelectionRuntimeTest extends TestCase
 
         $result = $this->runtime->getSelectionName($content, $fieldIdentifier, 'some_name');
 
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
 
         $this->assertEquals('Some name', $result);
     }

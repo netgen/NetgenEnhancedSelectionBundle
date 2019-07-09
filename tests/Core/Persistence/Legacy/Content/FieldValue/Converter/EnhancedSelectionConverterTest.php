@@ -32,11 +32,6 @@ class EnhancedSelectionConverterTest extends TestCase
         $this->assertFalse($this->converter->getIndexColumn());
     }
 
-    public function testCreate()
-    {
-        $this->assertEquals($this->converter, EnhancedSelectionConverter::create());
-    }
-
     public function testToStorageValueShouldDoNothing()
     {
         $fieldValue = new FieldValue();

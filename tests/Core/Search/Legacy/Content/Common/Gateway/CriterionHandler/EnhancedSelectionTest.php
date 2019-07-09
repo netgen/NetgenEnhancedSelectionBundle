@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\Search\Legacy\Content
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Statement;
+use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
 use eZ\Publish\Core\Persistence\Doctrine\ConnectionHandler;
@@ -56,11 +57,10 @@ class EnhancedSelectionTest extends TestCase
         $this->assertFalse($this->handler->accept($criterion));
     }
 
-    /**
-     * @expectedException \eZ\Publish\Core\Base\Exceptions\InvalidArgumentException
-     */
     public function testHandleWithoutFieldDefinitions()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $criteriaConverter = $this->getMockBuilder(CriteriaConverter::class)
             ->disableOriginalConstructor()
             ->setMethods(array())

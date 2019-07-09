@@ -2,8 +2,10 @@
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\FieldType\EnhancedSelection;
 
+use eZ\Publish\Core\Base\Exceptions\InvalidArgumentType;
 use eZ\Publish\Core\FieldType\FieldType;
 use eZ\Publish\Core\FieldType\ValidationError;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
@@ -50,7 +52,7 @@ class TypeTest extends TestCase
 
     public function testGetName()
     {
-        $this->assertEquals(implode(', ', $this->identifiers), $this->type->getName($this->value));
+        $this->assertEquals(implode(', ', $this->identifiers), $this->type->getName($this->value, new FieldDefinition(), 'eng-GB'));
     }
 
     public function testGetEmptyValue()
@@ -314,31 +316,28 @@ class TypeTest extends TestCase
         $this->assertEquals($this->value, $returnedValue);
     }
 
-    /**
-     * @expectedException \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
-     */
     public function testAcceptValueWithInvalidArray()
     {
+        $this->expectException(InvalidArgumentType::class);
+
         $returnedValue = $this->type->acceptValue(array(1));
 
         $this->assertEquals(1, $returnedValue);
     }
 
-    /**
-     * @expectedException \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
-     */
     public function testAcceptValueWithValueObject()
     {
+        $this->expectException(InvalidArgumentType::class);
+
         $value = new Value(array(true, true));
 
         $this->type->acceptValue($value);
     }
 
-    /**
-     * @expectedException \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
-     */
     public function testAcceptValueWithValueObjectAndIndentifiersAsString()
     {
+        $this->expectException(InvalidArgumentType::class);
+
         $value = new Value();
         $value->identifiers = 'test';
 
