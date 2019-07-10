@@ -53,7 +53,7 @@ class EnhancedSelection extends FieldTypeHandler
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
     ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
