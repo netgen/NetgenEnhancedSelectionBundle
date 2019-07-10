@@ -1,5 +1,5 @@
 {% block sckenhancedselection_field %}
-{% spaceless %}
+{% apply spaceless %}
 
 {% set available_options = fieldSettings.options %}
 {% set identifiers = field.value.identifiers %}
@@ -22,5 +22,5 @@
     {% endfor %}
 {% endif %}
 
-{% endspaceless %}
+{% endapply %}
 {% endblock %}
