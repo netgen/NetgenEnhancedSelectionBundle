@@ -14,7 +14,7 @@ services:
         arguments:
             - "@netgen.enhanced_selection.field_type.storage_gateway"
         tags:
-            - { name: ezpublish.fieldType.externalStorageHandler, alias: sckenhancedselection }
+            - { name: ezplatform.field_type.external_storage_handler, alias: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.converter:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\EnhancedSelectionConverter
