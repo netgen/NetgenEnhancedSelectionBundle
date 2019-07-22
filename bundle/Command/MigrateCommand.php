@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Command;
 
-use PDO;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOStatement;
+use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type as EnhancedSelectionType;
+use PDO;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type as EnhancedSelectionType;
 
 class MigrateCommand extends Command
 {
