@@ -11,10 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type as EnhancedSelectionType;
 
-class Migrate extends Command
+class MigrateCommand extends Command
 {
     /**
-     * @var Connection
+     * @var \Doctrine\DBAL\Connection
      */
     protected $db;
 
@@ -24,7 +24,7 @@ class Migrate extends Command
     protected $typeIdentifier;
 
     /**
-     * @var SymfonyStyle
+     * @var \Symfony\Component\Console\Style\SymfonyStyle
      */
     protected $io;
 
@@ -33,6 +33,7 @@ class Migrate extends Command
         $this->db = $db;
         $this->typeIdentifier = $type->getFieldTypeIdentifier();
 
+        // Call to parent controller is mandatory is commands registered as services
         parent::__construct();
     }
 
@@ -52,6 +53,7 @@ class Migrate extends Command
 
         $statement = $this->getFields();
         $this->io->progressStart($statement->rowCount());
+
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
             if ($row['data_text'] !== null) {
                 $this->removeSelectionDataForField($row['id'], $row['version']);
@@ -66,7 +68,10 @@ class Migrate extends Command
 
             $this->io->progressAdvance();
         }
+
         $this->io->progressFinish();
+
+        return 0;
     }
 
     protected function getFields()
@@ -94,6 +99,7 @@ class Migrate extends Command
             )
             ->setParameter('id', $id)
             ->setParameter('version', $version);
+
         $builder->execute();
     }
 
@@ -108,6 +114,7 @@ class Migrate extends Command
             )
             ->setParameter('id', $id)
             ->setParameter('version', $version);
+
         $builder->execute();
     }
 
@@ -117,6 +124,7 @@ class Migrate extends Command
             'contentobject_attribute_id' => $id,
             'contentobject_attribute_version' => $version,
         ];
+
         foreach ($identifiers as $identifier) {
             $data['identifier'] = $identifier;
             $this->db->insert($this->typeIdentifier, $data);

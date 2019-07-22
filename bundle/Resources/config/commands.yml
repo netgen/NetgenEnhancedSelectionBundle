@@ -1,5 +1,6 @@
 services:
-    Netgen\Bundle\EnhancedSelectionBundle\Command\Migrate:
+    netgen.enhanced_selection.command.migrate:
+        class: Netgen\Bundle\EnhancedSelectionBundle\Command\MigrateCommand
         arguments:
             - '@database_connection'
             - '@netgen.enhanced_selection.field_type'
