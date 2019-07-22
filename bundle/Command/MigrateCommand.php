@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EnhancedSelectionBundle\Command;
 
 use PDO;
@@ -16,38 +18,33 @@ class MigrateCommand extends Command
     /**
      * @var \Doctrine\DBAL\Connection
      */
-    protected $db;
+    private $db;
 
     /**
      * @var string
      */
-    protected $typeIdentifier;
+    private $typeIdentifier;
 
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
      */
-    protected $io;
+    private $io;
 
     public function __construct(Connection $db, EnhancedSelectionType $type)
     {
         $this->db = $db;
         $this->typeIdentifier = $type->getFieldTypeIdentifier();
 
-        // Call to parent controller is mandatory is commands registered as services
+        // Call to parent controller is mandatory in commands registered as services
         parent::__construct();
     }
 
-    /**
-     * Configures the current command.
-     */
-    protected function configure()
+    protected function configure(): void
     {
-        $this
-            ->setName('enhanced-selection:migrate')
-            ->setDescription('Migrates sckenhancedselection field type to version which stores content object data to database table.');
+        $this->setDescription('Migrates sckenhancedselection field type to version which stores content object data to database table.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $this->io = new SymfonyStyle($input, $output);
 
@@ -56,14 +53,17 @@ class MigrateCommand extends Command
 
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
             if ($row['data_text'] !== null) {
-                $this->removeSelectionDataForField($row['id'], $row['version']);
+                $fieldId = (int) $row['id'];
+                $version = (int) $row['version'];
+
+                $this->removeSelectionDataForField($fieldId, $version);
 
                 $identifiers = (array) unserialize($row['data_text']);
                 if (count($identifiers) > 0) {
-                    $this->createSelections($row['id'], $row['version'], $identifiers);
+                    $this->createSelections($fieldId, $version, $identifiers);
                 }
 
-                $this->resetFieldData($row['id'], $row['version']);
+                $this->resetFieldData($fieldId, $version);
             }
 
             $this->io->progressAdvance();
@@ -74,7 +74,7 @@ class MigrateCommand extends Command
         return 0;
     }
 
-    protected function getFields()
+    private function getFields(): PDOStatement
     {
         $builder = $this->db->createQueryBuilder();
         $builder->select('a.id', 'a.version', 'a.data_text')
@@ -87,7 +87,7 @@ class MigrateCommand extends Command
         return $builder->execute();
     }
 
-    protected function resetFieldData($id, $version)
+    private function resetFieldData(int $id, int $version): void
     {
         $builder = $this->db->createQueryBuilder();
         $builder->update('ezcontentobject_attribute')
@@ -103,7 +103,7 @@ class MigrateCommand extends Command
         $builder->execute();
     }
 
-    protected function removeSelectionDataForField($id, $version)
+    private function removeSelectionDataForField(int $id, int $version): void
     {
         $builder = $this->db->createQueryBuilder();
         $builder->delete($this->typeIdentifier)
@@ -118,7 +118,7 @@ class MigrateCommand extends Command
         $builder->execute();
     }
 
-    protected function createSelections($id, $version, array $identifiers)
+    private function createSelections(int $id, int $version, array $identifiers): void
     {
         $data = [
             'contentobject_attribute_id' => $id,
