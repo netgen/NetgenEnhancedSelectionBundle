@@ -14,7 +14,7 @@ Installation steps
 Run the following command from your project root to install the bundle:
 
 ```bash
-$ composer require netgen/enhanced-selection-bundle netgen/enhancedselection2
+$ composer require netgen/enhanced-selection-bundle
 ```
 
 ### Activate the bundle
@@ -53,7 +53,7 @@ CREATE TABLE `sckenhancedselection` (
 Clear eZ Publish caches.
 
 ```bash
-php app/console cache:clear
+php bin/console cache:clear
 ```
 
 ### Use the bundle
