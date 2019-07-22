@@ -1,0 +1,7 @@
+services:
+    Netgen\Bundle\EnhancedSelectionBundle\Command\Migrate:
+        arguments:
+            - '@database_connection'
+            - '@netgen.enhanced_selection.field_type'
+        tags:
+            - { name: 'console.command' }
