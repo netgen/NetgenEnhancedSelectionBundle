@@ -69,7 +69,7 @@ class Migrate extends Command
         $this->io->progressFinish();
     }
 
-    protected function getFields(): PDOStatement
+    protected function getFields()
     {
         $builder = $this->db->createQueryBuilder();
         $builder->select('a.id', 'a.version', 'a.data_text')
@@ -82,7 +82,7 @@ class Migrate extends Command
         return $builder->execute();
     }
 
-    protected function resetFieldData(int $id, int $version): void
+    protected function resetFieldData($id, $version)
     {
         $builder = $this->db->createQueryBuilder();
         $builder->update('ezcontentobject_attribute')
@@ -97,7 +97,7 @@ class Migrate extends Command
         $builder->execute();
     }
 
-    protected function removeSelectionDataForField(int $id, int $version): void
+    protected function removeSelectionDataForField($id, $version)
     {
         $builder = $this->db->createQueryBuilder();
         $builder->delete($this->typeIdentifier)
@@ -111,7 +111,7 @@ class Migrate extends Command
         $builder->execute();
     }
 
-    protected function createSelections(int $id, int $version, array $identifiers): void
+    protected function createSelections($id, $version, array $identifiers)
     {
         $data = [
             'contentobject_attribute_id' => $id,
