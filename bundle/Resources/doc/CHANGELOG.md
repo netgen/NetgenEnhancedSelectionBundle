@@ -1,6 +1,17 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+3.3.0 (22.07.2019)
+------------------
+
+* Added Symfony version of database migration command from legacy extension (thanks @SerheyDolgushev)
+* Removed eZ kernel 8 support, it doesn't work in v3.x of the bundle
+
+3.2.1 (06.07.2019)
+------------------
+
+* Allow eZ kernel 8
+
 3.2.0 (07.06.2019)
 ------------------
 
