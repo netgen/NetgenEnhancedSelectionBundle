@@ -2,8 +2,6 @@ services:
     netgen.enhanced_selection.field_type:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type
         parent: ezpublish.fieldType
-        # Field type services in eZ Platform need to be public
-        public: true
         tags:
             - { name: ezplatform.field_type, alias: sckenhancedselection }
 
