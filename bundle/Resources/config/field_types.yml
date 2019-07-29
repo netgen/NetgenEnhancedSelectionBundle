@@ -7,8 +7,6 @@ services:
 
     netgen.enhanced_selection.field_type.external_storage:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage
-        # External storage services in eZ Platform need to be public
-        public: true
         arguments:
             - "@netgen.enhanced_selection.field_type.storage_gateway"
         tags:
