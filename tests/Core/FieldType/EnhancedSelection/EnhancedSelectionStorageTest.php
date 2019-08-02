@@ -27,7 +27,7 @@ class EnhancedSelectionStorageTest extends TestCase
     {
         $this->gateway = $this->getMockBuilder(EnhancedSelectionStorage\Gateway\DoctrineStorage::class)
             ->disableOriginalConstructor()
-            ->setMethods(['deleteFieldData', 'storeFieldData', 'getFieldData'])
+            ->onlyMethods(['deleteFieldData', 'storeFieldData', 'getFieldData'])
             ->getMock();
 
         $this->storage = new EnhancedSelectionStorage($this->gateway);

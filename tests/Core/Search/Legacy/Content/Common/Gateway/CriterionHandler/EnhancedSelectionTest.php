@@ -38,7 +38,7 @@ class EnhancedSelectionTest extends TestCase
 
         $this->db = $this->getMockBuilder(ConnectionHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(['createSelectQuery', 'quoteColumn'])
+            ->onlyMethods(['createSelectQuery', 'quoteColumn'])
             ->getMock();
 
         $this->handler = new EnhancedSelection($this->db);
@@ -65,7 +65,6 @@ class EnhancedSelectionTest extends TestCase
 
         $criteriaConverter = $this->getMockBuilder(CriteriaConverter::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $connection = $this->getMockBuilder(Connection::class)
@@ -74,12 +73,12 @@ class EnhancedSelectionTest extends TestCase
 
         $query = $this->getMockBuilder(SelectDoctrineQuery::class)
             ->setConstructorArgs([$connection])
-            ->setMethods(['prepare'])
+            ->onlyMethods(['prepare'])
             ->getMock();
 
         $statement = $this->getMockBuilder(Statement::class)
             ->disableOriginalConstructor()
-            ->setMethods(['execute', 'fetchAll'])
+            ->onlyMethods(['execute', 'fetchAll'])
             ->getMock();
 
         $statement->expects(self::once())
@@ -104,7 +103,6 @@ class EnhancedSelectionTest extends TestCase
     {
         $criteriaConverter = $this->getMockBuilder(CriteriaConverter::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $connection = $this->getMockBuilder(Connection::class)
@@ -113,12 +111,12 @@ class EnhancedSelectionTest extends TestCase
 
         $query = $this->getMockBuilder(SelectDoctrineQuery::class)
             ->setConstructorArgs([$connection])
-            ->setMethods(['prepare'])
+            ->onlyMethods(['prepare'])
             ->getMock();
 
         $statement = $this->getMockBuilder(Statement::class)
             ->disableOriginalConstructor()
-            ->setMethods(['execute', 'fetchAll'])
+            ->onlyMethods(['execute', 'fetchAll'])
             ->getMock();
 
         $statement->expects(self::once())

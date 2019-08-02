@@ -37,12 +37,12 @@ class NetgenEnhancedSelectionRuntimeTest extends TestCase
     {
         $this->translationHelper = $this->getMockBuilder(TranslationHelper::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getTranslatedField'])
+            ->onlyMethods(['getTranslatedField'])
             ->getMock();
 
         $this->contentTypeService = $this->getMockBuilder(ContentTypeService::class)
             ->disableOriginalConstructor()
-            ->setMethods(['loadContentType'])
+            ->onlyMethods(['loadContentType'])
             ->getMockForAbstractClass();
 
         $this->runtime = new NetgenEnhancedSelectionRuntime($this->contentTypeService, $this->translationHelper);

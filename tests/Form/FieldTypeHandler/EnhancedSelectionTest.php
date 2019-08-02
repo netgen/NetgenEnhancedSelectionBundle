@@ -27,7 +27,7 @@ class EnhancedSelectionTest extends TestCase
     protected function setUp(): void
     {
         $this->configResolver = $this->getMockBuilder(ConfigResolverInterface::class)
-            ->setMethods(['hasParameter', 'getParameter', 'setDefaultNamespace', 'getDefaultNamespace'])
+            ->onlyMethods(['hasParameter', 'getParameter', 'setDefaultNamespace', 'getDefaultNamespace'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -114,7 +114,7 @@ class EnhancedSelectionTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::once())

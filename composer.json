@@ -22,7 +22,7 @@
         "twig/twig": "^2.4.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.2",
+        "phpunit/phpunit": "^8.3",
         "netgen/ez-forms-bundle": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.15.1"
     },
