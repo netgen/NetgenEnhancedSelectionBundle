@@ -8,17 +8,17 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\Helper\TranslationHelper;
 
-class NetgenEnhancedSelectionRuntime
+final class NetgenEnhancedSelectionRuntime
 {
     /**
      * @var \eZ\Publish\API\Repository\ContentTypeService
      */
-    protected $contentTypeService;
+    private $contentTypeService;
 
     /**
      * @var \eZ\Publish\Core\Helper\TranslationHelper
      */
-    protected $translationHelper;
+    private $translationHelper;
 
     public function __construct(ContentTypeService $contentTypeService, TranslationHelper $translationHelper)
     {

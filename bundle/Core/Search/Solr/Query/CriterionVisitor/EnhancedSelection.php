@@ -10,7 +10,7 @@ use EzSystems\EzPlatformSolrSearchEngine\Query\Common\CriterionVisitor\Field;
 use EzSystems\EzPlatformSolrSearchEngine\Query\CriterionVisitor;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
 
-class EnhancedSelection extends Field
+final class EnhancedSelection extends Field
 {
     public function canVisit(Criterion $criterion): bool
     {

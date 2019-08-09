@@ -10,12 +10,12 @@ use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 use PDO;
 
-class DoctrineStorage extends Gateway
+final class DoctrineStorage extends Gateway
 {
     /**
      * @var \Doctrine\DBAL\Connection
      */
-    protected $connection;
+    private $connection;
 
     public function __construct(Connection $connection)
     {
@@ -73,7 +73,7 @@ class DoctrineStorage extends Gateway
      *
      * @return array
      */
-    protected function loadFieldData($fieldId, $versionNo): array
+    private function loadFieldData($fieldId, $versionNo): array
     {
         $query = $this->connection->createQueryBuilder();
         $query

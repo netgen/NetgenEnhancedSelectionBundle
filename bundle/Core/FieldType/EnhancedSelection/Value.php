@@ -6,7 +6,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection
 
 use eZ\Publish\Core\FieldType\Value as BaseValue;
 
-class Value extends BaseValue
+final class Value extends BaseValue
 {
     /**
      * The list of selection identifiers.

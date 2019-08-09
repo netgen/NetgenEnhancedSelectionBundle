@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Yaml\Yaml;
 
-class NetgenEnhancedSelectionExtension extends Extension implements PrependExtensionInterface
+final class NetgenEnhancedSelectionExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {

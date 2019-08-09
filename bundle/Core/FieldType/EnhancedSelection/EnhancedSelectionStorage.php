@@ -8,7 +8,7 @@ use eZ\Publish\SPI\FieldType\GatewayBasedStorage;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 
-class EnhancedSelectionStorage extends GatewayBasedStorage
+final class EnhancedSelectionStorage extends GatewayBasedStorage
 {
     public function storeFieldData(VersionInfo $versionInfo, Field $field, array $context): ?bool
     {

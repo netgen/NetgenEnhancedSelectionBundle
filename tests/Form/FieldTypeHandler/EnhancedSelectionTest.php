@@ -12,17 +12,17 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class EnhancedSelectionTest extends TestCase
+final class EnhancedSelectionTest extends TestCase
 {
     /**
      * @var EnhancedSelection
      */
-    protected $handler;
+    private $handler;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */
-    protected $configResolver;
+    private $configResolver;
 
     protected function setUp(): void
     {

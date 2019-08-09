@@ -11,7 +11,7 @@ use eZ\Publish\Core\Search\Legacy\Content\Common\Gateway\CriteriaConverter;
 use eZ\Publish\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler\FieldBase;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
 
-class EnhancedSelection extends FieldBase
+final class EnhancedSelection extends FieldBase
 {
     public function accept(Criterion $criterion): bool
     {
@@ -76,7 +76,7 @@ class EnhancedSelection extends FieldBase
         );
     }
 
-    protected function getFieldDefinitionIds(string $fieldIdentifier): array
+    private function getFieldDefinitionIds(string $fieldIdentifier): array
     {
         $fieldDefinitionIdList = [];
         $fieldMap = $this->contentTypeHandler->getSearchableFieldMap();

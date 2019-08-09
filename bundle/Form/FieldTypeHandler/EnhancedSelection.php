@@ -14,12 +14,12 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
-class EnhancedSelection extends FieldTypeHandler
+final class EnhancedSelection extends FieldTypeHandler
 {
     /**
      * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
      */
-    protected $configResolver;
+    private $configResolver;
 
     public function __construct(ConfigResolverInterface $configResolver)
     {
@@ -74,7 +74,7 @@ class EnhancedSelection extends FieldTypeHandler
         );
     }
 
-    protected function getValues(array $options): array
+    private function getValues(array $options): array
     {
         $values = [];
 

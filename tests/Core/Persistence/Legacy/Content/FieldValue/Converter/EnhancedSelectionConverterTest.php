@@ -12,12 +12,12 @@ use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\EnhancedSelectionConverter;
 use PHPUnit\Framework\TestCase;
 
-class EnhancedSelectionConverterTest extends TestCase
+final class EnhancedSelectionConverterTest extends TestCase
 {
     /**
      * @var Converter
      */
-    protected $converter;
+    private $converter;
 
     protected function setUp(): void
     {

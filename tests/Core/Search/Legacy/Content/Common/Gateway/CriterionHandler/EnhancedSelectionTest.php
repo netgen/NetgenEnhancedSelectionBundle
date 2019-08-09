@@ -15,22 +15,22 @@ use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Cr
 use Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler\EnhancedSelection;
 use PHPUnit\Framework\TestCase;
 
-class EnhancedSelectionTest extends TestCase
+final class EnhancedSelectionTest extends TestCase
 {
     /**
      * @var EnhancedSelection
      */
-    protected $handler;
+    private $handler;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */
-    protected $db;
+    private $db;
 
     /**
      * @var EnhancedSelectionCriterion
      */
-    protected $criterion;
+    private $criterion;
 
     protected function setUp(): void
     {

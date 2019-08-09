@@ -7,7 +7,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class NetgenEnhancedSelectionExtension extends AbstractExtension
+final class NetgenEnhancedSelectionExtension extends AbstractExtension
 {
     public function getFunctions(): array
     {

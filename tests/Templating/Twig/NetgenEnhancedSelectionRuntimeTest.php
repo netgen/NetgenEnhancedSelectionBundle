@@ -16,22 +16,22 @@ use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value
 use Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionRuntime;
 use PHPUnit\Framework\TestCase;
 
-class NetgenEnhancedSelectionRuntimeTest extends TestCase
+final class NetgenEnhancedSelectionRuntimeTest extends TestCase
 {
     /**
      * @var NetgenEnhancedSelectionRuntime
      */
-    protected $runtime;
+    private $runtime;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */
-    protected $translationHelper;
+    private $translationHelper;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */
-    protected $contentTypeService;
+    private $contentTypeService;
 
     protected function setUp(): void
     {

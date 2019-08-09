@@ -15,7 +15,7 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator\Specificat
  * - IN: matches against a list of identifiers (with OR operator)
  * - EQ: matches against one identifier
  */
-class EnhancedSelection extends Criterion
+final class EnhancedSelection extends Criterion
 {
     public function getSpecifications(): array
     {

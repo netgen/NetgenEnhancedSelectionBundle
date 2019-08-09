@@ -11,21 +11,21 @@ use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage;
 use PHPUnit\Framework\TestCase;
 
-class EnhancedSelectionStorageTest extends TestCase
+final class EnhancedSelectionStorageTest extends TestCase
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */
-    protected $gateway;
+    private $gateway;
 
     /**
      * @var EnhancedSelectionStorage
      */
-    protected $storage;
+    private $storage;
 
     protected function setUp(): void
     {
-        $this->gateway = $this->getMockBuilder(EnhancedSelectionStorage\Gateway\DoctrineStorage::class)
+        $this->gateway = $this->getMockBuilder(EnhancedSelectionStorage\Gateway::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['deleteFieldData', 'storeFieldData', 'getFieldData'])
             ->getMock();

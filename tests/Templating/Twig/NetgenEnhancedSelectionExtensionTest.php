@@ -9,12 +9,12 @@ use PHPUnit\Framework\TestCase;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class NetgenEnhancedSelectionExtensionTest extends TestCase
+final class NetgenEnhancedSelectionExtensionTest extends TestCase
 {
     /**
      * @var NetgenEnhancedSelectionExtension
      */
-    protected $extension;
+    private $extension;
 
     protected function setUp(): void
     {

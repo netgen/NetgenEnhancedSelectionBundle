@@ -12,7 +12,7 @@ use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
 use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
 
-class EnhancedSelectionConverter implements Converter
+final class EnhancedSelectionConverter implements Converter
 {
     public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue): void
     {
