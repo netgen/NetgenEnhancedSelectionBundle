@@ -4,7 +4,7 @@ Netgen Enhanced Selection Bundle installation instructions
 Requirements
 ------------
 
-* eZ Platform 1.11+
+* eZ Platform 3.0+
 
 Installation steps
 ------------------
@@ -19,19 +19,18 @@ $ composer require netgen/enhanced-selection-bundle
 
 ### Activate the bundle
 
-Activate the bundle in `app/AppKernel.php` file.
+Activate the bundle in `config/bundles.php` file.
 
 ```php
-public function registerBundles()
-{
-   $bundles = array(
-       new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-       ...
-       new Netgen\Bundle\EnhancedSelectionBundle\NetgenEnhancedSelectionBundle()
-   );
+<?php
 
-   ...
-}
+return [
+    ...,
+
+    Netgen\Bundle\EnhancedSelectionBundle\NetgenEnhancedSelectionBundle::class => ['all' => true],
+
+    ...
+];
 ```
 
 ### Import SQL tables to your database
@@ -50,7 +49,7 @@ CREATE TABLE `sckenhancedselection` (
 
 ### Clear the caches
 
-Clear eZ Publish caches.
+Clear eZ Platform caches.
 
 ```bash
 php bin/console cache:clear
