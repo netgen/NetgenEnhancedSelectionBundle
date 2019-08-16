@@ -1,7 +1,7 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
-3.3.1 (xx.yy.zzzz)
+3.3.1 (16.08.2019)
 ------------------
 
 * Fix showing iteration delimiter when condition for options is applied in field template
