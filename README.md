@@ -20,7 +20,7 @@ without affecting the semantics of the values stored in the fields.
 This repository is a rewrite of the original eZ Publish 4 extension called
 `enhancedselection2` to eZ Platform.
 
-Master branch can be installed on eZ Platform 3 only. For eZ Platform 1.x and 2.x, use the
+`master` branch can be installed on eZ Platform 3 only. For eZ Platform 1.x and 2.x, use the
 [`3.x-stable`](https://github.com/netgen/NetgenEnhancedSelectionBundle/tree/3.x-stable) branch.
 
 License and installation instructions
