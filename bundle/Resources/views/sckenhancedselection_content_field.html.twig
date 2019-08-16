@@ -11,15 +11,17 @@
 {% endif %}
 
 {% if available_options is not empty and identifiers is not empty %}
+    {% set options = [] %}
+
     {% for option in available_options %}
         {% if option.identifier in identifiers %}
-            {{ option.name }}{% if not loop.last %}{{ delimiter }}{% endif %}
+            {% set options = options|merge([option.name]) %}
         {% endif %}
     {% endfor %}
+
+    {{ options|join(delimiter) }}
 {% elseif identifiers is not empty %}
-    {% for identifier in identifiers %}
-        {{ identifier }}{% if not loop.last %}{{ delimiter }}{% endif %}
-    {% endfor %}
+    {{ identifiers|join(delimiter) }}
 {% endif %}
 
 {% endapply %}
