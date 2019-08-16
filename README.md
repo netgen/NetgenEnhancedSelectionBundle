@@ -9,13 +9,16 @@ Netgen Enhanced Selection Bundle
 [![License](https://img.shields.io/github/license/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](LICENSE)
 [![PHP](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://secure.php.net/)
 
-Netgen Enhanced Selection Bundle is an eZ Publish / eZ Platform bundle that provides a field type that reimplements `ezselection` field type.
+Netgen Enhanced Selection Bundle is an eZ Platform bundle that provides a
+field type that allows defining and storing selection options with identifiers
+instead of using numerical indexes like `ezselection` field type built into
+eZ kernel does.
 
-This repository represents is a rewrite of the original eZ Publish 4 extension called `enhancedselection2`.
+Advantage is the ability to move the options up and down in the field definition
+without affecting the semantics of the values stored in the fields.
 
-However, The eZ Publish 4 extension is still required to populate field type through the admin interface.
-
-When you install this bundle with Composer, the eZ Publish 4 extension is installed automatically but not activated in settings.
+This repository is a rewrite of the original eZ Publish 4 extension called
+`enhancedselection2` to eZ Platform.
 
 License and installation instructions
 -------------------------------------
