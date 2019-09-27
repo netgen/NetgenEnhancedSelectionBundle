@@ -21,29 +21,29 @@ final class NetgenEnhancedSelectionExtension extends Extension implements Prepen
             new FileLocator(__DIR__ . '/../Resources/config')
         );
 
-        $loader->load('field_types.yml');
-        $loader->load('templating.yml');
-        $loader->load('commands.yml');
-        $loader->load('parameters.yml');
+        $loader->load('field_types.yaml');
+        $loader->load('templating.yaml');
+        $loader->load('commands.yaml');
+        $loader->load('parameters.yaml');
 
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
         if (in_array('EzPublishLegacySearchEngineBundle', $activatedBundles, true)) {
-            $loader->load('search/legacy.yml');
+            $loader->load('search/legacy.yaml');
         }
 
         if (in_array('EzSystemsEzPlatformSolrSearchEngineBundle', $activatedBundles, true)) {
-            $loader->load('search/solr.yml');
+            $loader->load('search/solr.yaml');
         }
 
         if (in_array('EzPlatformAdminUiBundle', $activatedBundles, true)) {
-            $loader->load('ezadminui/services.yml');
+            $loader->load('ezadminui/services.yaml');
         }
     }
 
     public function prepend(ContainerBuilder $container): void
     {
-        $configFile = __DIR__ . '/../Resources/config/ezplatform.yml';
+        $configFile = __DIR__ . '/../Resources/config/ezplatform.yaml';
         $config = Yaml::parse(file_get_contents($configFile));
         $container->prependExtensionConfig('ezpublish', $config);
         $container->addResource(new FileResource($configFile));
