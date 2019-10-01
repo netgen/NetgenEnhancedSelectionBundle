@@ -45,7 +45,6 @@ final class EnhancedSelectionFieldType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices' => $choices,
-                    'choices_as_values' => true,
                     'multiple' => $fieldDefinition->fieldSettings['isMultiple'],
                 ]
             )

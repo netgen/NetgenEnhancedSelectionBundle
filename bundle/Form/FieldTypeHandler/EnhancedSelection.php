@@ -12,7 +12,6 @@ use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpKernel\Kernel;
 
 final class EnhancedSelection extends FieldTypeHandler
 {
@@ -64,12 +63,11 @@ final class EnhancedSelection extends FieldTypeHandler
         $options['expanded'] = $this->configResolver
             ->getParameter('form_handler.expanded', 'netgen_enhanced_selection');
         $options['multiple'] = $fieldSettings['isMultiple'];
-        $options['choices_as_values'] = true;
         $options['choices'] = $this->getValues($optionsValues);
 
         $formBuilder->add(
             $fieldDefinition->identifier,
-            Kernel::VERSION_ID < 20800 ? 'choice' : ChoiceType::class,
+            ChoiceType::class,
             $options
         );
     }
