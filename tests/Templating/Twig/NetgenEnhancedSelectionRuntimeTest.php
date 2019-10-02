@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Templating\Twig;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\Core\Helper\TranslationHelper;
+use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\Persistence\Content\ContentInfo;
-use eZ\Publish\SPI\Persistence\Content\Field;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionRuntime;
 use PHPUnit\Framework\TestCase;
@@ -26,26 +25,16 @@ final class NetgenEnhancedSelectionRuntimeTest extends TestCase
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */
-    private $translationHelper;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
     private $contentTypeService;
 
     protected function setUp(): void
     {
-        $this->translationHelper = $this->getMockBuilder(TranslationHelper::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getTranslatedField'])
-            ->getMock();
-
         $this->contentTypeService = $this->getMockBuilder(ContentTypeService::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['loadContentType'])
             ->getMockForAbstractClass();
 
-        $this->runtime = new NetgenEnhancedSelectionRuntime($this->contentTypeService, $this->translationHelper);
+        $this->runtime = new NetgenEnhancedSelectionRuntime($this->contentTypeService);
     }
 
     public function testInstanceOfTwigExtension(): void
@@ -56,19 +45,12 @@ final class NetgenEnhancedSelectionRuntimeTest extends TestCase
     public function testGetSelectionName(): void
     {
         $fieldIdentifier = 'some_field';
-        $contentInfo = new ContentInfo(['contentTypeId' => 12345]);
-
-        $versionInfo = new VersionInfo(['contentInfo' => $contentInfo]);
-
-        $content = new Content(['versionInfo' => $versionInfo]);
-
         $selectionValue = new Value(['some_name', 'some_name_2']);
-        $field = new Field(['value' => $selectionValue]);
+        $field = new Field(['value' => $selectionValue, 'fieldDefIdentifier' => $fieldIdentifier]);
 
-        $this->translationHelper->expects(self::once())
-            ->method('getTranslatedField')
-            ->with($content, $fieldIdentifier)
-            ->willReturn($field);
+        $contentInfo = new ContentInfo(['contentTypeId' => 12345]);
+        $versionInfo = new VersionInfo(['contentInfo' => $contentInfo]);
+        $content = new Content(['versionInfo' => $versionInfo, 'internalFields' => [$field]]);
 
         $fieldSettings = [
             'options' => [
