@@ -6,7 +6,6 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\Helper\TranslationHelper;
 
 final class NetgenEnhancedSelectionRuntime
 {
@@ -15,15 +14,9 @@ final class NetgenEnhancedSelectionRuntime
      */
     private $contentTypeService;
 
-    /**
-     * @var \eZ\Publish\Core\Helper\TranslationHelper
-     */
-    private $translationHelper;
-
-    public function __construct(ContentTypeService $contentTypeService, TranslationHelper $translationHelper)
+    public function __construct(ContentTypeService $contentTypeService)
     {
         $this->contentTypeService = $contentTypeService;
-        $this->translationHelper = $translationHelper;
     }
 
     /**
@@ -37,7 +30,7 @@ final class NetgenEnhancedSelectionRuntime
         $identifiers = [$selectionIdentifier];
 
         if ($selectionIdentifier === null) {
-            $field = $this->translationHelper->getTranslatedField($content, $fieldDefIdentifier);
+            $field = $content->getField($fieldDefIdentifier);
             $identifiers = $field->value->identifiers;
         }
 

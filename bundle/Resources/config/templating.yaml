@@ -8,6 +8,5 @@ services:
         class: Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionRuntime
         arguments:
             - "@ezpublish.api.service.content_type"
-            - "@ezpublish.translation_helper"
         tags:
             - { name: twig.runtime }
