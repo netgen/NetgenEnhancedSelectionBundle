@@ -1,7 +1,7 @@
 Netgen Enhanced Selection Bundle
 ================================
 
-[![Build Status](https://img.shields.io/travis/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](https://travis-ci.org/netgen/NetgenEnhancedSelectionBundle)
+[![Build Status](https://img.shields.io/travis/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](https://travis-ci.com/netgen/NetgenEnhancedSelectionBundle)
 [![Code Coverage](https://img.shields.io/codecov/c/github/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](https://codecov.io/gh/netgen/NetgenEnhancedSelectionBundle)
 [![Quality Score](https://img.shields.io/scrutinizer/g/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/netgen/NetgenEnhancedSelectionBundle)
 [![Downloads](https://img.shields.io/packagist/dt/netgen/enhanced-selection-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/enhanced-selection-bundle)
