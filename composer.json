@@ -18,7 +18,7 @@
     ],
     "require": {
         "ezsystems/ezpublish-kernel": "^8.0",
-        "ezsystems/ezplatform-content-forms": "^3.0",
+        "ezsystems/ezplatform-content-forms": "^1.0",
         "twig/twig": "^2.11.3"
     },
     "require-dev": {
