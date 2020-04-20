@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler;
 
+use Doctrine\DBAL\Connection;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\Persistence\Database\SelectQuery;
+use Doctrine\DBAL\Query\QueryBuilder;
 use eZ\Publish\Core\Search\Legacy\Content\Common\Gateway\CriteriaConverter;
 use eZ\Publish\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler\FieldBase;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
@@ -18,62 +19,38 @@ final class EnhancedSelection extends FieldBase
         return $criterion instanceof EnhancedSelectionCriterion;
     }
 
-    /**
-     * Generate query expression for a Criterion this handler accepts.
-     *
-     * accept() must be called before calling this method.
-     *
-     * @param \eZ\Publish\Core\Search\Legacy\Content\Common\Gateway\CriteriaConverter $converter
-     * @param \eZ\Publish\Core\Persistence\Database\SelectQuery $query
-     * @param \eZ\Publish\API\Repository\Values\Content\Query\Criterion $criterion
-     * @param array $fieldFilters
-     *
-     * @return \eZ\Publish\Core\Persistence\Database\Expression
-     */
-    public function handle(CriteriaConverter $converter, SelectQuery $query, Criterion $criterion, ?array $fieldFilters = null): string
+    public function handle(CriteriaConverter $converter, QueryBuilder $queryBuilder, Criterion $criterion, array $languageSettings): string
     {
         $fieldDefinitionIds = $this->getFieldDefinitionIds($criterion->target);
 
-        $subSelect = $query->subSelect();
+        $subSelect = $this->connection->createQueryBuilder();
         $subSelect
-            ->select($this->dbHandler->quoteColumn('contentobject_id'))
-            ->from($this->dbHandler->quoteTable('ezcontentobject_attribute'))
+            ->select('t1.contentobject_id')
+            ->from('ezcontentobject_attribute', 't1')
             ->innerJoin(
-                $this->dbHandler->quoteTable('sckenhancedselection'),
-                $subSelect->expr->lAnd(
-                    [
-                        $subSelect->expr->eq(
-                            $this->dbHandler->quoteColumn('contentobject_attribute_version', 'sckenhancedselection'),
-                            $this->dbHandler->quoteColumn('version', 'ezcontentobject_attribute')
-                        ),
-                        $subSelect->expr->eq(
-                            $this->dbHandler->quoteColumn('contentobject_attribute_id', 'sckenhancedselection'),
-                            $this->dbHandler->quoteColumn('id', 'ezcontentobject_attribute')
-                        ),
-                    ]
+                't1',
+                'sckenhancedselection',
+                't2',
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->eq('t2.contentobject_attribute_version', 't1.version'),
+                    $queryBuilder->expr()->eq('t2.contentobject_attribute_id', 't1.id')
                 )
             )
             ->where(
-                $subSelect->expr->lAnd(
-                    $subSelect->expr->eq(
-                        $this->dbHandler->quoteColumn('version', 'ezcontentobject_attribute'),
-                        $this->dbHandler->quoteColumn('current_version', 'ezcontentobject')
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->eq('t1.version', 'c.current_version'),
+                    $subSelect->expr()->in(
+                        't1.contentclassattribute_id',
+                        $queryBuilder->createNamedParameter($fieldDefinitionIds, Connection::PARAM_INT_ARRAY)
                     ),
-                    $subSelect->expr->in(
-                        $this->dbHandler->quoteColumn('contentclassattribute_id', 'ezcontentobject_attribute'),
-                        $fieldDefinitionIds
-                    ),
-                    $subSelect->expr->in(
-                        $this->dbHandler->quoteColumn('identifier', 'sckenhancedselection'),
-                        $criterion->value
+                    $subSelect->expr()->in(
+                        't2.identifier',
+                        $queryBuilder->createNamedParameter($criterion->value, Connection::PARAM_STR_ARRAY)
                     )
                 )
             );
 
-        return $query->expr->in(
-            $this->dbHandler->quoteColumn('id', 'ezcontentobject'),
-            $subSelect
-        );
+        return $queryBuilder->expr()->in('c.id', $subSelect->getSQL());
     }
 
     private function getFieldDefinitionIds(string $fieldIdentifier): array
