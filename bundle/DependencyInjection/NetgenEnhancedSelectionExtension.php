@@ -45,7 +45,7 @@ final class NetgenEnhancedSelectionExtension extends Extension implements Prepen
     {
         $configFile = __DIR__ . '/../Resources/config/ezplatform.yaml';
         $config = Yaml::parse(file_get_contents($configFile));
-        $container->prependExtensionConfig('ezpublish', $config);
+        $container->prependExtensionConfig('ezplatform', $config);
         $container->addResource(new FileResource($configFile));
     }
 }

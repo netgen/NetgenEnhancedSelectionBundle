@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\FetchMode;
+use Doctrine\DBAL\Types\Types;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
-use PDO;
 
 final class DoctrineStorage extends Gateway
 {
@@ -35,9 +36,9 @@ final class DoctrineStorage extends Gateway
                         'identifier' => ':identifier',
                     ]
                 )
-                ->setParameter(':contentobject_attribute_id', $field->id, PDO::PARAM_INT)
-                ->setParameter(':contentobject_attribute_version', $versionInfo->versionNo, PDO::PARAM_INT)
-                ->setParameter(':identifier', $identifier, PDO::PARAM_STR);
+                ->setParameter(':contentobject_attribute_id', $field->id, Types::INTEGER)
+                ->setParameter(':contentobject_attribute_version', $versionInfo->versionNo, Types::INTEGER)
+                ->setParameter(':identifier', $identifier, Types::STRING);
 
             $insertQuery->execute();
         }
@@ -60,7 +61,7 @@ final class DoctrineStorage extends Gateway
                 )
             )
             ->setParameter(':contentobject_attribute_id', $fieldIds, Connection::PARAM_INT_ARRAY)
-            ->setParameter(':contentobject_attribute_version', $versionInfo->versionNo, PDO::PARAM_INT);
+            ->setParameter(':contentobject_attribute_version', $versionInfo->versionNo, Types::INTEGER);
 
         $query->execute();
     }
@@ -85,12 +86,12 @@ final class DoctrineStorage extends Gateway
                     $query->expr()->eq('contentobject_attribute_version', ':contentobject_attribute_version')
                 )
             )
-            ->setParameter(':contentobject_attribute_id', $fieldId, PDO::PARAM_INT)
-            ->setParameter(':contentobject_attribute_version', $versionNo, PDO::PARAM_INT);
+            ->setParameter(':contentobject_attribute_id', $fieldId, Types::INTEGER)
+            ->setParameter(':contentobject_attribute_version', $versionNo, Types::INTEGER);
 
         $statement = $query->execute();
 
-        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $statement->fetchAll(FetchMode::ASSOCIATIVE);
 
         return array_map(
             static function (array $row) {

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EnhancedSelectionBundle\Command;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\PDOStatement;
+use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\FetchMode;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type as EnhancedSelectionType;
-use PDO;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -44,14 +44,17 @@ final class MigrateCommand extends Command
         $this->setDescription('Migrates sckenhancedselection field type to version which stores content object data to database table.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
+    }
 
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    {
         $statement = $this->getFields();
         $this->io->progressStart($statement->rowCount());
 
-        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $statement->fetch(FetchMode::ASSOCIATIVE)) {
             if ($row['data_text'] !== null) {
                 $fieldId = (int) $row['id'];
                 $version = (int) $row['version'];
@@ -74,7 +77,7 @@ final class MigrateCommand extends Command
         return 0;
     }
 
-    private function getFields(): PDOStatement
+    private function getFields(): Statement
     {
         $builder = $this->db->createQueryBuilder();
         $builder->select('a.id', 'a.version', 'a.data_text')

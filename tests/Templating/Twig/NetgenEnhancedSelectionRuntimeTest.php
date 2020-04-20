@@ -10,6 +10,7 @@ use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use eZ\Publish\SPI\Persistence\Content\ContentInfo;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionRuntime;
@@ -76,7 +77,7 @@ final class NetgenEnhancedSelectionRuntimeTest extends TestCase
             ]
         );
 
-        $contentType = new ContentType(['fieldDefinitions' => [$fieldDefinition]]);
+        $contentType = new ContentType(['fieldDefinitions' => new FieldDefinitionCollection([$fieldDefinition])]);
 
         $this->contentTypeService->expects(self::once())
             ->method('loadContentType')
@@ -128,7 +129,7 @@ final class NetgenEnhancedSelectionRuntimeTest extends TestCase
             ]
         );
 
-        $contentType = new ContentType(['fieldDefinitions' => [$fieldDefinition]]);
+        $contentType = new ContentType(['fieldDefinitions' => new FieldDefinitionCollection([$fieldDefinition])]);
 
         $this->contentTypeService->expects(self::once())
             ->method('loadContentType')
@@ -175,7 +176,7 @@ final class NetgenEnhancedSelectionRuntimeTest extends TestCase
             ]
         );
 
-        $contentType = new ContentType(['fieldDefinitions' => [$fieldDefinition]]);
+        $contentType = new ContentType(['fieldDefinitions' => new FieldDefinitionCollection([$fieldDefinition])]);
 
         $this->contentTypeService->expects(self::once())
             ->method('loadContentType')
