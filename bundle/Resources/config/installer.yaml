@@ -1,0 +1,7 @@
+services:
+    netgen.enhanced_selection.installer.listener.build_schema:
+        class: Netgen\Bundle\EnhancedSelectionBundle\Installer\BuildSchemaListener
+        arguments:
+            - '@=service("kernel").locateResource("@NetgenEnhancedSelectionBundle/Resources/schema/legacy.yaml")'
+        tags:
+            - { name: kernel.event_subscriber }

@@ -1,0 +1,26 @@
+tables:
+    sckenhancedselection:
+        fields:
+            contentobject_attribute_id:
+                type: integer
+                nullable: false
+                options:
+                    default: '0'
+            contentobject_attribute_version:
+                type: integer
+                nullable: false
+                options:
+                    default: '0'
+            identifier:
+                type: string
+                nullable: false
+                length: 255
+                options:
+                    default: ''
+        indexes:
+            sckenhancedselection_coaid_coav:
+                fields: [contentobject_attribute_id, contentobject_attribute_version]
+            sckenhancedselection_coaid_coav_iden:
+                fields: [contentobject_attribute_id, contentobject_attribute_version, identifier]
+                options:
+                    lengths: [null, null, '191']
