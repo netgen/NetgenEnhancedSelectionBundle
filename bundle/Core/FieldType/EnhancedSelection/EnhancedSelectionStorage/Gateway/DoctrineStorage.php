@@ -10,6 +10,7 @@ use Doctrine\DBAL\Types\Types;
 use eZ\Publish\SPI\Persistence\Content\Field;
 use eZ\Publish\SPI\Persistence\Content\VersionInfo;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
+use function array_map;
 
 final class DoctrineStorage extends Gateway
 {

@@ -8,6 +8,7 @@ use eZ\Publish\API\Repository\FieldType;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
 use Symfony\Component\Form\DataTransformerInterface;
+use function is_array;
 
 final class FieldValueTransformer implements DataTransformerInterface
 {

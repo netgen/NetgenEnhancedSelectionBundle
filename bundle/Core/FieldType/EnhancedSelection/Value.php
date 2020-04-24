@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
 use eZ\Publish\Core\FieldType\Value as BaseValue;
+use function implode;
 
 final class Value extends BaseValue
 {

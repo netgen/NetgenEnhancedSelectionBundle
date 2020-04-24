@@ -6,6 +6,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use function in_array;
 
 final class NetgenEnhancedSelectionRuntime
 {

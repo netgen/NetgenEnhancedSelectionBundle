@@ -12,6 +12,7 @@ use eZ\Publish\SPI\Persistence\Content\FieldValue;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
 use PHPUnit\Framework\TestCase;
+use function implode;
 
 final class TypeTest extends TestCase
 {

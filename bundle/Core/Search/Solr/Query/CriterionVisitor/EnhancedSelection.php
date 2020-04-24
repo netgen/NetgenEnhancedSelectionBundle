@@ -9,6 +9,7 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformSolrSearchEngine\Query\Common\CriterionVisitor\Field;
 use EzSystems\EzPlatformSolrSearchEngine\Query\CriterionVisitor;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
+use function implode;
 
 final class EnhancedSelection extends Field
 {
