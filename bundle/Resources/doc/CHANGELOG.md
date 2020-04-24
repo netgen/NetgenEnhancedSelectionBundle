@@ -1,6 +1,12 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+4.0.0 (24.04.2020)
+------------------
+
+* Support eZ Platform 3
+* Removed support for eZ Platform 2.5
+
 3.3.1 (16.08.2019)
 ------------------
 
@@ -20,7 +26,7 @@ Netgen Enhanced Selection Bundle changelog
 3.2.0 (07.06.2019)
 ------------------
 
-* Add parameter to render the form via an expandend Symfony choice type
+* Add parameter to render the form via an expanded Symfony choice type
 
 3.1.0 (22.12.2017)
 ------------------
