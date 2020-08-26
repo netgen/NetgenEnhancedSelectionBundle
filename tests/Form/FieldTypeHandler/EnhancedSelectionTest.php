@@ -57,6 +57,7 @@ final class EnhancedSelectionTest extends TestCase
             [
                 'fieldSettings' => [
                     'isMultiple' => false,
+                    'isExpanded' => false,
                 ],
             ]
         );
@@ -74,6 +75,7 @@ final class EnhancedSelectionTest extends TestCase
             [
                 'fieldSettings' => [
                     'isMultiple' => true,
+                    'isExpanded' => false,
                 ],
             ]
         );
@@ -91,6 +93,7 @@ final class EnhancedSelectionTest extends TestCase
             [
                 'fieldSettings' => [
                     'isMultiple' => false,
+                    'isExpanded' => false,
                 ],
             ]
         );
@@ -143,6 +146,7 @@ final class EnhancedSelectionTest extends TestCase
                         ],
                     ],
                     'isMultiple' => true,
+                    'isExpanded' => false,
                 ],
             ]
         );
