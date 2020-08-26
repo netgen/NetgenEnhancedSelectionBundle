@@ -1,6 +1,11 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+4.1.0 (26.08.2020)
+------------------
+
+* Add `isExpanded` option in field type (thanks @MarioBlazek)
+
 4.0.0 (24.04.2020)
 ------------------
 
