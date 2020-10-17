@@ -65,6 +65,17 @@ class FormMapper implements FieldDefinitionFormMapperInterface, FieldValueFormMa
                 )
             )
             ->add(
+                'isExpanded', CheckboxType::class, array(
+                    'required' => false,
+                    'property_path' => 'fieldSettings[isExpanded]',
+                    'label' => 'field_definition.sckenhancedselection.settings.is_expanded',
+                    'constraints' => array(
+                        new Constraints\Type(array('type' => 'bool')),
+                        new Constraints\NotNull(),
+                    ),
+                )
+            )
+            ->add(
                 'delimiter', TextType::class, array(
                     'required' => false,
                     'property_path' => 'fieldSettings[delimiter]',

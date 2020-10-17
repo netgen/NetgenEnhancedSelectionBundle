@@ -84,6 +84,13 @@ class EnhancedSelectionConverter implements Converter
         );
         $selection->appendChild($multiSelectNode);
 
+        // Expanded
+        $expandedNode = $xml->createElement(
+            'expanded',
+            !empty($fieldSettings['isExpanded']) ? '1' : '0'
+        );
+        $selection->appendChild($expandedNode);
+
         // Delimiter
         if (!empty($fieldSettings['delimiter'])) {
             $delimiterElement = $xml->createElement('delimiter');
@@ -112,6 +119,7 @@ class EnhancedSelectionConverter implements Converter
         $simpleXml = simplexml_load_string($storageDef->dataText5);
         $options = array();
         $isMultiple = false;
+        $isExpanded = false;
         $delimiter = '';
         $query = '';
 
@@ -131,6 +139,10 @@ class EnhancedSelectionConverter implements Converter
                 $isMultiple = true;
             }
 
+            if (!empty($simpleXml->expanded)) {
+                $isExpanded = true;
+            }
+
             if (!empty($simpleXml->delimiter)) {
                 $delimiter = (string) $simpleXml->delimiter;
             }
@@ -143,6 +155,7 @@ class EnhancedSelectionConverter implements Converter
         $fieldDef->fieldTypeConstraints->fieldSettings = new FieldSettings(
             array(
                 'isMultiple' => $isMultiple,
+                'isExpanded' => $isExpanded,
                 'delimiter' => $delimiter,
                 'options' => $options,
                 'query' => $query,

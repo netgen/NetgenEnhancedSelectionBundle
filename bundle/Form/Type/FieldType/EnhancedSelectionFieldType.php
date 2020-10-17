@@ -45,6 +45,7 @@ class EnhancedSelectionFieldType extends AbstractType
                     'choices' => $choices,
                     'choices_as_values' => true,
                     'multiple' => $fieldDefinition->fieldSettings['isMultiple'],
+                    'expanded' => $fieldDefinition->fieldSettings['isExpanded'],
                 )
             )
             ->addModelTransformer(

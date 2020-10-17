@@ -147,6 +147,7 @@ class TypeTest extends TestCase
         $fieldSettings = array(
             'options' => 'test',
             'isMultiple' => 'test',
+            'isExpanded' => 'test',
             'delimiter' => false,
             'query' => false,
         );
@@ -168,6 +169,14 @@ class TypeTest extends TestCase
         );
 
         $validationError3 = new ValidationError(
+            "'%setting%' setting value must be of boolean type",
+            null,
+            array(
+                '%setting%' => 'isExpanded',
+            )
+        );
+
+        $validationError4 = new ValidationError(
             "'%setting%' setting value must be of string type",
             null,
             array(
@@ -175,7 +184,7 @@ class TypeTest extends TestCase
             )
         );
 
-        $validationError4 = new ValidationError(
+        $validationError5 = new ValidationError(
             "'%setting%' setting value must be of string type",
             null,
             array(
@@ -189,6 +198,7 @@ class TypeTest extends TestCase
         $this->assertEquals($validationError2, $errors[1]);
         $this->assertEquals($validationError3, $errors[2]);
         $this->assertEquals($validationError4, $errors[3]);
+        $this->assertEquals($validationError5, $errors[4]);
     }
 
     public function testValidateFieldSettingsWithMissingOptionsInFieldSettings()
@@ -199,6 +209,7 @@ class TypeTest extends TestCase
                 ),
             ),
             'isMultiple' => false,
+            'isExpanded' => false,
             'delimiter' => 'delimiter',
             'query' => 'query',
         );
@@ -245,6 +256,7 @@ class TypeTest extends TestCase
                 ),
             ),
             'isMultiple' => false,
+            'isExpanded' => false,
             'delimiter' => 'delimiter',
             'query' => 'query',
         );
