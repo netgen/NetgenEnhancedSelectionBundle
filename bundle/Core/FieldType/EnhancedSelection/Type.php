@@ -27,6 +27,10 @@ class Type extends FieldType
             'type' => 'boolean',
             'default' => false,
         ),
+        'isExpanded' => array(
+            'type' => 'boolean',
+            'default' => false,
+        ),
         'delimiter' => array(
             'type' => 'string',
             'default' => '',
@@ -302,6 +306,17 @@ class Type extends FieldType
 
                     break;
                 case 'isMultiple':
+                    if (!is_bool($value)) {
+                        $validationErrors[] = new ValidationError(
+                            "'%setting%' setting value must be of boolean type",
+                            null,
+                            array(
+                                '%setting%' => $name,
+                            )
+                        );
+                    }
+                    break;
+                case 'isExpanded':
                     if (!is_bool($value)) {
                         $validationErrors[] = new ValidationError(
                             "'%setting%' setting value must be of boolean type",

@@ -141,6 +141,7 @@ class EnhancedSelectionTest extends TestCase
                         ),
                     ),
                     'isMultiple' => true,
+                    'isExpanded' => true,
                 ),
             )
         );
