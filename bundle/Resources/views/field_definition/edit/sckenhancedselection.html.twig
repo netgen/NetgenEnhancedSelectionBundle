@@ -36,12 +36,6 @@
         {{- form_widget(form.isMultiple) -}}
     </div>
 
-    <div class="sckenhancedselection-settings is-expanded{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_label(form.isExpanded) -}}
-        {{- form_errors(form.isExpanded) -}}
-        {{- form_widget(form.isExpanded) -}}
-    </div>
-
     <div class="sckenhancedselection-settings delimiter{% if group_class is not empty %} {{ group_class }}{% endif %}">
         {{- form_label(form.delimiter) -}}
         {{- form_errors(form.delimiter) -}}
