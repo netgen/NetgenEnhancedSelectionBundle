@@ -6,7 +6,6 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value as EnhancedSelectionValue;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
@@ -16,16 +15,6 @@ use function is_array;
 
 final class EnhancedSelection extends FieldTypeHandler
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
-
-    public function __construct(ConfigResolverInterface $configResolver)
-    {
-        $this->configResolver = $configResolver;
-    }
-
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
         $isMultiple = true;
@@ -61,9 +50,8 @@ final class EnhancedSelection extends FieldTypeHandler
         $fieldSettings = $fieldDefinition->getFieldSettings();
         $optionsValues = $fieldSettings['options'];
 
-        $options['expanded'] = $this->configResolver
-            ->getParameter('form_handler.expanded', 'netgen_enhanced_selection');
         $options['multiple'] = $fieldSettings['isMultiple'];
+        $options['expanded'] = $fieldSettings['isExpanded'];
         $options['choices'] = $this->getValues($optionsValues);
 
         $formBuilder->add(
