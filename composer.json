@@ -32,7 +32,7 @@
         "ezsystems/ezplatform-solr-search-engine": "Allows use of EnhancedSelection search criterion with Solr search engine"
     },
     "conflict": {
-        "netgen/enhancedselection2": "<2.0",
+        "netgen/enhancedselection2": "<2.1",
         "ezsystems/ezplatform-solr-search-engine": "<1.4.0"
     },
     "autoload": {
