@@ -1,6 +1,11 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+4.2.0 (05.11.2020)
+------------------
+
+* Implement expanded checkbox value in field type and expose controls in eZ Platform Admin UI
+
 4.1.0 (26.08.2020)
 ------------------
 
@@ -11,6 +16,11 @@ Netgen Enhanced Selection Bundle changelog
 
 * Support eZ Platform 3
 * Removed support for eZ Platform 2.5
+
+3.4.0 (05.11.2020)
+------------------
+
+* Implement expanded checkbox value in field type and expose controls in eZ Platform Admin UI
 
 3.3.1 (16.08.2019)
 ------------------
