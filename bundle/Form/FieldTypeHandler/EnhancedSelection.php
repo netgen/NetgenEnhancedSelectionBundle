@@ -36,6 +36,10 @@ final class EnhancedSelection extends FieldTypeHandler
 
     public function convertFieldValueFromForm($data): EnhancedSelectionValue
     {
+        if ($data === null) {
+            return new EnhancedSelectionValue();
+        }
+
         return new EnhancedSelectionValue(is_array($data) ? $data : [$data]);
     }
 
