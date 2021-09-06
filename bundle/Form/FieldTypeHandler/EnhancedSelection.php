@@ -63,6 +63,7 @@ class EnhancedSelection extends FieldTypeHandler
         if ($data === null) {
             return new EnhancedSelectionValue();
         }
+
         return new EnhancedSelectionValue(is_array($data) ? $data : array($data));
     }
 
