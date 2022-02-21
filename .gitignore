@@ -6,5 +6,5 @@ build/
 composer.phar
 composer.lock
 phpunit.phar
-.php_cs.cache
+.php-cs-fixer.cache
 .phpunit.result.cache
