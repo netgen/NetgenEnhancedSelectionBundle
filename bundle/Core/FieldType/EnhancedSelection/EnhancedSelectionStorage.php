@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
-use eZ\Publish\SPI\FieldType\GatewayBasedStorage;
-use eZ\Publish\SPI\Persistence\Content\Field;
-use eZ\Publish\SPI\Persistence\Content\VersionInfo;
+use Ibexa\Contracts\Core\FieldType\GatewayBasedStorage;
+use Ibexa\Contracts\Core\Persistence\Content\Field;
+use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 
 final class EnhancedSelectionStorage extends GatewayBasedStorage
 {

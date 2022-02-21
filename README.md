@@ -1,7 +1,6 @@
 Netgen Enhanced Selection Bundle
 ================================
 
-[![Build Status](https://img.shields.io/travis/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](https://travis-ci.com/netgen/NetgenEnhancedSelectionBundle)
 [![Code Coverage](https://img.shields.io/codecov/c/github/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](https://codecov.io/gh/netgen/NetgenEnhancedSelectionBundle)
 [![Quality Score](https://img.shields.io/scrutinizer/g/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/netgen/NetgenEnhancedSelectionBundle)
 [![Downloads](https://img.shields.io/packagist/dt/netgen/enhanced-selection-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/enhanced-selection-bundle)
@@ -9,19 +8,19 @@ Netgen Enhanced Selection Bundle
 [![License](https://img.shields.io/github/license/netgen/NetgenEnhancedSelectionBundle.svg?style=flat-square)](LICENSE)
 [![PHP](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://secure.php.net/)
 
-Netgen Enhanced Selection Bundle is an eZ Platform bundle that provides a
+Netgen Enhanced Selection Bundle is an Ibexa Platform bundle that provides a
 field type that allows defining and storing selection options with identifiers
 instead of using numerical indexes like `ezselection` field type built into
-eZ kernel does.
+Ibexa kernel does.
 
 Advantage is the ability to move the options up and down in the field definition
 without affecting the semantics of the values stored in the fields.
 
-This repository is a rewrite of the original eZ Publish 4 extension called
-`enhancedselection2` to eZ Platform.
+`master` branch can be installed on Ibexa Platform 4 only.
 
-`master` branch can be installed on eZ Platform 3 only. For eZ Platform 1.x and 2.x, use the
-[`3.x-stable`](https://github.com/netgen/NetgenEnhancedSelectionBundle/tree/3.x-stable) branch.
+For Ibexa Platform 3.x, use the [`4.x-stable`](https://github.com/netgen/NetgenEnhancedSelectionBundle/tree/4.x-stable) branch.
+
+For eZ Platform 1.x and 2.x, use the [`3.x-stable`](https://github.com/netgen/NetgenEnhancedSelectionBundle/tree/3.x-stable) branch.
 
 License and installation instructions
 -------------------------------------

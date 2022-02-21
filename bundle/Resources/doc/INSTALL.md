@@ -4,7 +4,7 @@ Netgen Enhanced Selection Bundle installation instructions
 Requirements
 ------------
 
-* eZ Platform 3.0+
+* Ibexa Platform 4.0+
 
 Installation steps
 ------------------
@@ -49,7 +49,7 @@ CREATE TABLE `sckenhancedselection` (
 
 ### Clear the caches
 
-Clear eZ Platform caches.
+Clear Ibexa Platform caches.
 
 ```bash
 php bin/console cache:clear

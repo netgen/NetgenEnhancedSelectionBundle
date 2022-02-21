@@ -31,24 +31,24 @@ final class NetgenEnhancedSelectionExtension extends Extension implements Prepen
 
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
-        if (in_array('EzPublishLegacySearchEngineBundle', $activatedBundles, true)) {
+        if (in_array('IbexaLegacySearchEngineBundle', $activatedBundles, true)) {
             $loader->load('search/legacy.yaml');
         }
 
-        if (in_array('EzSystemsEzPlatformSolrSearchEngineBundle', $activatedBundles, true)) {
+        if (in_array('IbexaSolrBundle', $activatedBundles, true)) {
             $loader->load('search/solr.yaml');
         }
 
-        if (in_array('EzPlatformAdminUiBundle', $activatedBundles, true)) {
-            $loader->load('ezadminui/services.yaml');
+        if (in_array('IbexaAdminUiBundle', $activatedBundles, true)) {
+            $loader->load('ibexa/admin/services.yaml');
         }
     }
 
     public function prepend(ContainerBuilder $container): void
     {
-        $configFile = __DIR__ . '/../Resources/config/ezplatform.yaml';
+        $configFile = __DIR__ . '/../Resources/config/ibexa.yaml';
         $config = Yaml::parse(file_get_contents($configFile));
-        $container->prependExtensionConfig('ezpublish', $config);
+        $container->prependExtensionConfig('ibexa', $config);
         $container->addResource(new FileResource($configFile));
     }
 }

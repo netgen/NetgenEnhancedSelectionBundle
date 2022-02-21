@@ -1,0 +1,16 @@
+services:
+    netgen.enhanced_selection.ibexa.admin.component.javascripts:
+         parent: Ibexa\AdminUi\Component\TwigComponent
+         arguments:
+             - "@twig"
+             - "@@NetgenEnhancedSelection/ibexa/admin/javascripts.html.twig"
+         tags:
+             - { name: ibexa.admin_ui.component, group: 'script-body' }
+
+    netgen.enhanced_selection.ibexa.admin.component.stylesheets:
+         parent: Ibexa\AdminUi\Component\TwigComponent
+         arguments:
+             - "@twig"
+             - "@@NetgenEnhancedSelection/ibexa/admin/stylesheets.html.twig"
+         tags:
+             - { name: ibexa.admin_ui.component, group: 'stylesheet-head' }

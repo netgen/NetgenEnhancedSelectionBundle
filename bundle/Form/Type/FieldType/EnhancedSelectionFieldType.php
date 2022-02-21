@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Form\Type\FieldType;
 
-use eZ\Publish\API\Repository\FieldTypeService;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Contracts\Core\Repository\FieldTypeService;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class EnhancedSelectionFieldType extends AbstractType
 {
     /**
-     * @var \eZ\Publish\API\Repository\FieldTypeService
+     * @var \Ibexa\Contracts\Core\Repository\FieldTypeService
      */
     private $fieldTypeService;
 
@@ -31,7 +31,7 @@ final class EnhancedSelectionFieldType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition */
         $fieldDefinition = $options['field_definition'];
 
         $choices = [];

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use function in_array;
 
 final class NetgenEnhancedSelectionRuntime
 {
     /**
-     * @var \eZ\Publish\API\Repository\ContentTypeService
+     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
      */
     private $contentTypeService;
 

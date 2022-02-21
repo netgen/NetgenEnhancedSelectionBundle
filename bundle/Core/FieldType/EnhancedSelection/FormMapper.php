@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
-use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
-use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use EzSystems\EzPlatformContentForms\FieldType\FieldValueFormMapperInterface;
+use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\Contracts\ContentForms\Data\Content\FieldData;
+use Ibexa\Contracts\ContentForms\FieldType\FieldValueFormMapperInterface;
 use Netgen\Bundle\EnhancedSelectionBundle\Form\Type\FieldType\EnhancedSelectionFieldType;
 use Netgen\Bundle\EnhancedSelectionBundle\Form\Type\FieldType\OptionType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

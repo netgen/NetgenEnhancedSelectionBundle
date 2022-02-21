@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator\Specifications;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator\Specifications;
 
 /**
  * A criterion that matches content based on identifier that is located in one of the fields.

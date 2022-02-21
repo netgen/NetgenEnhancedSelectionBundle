@@ -7,6 +7,6 @@ services:
     netgen.enhanced_selection.templating.twig.runtime:
         class: Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionRuntime
         arguments:
-            - "@ezpublish.api.service.content_type"
+            - "@ibexa.api.service.content_type"
         tags:
             - { name: twig.runtime }

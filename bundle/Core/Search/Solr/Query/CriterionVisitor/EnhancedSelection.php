@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Solr\Query\CriterionVisitor;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformSolrSearchEngine\Query\Common\CriterionVisitor\Field;
-use EzSystems\EzPlatformSolrSearchEngine\Query\CriterionVisitor;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Solr\Query\Common\CriterionVisitor\Field;
+use Ibexa\Contracts\Solr\Query\CriterionVisitor;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
 use function implode;
 

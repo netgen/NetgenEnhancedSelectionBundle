@@ -1,31 +1,31 @@
 services:
     netgen.enhanced_selection.field_type:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type
-        parent: ezpublish.fieldType
+        parent: Ibexa\Core\FieldType\FieldType
         tags:
-            - { name: ezplatform.field_type, alias: sckenhancedselection }
+            - { name: ibexa.field_type, alias: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.external_storage:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage
         arguments:
             - "@netgen.enhanced_selection.field_type.storage_gateway"
         tags:
-            - { name: ezplatform.field_type.external_storage_handler, alias: sckenhancedselection }
+            - { name: ibexa.field_type.storage.external.handler, alias: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.converter:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\Persistence\Legacy\Content\FieldValue\Converter\EnhancedSelectionConverter
         tags:
-            - { name: ezplatform.field_type.legacy_storage.converter, alias: sckenhancedselection }
+            - { name: ibexa.field_type.storage.legacy.converter, alias: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.storage_gateway:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway\DoctrineStorage
         arguments:
-            - "@ezpublish.api.storage_engine.legacy.connection"
+            - "@ibexa.api.storage_engine.legacy.connection"
 
     netgen.enhanced_selection.field_type.indexable:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\SearchField
         tags:
-            - { name: ezplatform.field_type.indexable, alias: sckenhancedselection }
+            - { name: ibexa.field_type.indexable, alias: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.form.fieldtype_handler:
         class: Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection
@@ -35,12 +35,12 @@ services:
     netgen.enhanced_selection.field_type.form_mapper:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\FormMapper
         tags:
-            - { name: ezplatform.field_type.form_mapper.definition, fieldType: sckenhancedselection }
-            - { name: ezplatform.field_type.form_mapper.value, fieldType: sckenhancedselection }
+            - { name: ibexa.admin_ui.field_type.form.mapper.definition, fieldType: sckenhancedselection }
+            - { name: ibexa.admin_ui.field_type.form.mapper.value, fieldType: sckenhancedselection }
 
     netgen.enhanced_selection.field_type.form:
         class: Netgen\Bundle\EnhancedSelectionBundle\Form\Type\FieldType\EnhancedSelectionFieldType
         arguments:
-            - "@ezpublish.api.service.field_type"
+            - "@ibexa.api.service.field_type"
         tags:
             - { name: form.type }

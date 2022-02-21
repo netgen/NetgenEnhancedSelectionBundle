@@ -2,8 +2,8 @@ services:
     netgen.enhanced_selection.search.solr.criterion_visitor.enhanced_selection:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Solr\Query\CriterionVisitor\EnhancedSelection
         arguments:
-            - "@ezpublish.search.common.field_name_resolver"
-            - "@ezpublish.search.common.field_value_mapper.aggregate"
+            - "@Ibexa\\Core\\Search\\Common\\FieldNameResolver"
+            - "@Ibexa\\Contracts\\Core\\Search\\Field"
         tags:
-            - { name: ezpublish.search.solr.query.content.criterion_visitor }
-            - { name: ezpublish.search.solr.query.location.criterion_visitor }
+            - { name: ibexa.search.solr.query.content.criterion.visitor }
+            - { name: ibexa.search.solr.query.location.criterion.visitor }
