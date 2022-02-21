@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection;
 
+use Ibexa\Contracts\Core\FieldType\Value as SPIValue;
+use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as BaseValue;
-use Ibexa\Contracts\Core\FieldType\Value as SPIValue;
-use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use function is_array;
 use function is_bool;
 use function is_numeric;
@@ -245,6 +245,7 @@ final class Type extends FieldType
                     }
 
                     break;
+
                 case 'isMultiple':
                     if (!is_bool($value)) {
                         $validationErrors[] = new ValidationError(
@@ -257,6 +258,7 @@ final class Type extends FieldType
                     }
 
                     break;
+
                 case 'isExpanded':
                     if (!is_bool($value)) {
                         $validationErrors[] = new ValidationError(
@@ -269,6 +271,7 @@ final class Type extends FieldType
                     }
 
                     break;
+
                 case 'delimiter':
                     if (!is_string($value)) {
                         $validationErrors[] = new ValidationError(
@@ -281,6 +284,7 @@ final class Type extends FieldType
                     }
 
                     break;
+
                 case 'query':
                     if (!is_string($value)) {
                         $validationErrors[] = new ValidationError(

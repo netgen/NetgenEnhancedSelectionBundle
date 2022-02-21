@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Solr\Query\CriterionVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Ibexa\Contracts\Solr\Query\CriterionVisitor;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Solr\Query\Common\CriterionVisitor\Field;
-use Ibexa\Contracts\Solr\Query\CriterionVisitor;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
 use function implode;
 
