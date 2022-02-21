@@ -47,7 +47,7 @@ final class NetgenEnhancedSelectionRuntimeTest extends TestCase
     {
         $fieldIdentifier = 'some_field';
         $selectionValue = new Value(['some_name', 'some_name_2']);
-        $field = new Field(['value' => $selectionValue, 'fieldDefIdentifier' => $fieldIdentifier]);
+        $field = new Field(['value' => $selectionValue, 'fieldDefIdentifier' => $fieldIdentifier, 'languageCode' => 'eng-GB']);
 
         $contentInfo = new ContentInfo(['contentTypeId' => 12345, 'mainLanguageCode' => 'eng-GB']);
         $versionInfo = new VersionInfo(['contentInfo' => $contentInfo]);
