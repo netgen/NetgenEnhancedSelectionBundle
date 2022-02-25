@@ -3,7 +3,7 @@ services:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Solr\Query\CriterionVisitor\EnhancedSelection
         arguments:
             - "@Ibexa\\Core\\Search\\Common\\FieldNameResolver"
-            - "@Ibexa\\Contracts\\Core\\Search\\Field"
+            - "@Ibexa\\Core\\Search\\Common\\FieldValueMapper\\Aggregate"
         tags:
             - { name: ibexa.search.solr.query.content.criterion.visitor }
             - { name: ibexa.search.solr.query.location.criterion.visitor }
