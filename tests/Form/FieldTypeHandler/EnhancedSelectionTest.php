@@ -7,7 +7,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Form\FieldTypeHandler;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value as EnhancedSelectionValue;
 use Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection;
-use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Netgen\Bundle\IbexaFormsBundle\Form\FieldTypeHandler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 

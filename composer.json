@@ -22,13 +22,13 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
-        "netgen/ez-forms-bundle": "^3.0",
+        "netgen/ibexa-forms-bundle": "^4.0",
         "friendsofphp/php-cs-fixer": "^2.16"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "suggest": {
-        "netgen/ez-forms-bundle": "Allows use of enhanced selection field type with Symfony forms",
+        "netgen/ibexa-forms-bundle": "Allows use of enhanced selection field type with Symfony forms",
         "ibexa/solr": "Allows use of EnhancedSelection search criterion with Solr search engine"
     },
     "autoload": {
