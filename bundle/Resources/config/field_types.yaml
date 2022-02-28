@@ -27,6 +27,11 @@ services:
         tags:
             - { name: ibexa.field_type.indexable, alias: sckenhancedselection }
 
+    netgen.enhanced_selection.field_type.form.fieldtype_handler:
+        class: Netgen\Bundle\EnhancedSelectionBundle\Form\FieldTypeHandler\EnhancedSelection
+        tags:
+            - { name: netgen.ezforms.form.fieldtype_handler, alias: sckenhancedselection }
+
     netgen.enhanced_selection.field_type.form_mapper:
         class: Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\FormMapper
         tags:
