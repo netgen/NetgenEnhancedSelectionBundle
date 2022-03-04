@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\Types\Types;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
@@ -14,10 +13,7 @@ use function array_map;
 
 final class DoctrineStorage extends Gateway
 {
-    /**
-     * @var \Doctrine\DBAL\Connection
-     */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -56,7 +52,7 @@ final class DoctrineStorage extends Gateway
         $query
             ->delete($this->connection->quoteIdentifier('sckenhancedselection'))
             ->where(
-                $query->expr()->andX(
+                $query->expr()->and(
                     $query->expr()->in('contentobject_attribute_id', [':contentobject_attribute_id']),
                     $query->expr()->eq('contentobject_attribute_version', ':contentobject_attribute_version')
                 )
@@ -70,19 +66,16 @@ final class DoctrineStorage extends Gateway
     /**
      * Returns the data for the given $fieldId and $versionNo.
      *
-     * @param mixed $fieldId
-     * @param mixed $versionNo
-     *
-     * @return array
+     * @return string[]
      */
-    private function loadFieldData($fieldId, $versionNo): array
+    private function loadFieldData(int $fieldId, int $versionNo): array
     {
         $query = $this->connection->createQueryBuilder();
         $query
             ->select('DISTINCT identifier')
             ->from($this->connection->quoteIdentifier('sckenhancedselection'))
             ->where(
-                $query->expr()->andX(
+                $query->expr()->and(
                     $query->expr()->eq('contentobject_attribute_id', ':contentobject_attribute_id'),
                     $query->expr()->eq('contentobject_attribute_version', ':contentobject_attribute_version')
                 )
@@ -92,12 +85,10 @@ final class DoctrineStorage extends Gateway
 
         $statement = $query->execute();
 
-        $rows = $statement->fetchAll(FetchMode::ASSOCIATIVE);
+        $rows = $statement->fetchAllAssociative();
 
         return array_map(
-            static function (array $row) {
-                return $row['identifier'];
-            },
+            static fn (array $row): string => $row['identifier'],
             $rows
         );
     }

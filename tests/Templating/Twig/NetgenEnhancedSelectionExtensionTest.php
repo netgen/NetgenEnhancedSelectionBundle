@@ -11,10 +11,7 @@ use Twig\TwigFunction;
 
 final class NetgenEnhancedSelectionExtensionTest extends TestCase
 {
-    /**
-     * @var NetgenEnhancedSelectionExtension
-     */
-    private $extension;
+    private NetgenEnhancedSelectionExtension $extension;
 
     protected function setUp(): void
     {

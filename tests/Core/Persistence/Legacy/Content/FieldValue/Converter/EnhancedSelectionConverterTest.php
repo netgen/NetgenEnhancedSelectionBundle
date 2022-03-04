@@ -14,10 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 final class EnhancedSelectionConverterTest extends TestCase
 {
-    /**
-     * @var Converter
-     */
-    private $converter;
+    private EnhancedSelectionConverter $converter;
 
     protected function setUp(): void
     {

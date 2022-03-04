@@ -19,7 +19,7 @@ use function is_string;
 final class Type extends FieldType
 {
     /**
-     * @var array
+     * @var array<string, array<string, mixed>>
      */
     protected $settingsSchema = [
         'options' => [

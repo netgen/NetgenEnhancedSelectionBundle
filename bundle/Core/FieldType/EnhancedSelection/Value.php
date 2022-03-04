@@ -14,7 +14,7 @@ final class Value extends BaseValue
      *
      * @var string[]
      */
-    public $identifiers = [];
+    public array $identifiers = [];
 
     /**
      * @param string[] $identifiers

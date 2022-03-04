@@ -13,10 +13,7 @@ use Symfony\Component\Form\FormBuilder;
 
 final class EnhancedSelectionTest extends TestCase
 {
-    /**
-     * @var EnhancedSelection
-     */
-    private $handler;
+    private EnhancedSelection $handler;
 
     protected function setUp(): void
     {

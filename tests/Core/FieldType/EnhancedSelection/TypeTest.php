@@ -16,25 +16,16 @@ use function implode;
 
 final class TypeTest extends TestCase
 {
-    /**
-     * @var Type
-     */
-    private $type;
+    private Type $type;
 
     /**
-     * @var array
+     * @var string[]
      */
-    private $identifiers = ['identifier0', 'identifier1'];
+    private array $identifiers = ['identifier0', 'identifier1'];
 
-    /**
-     * @var Value
-     */
-    private $value;
+    private Value $value;
 
-    /**
-     * @var Value
-     */
-    private $emptyValue;
+    private Value $emptyValue;
 
     protected function setUp(): void
     {

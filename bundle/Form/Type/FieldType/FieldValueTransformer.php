@@ -12,15 +12,9 @@ use function is_array;
 
 final class FieldValueTransformer implements DataTransformerInterface
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\FieldType
-     */
-    private $fieldType;
+    private FieldType $fieldType;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition
-     */
-    private $fieldDefinition;
+    private FieldDefinition $fieldDefinition;
 
     public function __construct(FieldType $fieldType, FieldDefinition $fieldDefinition)
     {

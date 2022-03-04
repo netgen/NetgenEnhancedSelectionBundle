@@ -9,19 +9,14 @@ use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Ibexa\Core\FieldType\StorageGateway;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class EnhancedSelectionStorageTest extends TestCase
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    private $gateway;
+    private MockObject $gateway;
 
-    /**
-     * @var EnhancedSelectionStorage
-     */
-    private $storage;
+    private EnhancedSelectionStorage $storage;
 
     protected function setUp(): void
     {

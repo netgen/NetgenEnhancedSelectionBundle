@@ -10,10 +10,7 @@ use function in_array;
 
 final class NetgenEnhancedSelectionRuntime
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    private $contentTypeService;
+    private ContentTypeService $contentTypeService;
 
     public function __construct(ContentTypeService $contentTypeService)
     {

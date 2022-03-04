@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EnhancedSelectionBundle\Command;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Statement;
-use Doctrine\DBAL\FetchMode;
+use Doctrine\DBAL\Driver\Result;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type as EnhancedSelectionType;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,20 +16,11 @@ use function unserialize;
 
 final class MigrateCommand extends Command
 {
-    /**
-     * @var \Doctrine\DBAL\Connection
-     */
-    private $db;
+    private Connection $db;
 
-    /**
-     * @var string
-     */
-    private $typeIdentifier;
+    private string $typeIdentifier;
 
-    /**
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
-     */
-    private $io;
+    private SymfonyStyle $io;
 
     public function __construct(Connection $db, EnhancedSelectionType $type)
     {
@@ -56,7 +46,7 @@ final class MigrateCommand extends Command
         $statement = $this->getFields();
         $this->io->progressStart($statement->rowCount());
 
-        while ($row = $statement->fetch(FetchMode::ASSOCIATIVE)) {
+        while ($row = $statement->fetchAssociative()) {
             if ($row['data_text'] !== null) {
                 $fieldId = (int) $row['id'];
                 $version = (int) $row['version'];
@@ -79,7 +69,7 @@ final class MigrateCommand extends Command
         return 0;
     }
 
-    private function getFields(): Statement
+    private function getFields(): Result
     {
         $builder = $this->db->createQueryBuilder();
         $builder->select('a.id', 'a.version', 'a.data_text')

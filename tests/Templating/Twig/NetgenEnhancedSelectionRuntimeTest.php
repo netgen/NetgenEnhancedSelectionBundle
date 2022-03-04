@@ -14,19 +14,14 @@ use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value;
 use Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig\NetgenEnhancedSelectionRuntime;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class NetgenEnhancedSelectionRuntimeTest extends TestCase
 {
-    /**
-     * @var NetgenEnhancedSelectionRuntime
-     */
-    private $runtime;
+    private NetgenEnhancedSelectionRuntime $runtime;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    private $contentTypeService;
+    private MockObject $contentTypeService;
 
     protected function setUp(): void
     {
