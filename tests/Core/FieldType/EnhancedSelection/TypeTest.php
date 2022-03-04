@@ -366,14 +366,4 @@ final class TypeTest extends TestCase
 
         $this->type->acceptValue($value);
     }
-
-    public function testAcceptValueWithValueObjectAndIdentifiersAsString(): void
-    {
-        $this->expectException(InvalidArgumentType::class);
-
-        $value = new Value();
-        $value->identifiers = 'test';
-
-        $this->type->acceptValue($value);
-    }
 }
