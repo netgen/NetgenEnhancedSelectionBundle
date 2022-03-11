@@ -3,3 +3,24 @@
     font-size: 28px;
     cursor: pointer;
 }
+
+.multientry_add {
+    margin-top: 8px;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+    background-color: #ae1164;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.icon-close {
+    line-height: inherit;
+    margin-left: 8px;
+}
+
+.multientry-item {
+    margin-bottom: 8px;
+}
