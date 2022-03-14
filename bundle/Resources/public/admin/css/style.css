@@ -24,3 +24,7 @@
 .multientry-item {
     margin-bottom: 8px;
 }
+
+.multientry-error {
+    border: 1px solid #db0032 !important;
+}
