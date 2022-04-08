@@ -1,10 +1,10 @@
-.icon-close:before {
+.sckenhancedselection-settings icon-close:before {
     content: "\d7";
     font-size: 28px;
     cursor: pointer;
 }
 
-.multientry_add {
+.sckenhancedselection-settings multientry_add {
     margin-top: 8px;
     border: 0;
     background: none;
@@ -16,15 +16,15 @@
     border-radius: 8px;
 }
 
-.icon-close {
+.sckenhancedselection-settings icon-close {
     line-height: inherit;
     margin-left: 8px;
 }
 
-.multientry-item {
+.sckenhancedselection-settings multientry-item {
     margin-bottom: 8px;
 }
 
-.multientry-error {
+.sckenhancedselection-settings multientry-error {
     border: 1px solid #db0032 !important;
 }
