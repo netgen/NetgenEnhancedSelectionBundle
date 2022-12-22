@@ -26,7 +26,8 @@ final class OptionType extends AbstractType
                 'identifier',
                 TextType::class,
                 [
-                    'required' => true,
+                    'required' => false,
+                    'empty_data' => '',
                     'label' => 'field_definition.sckenhancedselection.settings.options.identifier',
                 ]
             )

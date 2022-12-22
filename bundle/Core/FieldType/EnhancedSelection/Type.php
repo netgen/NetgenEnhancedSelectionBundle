@@ -264,16 +264,6 @@ final class Type extends FieldType
                                         ]
                                     );
                                 }
-
-                                if (empty($option['identifier'])) {
-                                    $validationErrors[] = new ValidationError(
-                                        "'%setting%' setting value item's 'identifier' property must have a value",
-                                        null,
-                                        [
-                                            '%setting%' => $name,
-                                        ]
-                                    );
-                                }
                             }
 
                             if (!isset($option['priority'])) {
@@ -293,6 +283,26 @@ final class Type extends FieldType
                                     ]
                                 );
                             }
+                        }
+
+                        $emptyCount = 0;
+
+                        foreach ($value as $option) {
+                            if (empty($option['identifier'])) {
+                                $emptyCount++;
+                            }
+                        }
+
+                        if ($emptyCount > ($fieldSettings['isMultiple'] ? 0 : 1)) {
+                            $validationErrors[] = new ValidationError(
+                                $fieldSettings['isMultiple'] ?
+                                    "'%setting%' setting value item's 'identifier' property must have a value" :
+                                    "'%setting%' setting value item's 'identifier' property must have only a single empty value",
+                                null,
+                                [
+                                    '%setting%' => $name,
+                                ]
+                            );
                         }
                     }
 

@@ -40,6 +40,10 @@ final class EnhancedSelectionFieldType extends AbstractType
 
         $choices = [];
         foreach ($options as $option) {
+            if ($option['identifier'] === '' && $fieldDefinition->isRequired) {
+                continue;
+            }
+
             $choices[$option['name']] = $option['identifier'];
         }
 
