@@ -153,6 +153,58 @@ final class Type extends FieldType
             }
 
             switch ($name) {
+                case 'isMultiple':
+                    if (!is_bool($value)) {
+                        $validationErrors[] = new ValidationError(
+                            "'%setting%' setting value must be of boolean type",
+                            null,
+                            [
+                                '%setting%' => $name,
+                            ]
+                        );
+                    }
+
+                    break;
+
+                case 'isExpanded':
+                    if (!is_bool($value)) {
+                        $validationErrors[] = new ValidationError(
+                            "'%setting%' setting value must be of boolean type",
+                            null,
+                            [
+                                '%setting%' => $name,
+                            ]
+                        );
+                    }
+
+                    break;
+
+                case 'delimiter':
+                    if (!is_string($value)) {
+                        $validationErrors[] = new ValidationError(
+                            "'%setting%' setting value must be of string type",
+                            null,
+                            [
+                                '%setting%' => $name,
+                            ]
+                        );
+                    }
+
+                    break;
+
+                case 'query':
+                    if (!is_string($value)) {
+                        $validationErrors[] = new ValidationError(
+                            "'%setting%' setting value must be of string type",
+                            null,
+                            [
+                                '%setting%' => $name,
+                            ]
+                        );
+                    }
+
+                    break;
+
                 case 'options':
                     if (!is_array($value)) {
                         $validationErrors[] = new ValidationError(
@@ -242,58 +294,6 @@ final class Type extends FieldType
                                 );
                             }
                         }
-                    }
-
-                    break;
-
-                case 'isMultiple':
-                    if (!is_bool($value)) {
-                        $validationErrors[] = new ValidationError(
-                            "'%setting%' setting value must be of boolean type",
-                            null,
-                            [
-                                '%setting%' => $name,
-                            ]
-                        );
-                    }
-
-                    break;
-
-                case 'isExpanded':
-                    if (!is_bool($value)) {
-                        $validationErrors[] = new ValidationError(
-                            "'%setting%' setting value must be of boolean type",
-                            null,
-                            [
-                                '%setting%' => $name,
-                            ]
-                        );
-                    }
-
-                    break;
-
-                case 'delimiter':
-                    if (!is_string($value)) {
-                        $validationErrors[] = new ValidationError(
-                            "'%setting%' setting value must be of string type",
-                            null,
-                            [
-                                '%setting%' => $name,
-                            ]
-                        );
-                    }
-
-                    break;
-
-                case 'query':
-                    if (!is_string($value)) {
-                        $validationErrors[] = new ValidationError(
-                            "'%setting%' setting value must be of string type",
-                            null,
-                            [
-                                '%setting%' => $name,
-                            ]
-                        );
                     }
 
                     break;
