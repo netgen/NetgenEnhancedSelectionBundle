@@ -30,9 +30,16 @@ final class EnhancedSelectionFieldType extends AbstractType
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition */
         $fieldDefinition = $options['field_definition'];
+        $options = $fieldDefinition->fieldSettings['options'];
+
+        usort(
+            $options,
+            static fn (array $option1, array $option2): int =>
+                $option2['priority'] <=> $option1['priority']
+        );
 
         $choices = [];
-        foreach ($fieldDefinition->fieldSettings['options'] as $option) {
+        foreach ($options as $option) {
             $choices[$option['name']] = $option['identifier'];
         }
 

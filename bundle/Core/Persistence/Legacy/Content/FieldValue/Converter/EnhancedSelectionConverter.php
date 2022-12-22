@@ -119,6 +119,12 @@ final class EnhancedSelectionConverter implements Converter
             }
         }
 
+        usort(
+            $options,
+            static fn (array $option1, array $option2): int =>
+                $option2['priority'] <=> $option1['priority']
+        );
+
         $fieldDef->fieldTypeConstraints->fieldSettings = new FieldSettings(
             [
                 'isMultiple' => $isMultiple,

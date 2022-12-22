@@ -1,7 +1,7 @@
 {% block sckenhancedselection_field %}
 {% apply spaceless %}
 
-{% set available_options = fieldSettings.options %}
+{% set available_options = fieldSettings.options|sort((option1, option2) => option2.priority <=> option1.priority) %}
 {% set identifiers = field.value.identifiers %}
 
 {% if fieldSettings.delimiter is not empty %}
