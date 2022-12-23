@@ -8,6 +8,7 @@ use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Contracts\Core\Repository\FieldType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Symfony\Component\Form\DataTransformerInterface;
+
 use function is_array;
 
 final class FieldValueTransformer implements DataTransformerInterface

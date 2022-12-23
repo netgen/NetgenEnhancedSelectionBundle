@@ -9,6 +9,7 @@ use Ibexa\Contracts\Solr\Query\CriterionVisitor;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Solr\Query\Common\CriterionVisitor\Field;
 use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection as EnhancedSelectionCriterion;
+
 use function implode;
 
 final class EnhancedSelection extends Field

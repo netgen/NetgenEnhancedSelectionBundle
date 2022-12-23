@@ -30,6 +30,6 @@ final class ValueTest extends TestCase
     {
         $identifiers = 'identifier0, identifier1';
 
-        self::assertSame($identifiers, (string) ($this->value));
+        self::assertSame($identifiers, (string) $this->value);
     }
 }

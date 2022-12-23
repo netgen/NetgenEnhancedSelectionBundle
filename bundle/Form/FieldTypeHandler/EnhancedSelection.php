@@ -11,6 +11,7 @@ use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Value
 use Netgen\Bundle\IbexaFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+
 use function is_array;
 
 final class EnhancedSelection extends FieldTypeHandler

@@ -6,6 +6,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Templating\Twig;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+
 use function in_array;
 
 final class NetgenEnhancedSelectionRuntime

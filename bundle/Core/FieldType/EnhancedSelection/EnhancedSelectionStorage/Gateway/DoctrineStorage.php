@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
+
 use function array_map;
 
 final class DoctrineStorage extends Gateway

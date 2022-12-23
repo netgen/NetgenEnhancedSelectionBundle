@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use function usort;
+
 final class EnhancedSelectionFieldType extends AbstractType
 {
     private FieldTypeService $fieldTypeService;
@@ -34,8 +36,7 @@ final class EnhancedSelectionFieldType extends AbstractType
 
         usort(
             $options,
-            static fn (array $option1, array $option2): int =>
-                $option2['priority'] <=> $option1['priority']
+            static fn (array $option1, array $option2): int => $option2['priority'] <=> $option1['priority']
         );
 
         $choices = [];

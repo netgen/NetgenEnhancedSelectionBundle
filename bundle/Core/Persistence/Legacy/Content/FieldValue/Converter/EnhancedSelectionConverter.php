@@ -11,7 +11,9 @@ use Ibexa\Core\FieldType\FieldSettings;
 use Ibexa\Core\Persistence\Legacy\Content\FieldValue\Converter;
 use Ibexa\Core\Persistence\Legacy\Content\StorageFieldDefinition;
 use Ibexa\Core\Persistence\Legacy\Content\StorageFieldValue;
+
 use function simplexml_load_string;
+use function usort;
 
 final class EnhancedSelectionConverter implements Converter
 {
@@ -121,8 +123,7 @@ final class EnhancedSelectionConverter implements Converter
 
         usort(
             $options,
-            static fn (array $option1, array $option2): int =>
-                $option2['priority'] <=> $option1['priority']
+            static fn (array $option1, array $option2): int => $option2['priority'] <=> $option1['priority']
         );
 
         $fieldDef->fieldTypeConstraints->fieldSettings = new FieldSettings(

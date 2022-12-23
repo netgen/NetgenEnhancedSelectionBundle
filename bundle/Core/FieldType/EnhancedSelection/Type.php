@@ -11,6 +11,7 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as BaseValue;
+
 use function is_array;
 use function is_bool;
 use function is_numeric;
@@ -289,7 +290,7 @@ final class Type extends FieldType
 
                         foreach ($value as $option) {
                             if (empty($option['identifier'])) {
-                                $emptyCount++;
+                                ++$emptyCount;
                             }
                         }
 
