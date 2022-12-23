@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Templating\Twig;
 
-use Ibexa\Contracts\Core\Persistence\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\Core\Repository\Values\Content\VersionInfo;
