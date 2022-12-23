@@ -1,30 +1,23 @@
-.sckenhancedselection-settings icon-close:before {
+.sckenhancedselection-settings .icon-close:before {
     content: "\d7";
     font-size: 28px;
     cursor: pointer;
 }
 
-.sckenhancedselection-settings multientry_add {
+.sckenhancedselection-settings .multientry_add {
     margin-top: 8px;
-    border: 0;
-    background: none;
-    box-shadow: none;
-    border-radius: 0px;
-    background-color: #ae1164;
-    color: white;
     padding: 8px;
-    border-radius: 8px;
 }
 
-.sckenhancedselection-settings icon-close {
+.sckenhancedselection-settings .icon-close {
     line-height: inherit;
     margin-left: 8px;
 }
 
-.sckenhancedselection-settings multientry-item {
+.sckenhancedselection-settings .multientry-item {
     margin-bottom: 8px;
 }
 
-.sckenhancedselection-settings multientry-error {
+.sckenhancedselection-settings .multientry-error {
     border: 1px solid #db0032 !important;
 }
