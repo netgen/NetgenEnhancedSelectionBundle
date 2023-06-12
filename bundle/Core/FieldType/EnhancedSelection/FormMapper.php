@@ -30,6 +30,7 @@ final class FormMapper implements FieldDefinitionFormMapperInterface, FieldValue
                         [
                             'required' => $data->fieldDefinition->isRequired,
                             'label' => $data->fieldDefinition->getName(),
+                            'language_code' => $data->field->languageCode,
                             'field_definition' => $data->fieldDefinition,
                         ]
                     )

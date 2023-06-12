@@ -267,9 +267,29 @@ final class Type extends FieldType
                                 }
                             }
 
+                            if (!isset($option['language_code'])) {
+                                $validationErrors[] = new ValidationError(
+                                    "'%setting%' setting value item must have a 'language_code' property",
+                                    null,
+                                    [
+                                        '%setting%' => $name,
+                                    ]
+                                );
+                            } else {
+                                if (!is_string($option['language_code'])) {
+                                    $validationErrors[] = new ValidationError(
+                                        "'%setting%' setting value item's 'language_code' property must be of string value",
+                                        null,
+                                        [
+                                            '%setting%' => $name,
+                                        ]
+                                    );
+                                }
+                            }
+
                             if (!isset($option['priority'])) {
                                 $validationErrors[] = new ValidationError(
-                                    "'%setting%' setting value item must have an 'priority' property",
+                                    "'%setting%' setting value item must have a 'priority' property",
                                     null,
                                     [
                                         '%setting%' => $name,

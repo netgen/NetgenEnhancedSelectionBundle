@@ -44,3 +44,10 @@ services:
             - "@ibexa.api.service.field_type"
         tags:
             - { name: form.type }
+
+    netgen.enhanced_selection.field_type.form.option_type:
+        class: Netgen\Bundle\EnhancedSelectionBundle\Form\Type\FieldType\OptionType
+        arguments:
+            - "@ibexa.api.service.language"
+        tags:
+            - { name: form.type }

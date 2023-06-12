@@ -48,6 +48,7 @@ final class EnhancedSelectionConverter implements Converter
                 $optionNode->setAttribute('id', (string) ($key + 1));
                 $optionNode->setAttribute('name', (string) $option['name']);
                 $optionNode->setAttribute('identifier', (string) $option['identifier']);
+                $optionNode->setAttribute('language_code', (string) $option['language_code']);
                 $optionNode->setAttribute('priority', (string) $option['priority']);
             }
         }
@@ -99,6 +100,7 @@ final class EnhancedSelectionConverter implements Converter
                         'id' => (int) $option['id'],
                         'name' => (string) $option['name'],
                         'identifier' => (string) $option['identifier'],
+                        'language_code' => (string) $option['language_code'],
                         'priority' => (int) $option['priority'],
                     ];
                 }

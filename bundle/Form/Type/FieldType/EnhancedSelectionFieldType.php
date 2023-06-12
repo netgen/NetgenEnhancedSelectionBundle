@@ -24,28 +24,35 @@ final class EnhancedSelectionFieldType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setRequired(['field_definition']);
+        $resolver->setRequired(['field_definition', 'language_code']);
+
         $resolver->setAllowedTypes('field_definition', FieldDefinition::class);
+        $resolver->setAllowedTypes('language_code', 'string');
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition */
         $fieldDefinition = $options['field_definition'];
-        $options = $fieldDefinition->fieldSettings['options'];
+        $fieldOptions = $fieldDefinition->fieldSettings['options'];
+
+        /** @var string $languageCode */
+        $languageCode = $options['language_code'];
 
         usort(
-            $options,
+            $fieldOptions,
             static fn (array $option1, array $option2): int => $option2['priority'] <=> $option1['priority']
         );
 
         $choices = [];
-        foreach ($options as $option) {
-            if ($option['identifier'] === '' && $fieldDefinition->isRequired) {
+        foreach ($fieldOptions as $fieldOption) {
+            if ($fieldOption['identifier'] === '' && $fieldDefinition->isRequired) {
                 continue;
             }
 
-            $choices[$option['name']] = $option['identifier'];
+            if ($fieldOption['language_code'] === $languageCode || $fieldOption['language_code'] === '') {
+                $choices[$fieldOption['name']] = $fieldOption['identifier'];
+            }
         }
 
         $builder
