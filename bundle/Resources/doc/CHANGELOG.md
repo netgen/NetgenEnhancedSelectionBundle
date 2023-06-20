@@ -1,6 +1,23 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+5.2.0 (20.06.2023)
+------------------
+
+* Added translations support for labels in field definition options
+
+5.1.0 (08.04.2022)
+------------------
+
+* Sort options based on priority
+* Allow empty value for identifier
+
+5.0.0 (25.03.2022)
+------------------
+
+* Added support for Ibexa v4
+* Removed support for eZ Platform
+
 4.2.0 (05.11.2020)
 ------------------
 
