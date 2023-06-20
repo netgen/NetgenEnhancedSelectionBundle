@@ -14,7 +14,7 @@
     {% set options = [] %}
 
     {% for option in available_options %}
-        {% if option.identifier in identifiers %}
+        {% if option.identifier in identifiers and option.language_code in [field.languageCode, ''] %}
             {% set options = options|merge([option.name]) %}
         {% endif %}
     {% endfor %}

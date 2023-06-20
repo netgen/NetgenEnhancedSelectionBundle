@@ -63,6 +63,7 @@ final class EnhancedSelectionConverterTest extends TestCase
                 [
                     'name' => 'name',
                     'identifier' => 'id',
+                    'language_code' => 'cro-HR',
                     'priority' => 10,
                 ],
             ],
@@ -79,7 +80,7 @@ final class EnhancedSelectionConverterTest extends TestCase
         $fieldDefinition = new FieldDefinition();
         $storageDefinition = new StorageFieldDefinition();
         $storageDefinition->dataText5 = '<?xml version="1.0"?>
-            <content><options><option id="3" name="None" identifier="none" priority="0"/><option id="1" name="Include" identifier="include" priority="1"/><option id="2" name="Exclude" identifier="exclude" priority="2"/></options><multiselect>1</multiselect><expanded>1</expanded><delimiter><![CDATA[]]></delimiter><query><![CDATA[]]></query></content>';
+            <content><options><option id="3" name="None" identifier="none" langauge_code="cro-HR" priority="0"/><option id="1" name="Include" identifier="include" langauge_code="cro-HR" priority="1"/><option id="2" name="Exclude" identifier="exclude" langauge_code="cro-HR" priority="2"/></options><multiselect>1</multiselect><expanded>1</expanded><delimiter><![CDATA[]]></delimiter><query><![CDATA[]]></query></content>';
 
         $this->converter->toFieldDefinition($storageDefinition, $fieldDefinition);
     }

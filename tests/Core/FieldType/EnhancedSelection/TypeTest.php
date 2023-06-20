@@ -241,7 +241,15 @@ final class TypeTest extends TestCase
         );
 
         $validationError3 = new ValidationError(
-            "'%setting%' setting value item must have an 'priority' property",
+            "'%setting%' setting value item must have a 'language_code' property",
+            null,
+            [
+                '%setting%' => 'options',
+            ]
+        );
+
+        $validationError4 = new ValidationError(
+            "'%setting%' setting value item must have a 'priority' property",
             null,
             [
                 '%setting%' => 'options',
@@ -258,6 +266,9 @@ final class TypeTest extends TestCase
 
         self::assertSame($validationError3->getTarget(), $errors[2]->getTarget());
         self::assertSame((string) $validationError3->getTranslatableMessage(), (string) $errors[2]->getTranslatableMessage());
+
+        self::assertSame($validationError4->getTarget(), $errors[3]->getTarget());
+        self::assertSame((string) $validationError4->getTranslatableMessage(), (string) $errors[3]->getTranslatableMessage());
     }
 
     public function testValidateFieldSettingsWithInvalidOptionsInFieldSettings(): void
@@ -267,6 +278,7 @@ final class TypeTest extends TestCase
                 [
                     'name' => false,
                     'identifier' => false,
+                    'language_code' => false,
                     'priority' => 'test',
                 ],
             ],
@@ -301,6 +313,14 @@ final class TypeTest extends TestCase
         );
 
         $validationError4 = new ValidationError(
+            "'%setting%' setting value item's 'language_code' property must be of string value",
+            null,
+            [
+                '%setting%' => 'options',
+            ]
+        );
+
+        $validationError5 = new ValidationError(
             "'%setting%' setting value item's 'priority' property must be of numeric value",
             null,
             [
@@ -321,6 +341,9 @@ final class TypeTest extends TestCase
 
         self::assertSame($validationError4->getTarget(), $errors[3]->getTarget());
         self::assertSame((string) $validationError4->getTranslatableMessage(), (string) $errors[3]->getTranslatableMessage());
+
+        self::assertSame($validationError5->getTarget(), $errors[4]->getTarget());
+        self::assertSame((string) $validationError5->getTranslatableMessage(), (string) $errors[4]->getTranslatableMessage());
     }
 
     public function testAcceptValueWithSingle(): void

@@ -12,6 +12,11 @@
     </td>
 
     <td>
+        {{- form_errors(form.language_code) -}}
+        {{- form_widget(form.language_code) -}}
+    </td>
+
+    <td>
         {{- form_errors(form.priority) -}}
         {{- form_widget(form.priority) -}}
     </td>
