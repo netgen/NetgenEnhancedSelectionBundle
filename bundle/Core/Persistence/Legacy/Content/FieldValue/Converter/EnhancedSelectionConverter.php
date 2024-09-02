@@ -17,13 +17,9 @@ use function usort;
 
 final class EnhancedSelectionConverter implements Converter
 {
-    public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue): void
-    {
-    }
+    public function toStorageValue(FieldValue $value, StorageFieldValue $storageFieldValue): void {}
 
-    public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue): void
-    {
-    }
+    public function toFieldValue(StorageFieldValue $value, FieldValue $fieldValue): void {}
 
     public function toStorageFieldDefinition(FieldDefinition $fieldDef, StorageFieldDefinition $storageDef): void
     {

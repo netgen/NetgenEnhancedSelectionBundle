@@ -6,6 +6,4 @@ namespace Netgen\Bundle\EnhancedSelectionBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class NetgenEnhancedSelectionBundle extends Bundle
-{
-}
+final class NetgenEnhancedSelectionBundle extends Bundle {}
