@@ -43,15 +43,16 @@ class MultiEntry {
       ...externalOptions,
     };
 
+    this.$add_button = this.$element.querySelector(SELECTORS.add_button);
     this.$items_container = this.$element.querySelector(SELECTORS.items_container);
     this.items_exist = !!this.$items_container.querySelector(SELECTORS.item);
+
     this.item_template = this.$element.dataset.prototype;
+    this.remove_button_template = '<i class="icon-close"></i>';
 
     this.$error = MultiEntry.create_element_from_string(
       `<div class="multientry-error">${this.options.error_message}</div>`
     );
-    this.$add_button = this.$element.querySelector(SELECTORS.add_button);
-    this.$remove_element = MultiEntry.create_element_from_string('<i class="icon-close"></i>');
 
     this.setup_dom();
     this.setup_events();
@@ -73,7 +74,7 @@ class MultiEntry {
       this.item_template.replace(/__name__/g, this.next_id())
     );
     $template.classList.add('multientry-item', 'new');
-    $template.append(this.$remove_element);
+    $template.append(MultiEntry.create_element_from_string(this.remove_button_template));
 
     $template.querySelector(SELECTORS.remove_button).addEventListener('click', () => {
       this.remove($template);
@@ -84,7 +85,7 @@ class MultiEntry {
 
   setup_dom() {
     this.$element.querySelectorAll(SELECTORS.item).forEach(($item) => {
-      $item.append(this.$remove_element);
+      $item.append(MultiEntry.create_element_from_string(this.remove_button_template));
     });
   }
 
