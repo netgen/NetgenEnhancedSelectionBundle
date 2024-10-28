@@ -1,129 +1,195 @@
-(function($) {
-    'use strict';
+const SELECTORS = {
+  root: '.multientry',
+  items_container: '.multientry-items',
+  item: '.multientry-item',
+  add_button: '.multientry_add',
+  remove_button: '.icon-close',
+};
 
-    //initialize
-    var MultiEntry = function(element, options){
-       this.opts = $.extend({
-          insert_first: true,
-          last_item_can_be_removed: false,
-          limit: null,
-          show_errors: true,
-       }, options || {});
-       this.id = 0;
-       this.$el = $(element);
-       $.extend(this.opts, this.$el.data() || {});
-       this.$items_container = this.$el.find('.multientry-items');
-       this.items_exist = this.$items_container.find('.multientry-item').length ? true : false;
-       this.$add_button = this.$el.find('.multientry_add');
-       this.item_template = this.$el.data('prototype');
-       this.close_element = '<i class="icon-close"></i>';
-       this.error_message = this.opts.error_message || ('Max number of items: '+ this.opts.limit);
-       this.$error = $('<div class="multientry-error">'+ this.error_message +'</div>');
-       this.setup_dom();
-       this.setup_events();
-       setTimeout($.proxy(function(){
-        this.opts.insert_first && !(this.items_exist) && this.add();
-       }, this), 0);
+const EVENTS = {
+  PREFIX: 'multientry:',
+  add: {
+    on: 'add',
+    before: 'before:add',
+  },
+  remove: {
+    on: 'remove',
+    before: 'before:remove',
+  },
+  limit: {
+    reached: 'limit:reached',
+    valid: 'limit:valid',
+  },
+};
+
+class MultiEntry {
+  constructor(element, options = {}) {
+    this.parser = new DOMParser();
+    this.id = 0;
+
+    this.$element = element;
+    this.$element.dataset.instanceId = options.instance_id;
+
+    const externalOptions = {
+      ...options,
+      ...this.$element.dataset,
+    };
+    this.options = {
+      insert_first: true,
+      last_item_can_be_removed: false,
+      limit: null,
+      show_errors: true,
+      error_message: `Max number of items: ${externalOptions.limit}`,
+      ...externalOptions,
     };
 
-    MultiEntry.prototype.next_id = function(){
-      var timestamp = +new Date();
-      return timestamp+''+(this.id++);
+    this.$items_container = this.$element.querySelector(SELECTORS.items_container);
+    this.items_exist = !!this.$items_container.querySelector(SELECTORS.item);
+    this.item_template = this.$element.dataset.prototype;
+
+    this.$error = MultiEntry.create_element_from_string(
+      `<div class="multientry-error">${this.options.error_message}</div>`
+    );
+    this.$add_button = this.$element.querySelector(SELECTORS.add_button);
+    this.$remove_element = MultiEntry.create_element_from_string('<i class="icon-close"></i>');
+
+    this.setup_dom();
+    this.setup_events();
+    setTimeout(() => {
+      if (this.options.insert_first && !this.items_exist) {
+        this.add();
+      }
+    }, 0);
+  }
+
+  next_id() {
+    const timestamp = new Date();
+
+    return `${timestamp}${this.id++}`;
+  }
+
+  render_item_template() {
+    const $template = MultiEntry.create_element_from_string(
+      this.item_template.replace(/__name__/g, this.next_id())
+    );
+    $template.classList.add('multientry-item new');
+    $template.append(this.$remove_element);
+
+    $template.querySelector(SELECTORS.close_button).addEventListener('click', () => {
+      this.remove($template);
+    });
+
+    return $template;
+  }
+
+  setup_dom() {
+    this.$element.querySelectorAll(SELECTORS.item).forEach(($item) => {
+      $item.append(this.$remove_element);
+    });
+  }
+
+  setup_events() {
+    this.$add_button.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.add();
+    });
+  }
+
+  add() {
+    if (this.options.limit && this.limit_reached()) {
+      return;
+    }
+
+    const $newItem = this.render_item_template();
+    this.trigger(EVENTS.add.before, { item: $newItem });
+    this.$items_container.append($newItem);
+    this.trigger(EVENTS.add.on, { item: $newItem });
+    this.options.limit && this.limit_check();
+  }
+
+  remove($item) {
+    if (this.items_count() === 1 && !this.options.last_item_can_be_removed) {
+      return;
+    }
+
+    this.trigger(EVENTS.remove.before, { item: $item });
+    $item.remove();
+    this.trigger(EVENTS.remove.on, { item: $item });
+    this.options.limit && this.limit_check();
+  }
+
+  limit_check() {
+    if (this.limit_reached()) {
+      this.on_limit_reached();
+    } else {
+      this.on_limit_valid();
+    }
+  }
+
+  limit_reached() {
+    return this.items_count() >= this.options.limit;
+  }
+
+  on_limit_reached() {
+    if (this.options.show_errors) {
+      this.$items_container.append(this.$error);
+    }
+
+    this.$add_button.classList.add('disabled');
+    this.trigger(EVENTS.limit.reached);
+  }
+
+  on_limit_valid() {
+    if (this.options.show_errors) {
+      this.$error.remove();
+    }
+
+    this.$add_button.classList.remove('disabled');
+    this.trigger(EVENTS.limit.valid);
+  }
+
+  trigger(suffix, data) {
+    const eventName = `${EVENTS.PREFIX}${suffix}`;
+    const detail = {
+      ...data,
+      instance: this,
     };
 
-    //instance methods
-    MultiEntry.prototype.render_item_template = function() {
-      var $template = $(this.item_template.replace(/__name__/g, this.next_id() ));
-      $template.addClass('multientry-item new');
-      $template.append(this.close_element);
-      return $template;
-    };
+    const event = new CustomEvent(eventName, { detail });
 
-    MultiEntry.prototype.setup_dom = function() {
-      this.$el.find('.multientry-item').append(this.close_element);
-    };
+    this.$element.dispatchEvent(event);
+    document.body.dispatchEvent(event);
+  }
 
-    MultiEntry.prototype.setup_events = function() {
-      var self = this;
+  items_count() {
+    return this.$items_container.querySelectorAll(SELECTORS.item).length;
+  }
 
-      this.$add_button.on('click', function(e){
-          e.preventDefault();
-          self.add();
-      });
+  static create_element_from_string(elementString) {
+    return this.parser.parseFromString(elementString).querySelector('body > *');
+  }
+}
 
-      this.$items_container.on('click', '.icon-close', function(e){
-          e.preventDefault();
-          self.remove($(this).closest('.multientry-item'));
-      });
-    };
+const instances = [];
+window.initaliseMultientries = function (options = {}) {
+  document.querySelectorAll(SELECTORS.root).forEach(($multientry) => {
+    let instance = instances[$multientry.dataset.instanceId];
+    if (instance) {
+      return;
+    }
 
-    MultiEntry.prototype.add = function() {
-      if(this.opts.limit && this.limit_reached()) {return;}
-      var $item = this.render_item_template();
-      this.trigger('before:add', {item: $item});
-      this.$items_container.append($item);
-      this.trigger('add', {item: $item});
-      this.opts.limit && this.limit_check();
-    };
+    instance = new MultiEntry($multientry, {
+      ...options,
+      instance_id: instances.length,
+    });
+    instances.push(instance);
+  });
 
-    MultiEntry.prototype.remove = function($item) {
-       if(this.items_count() === 1 && !this.opts.last_item_can_be_removed){return;}
-       this.trigger('before:remove', {item: $item});
-       $item.remove();
-       this.opts.limit && this.limit_check();
-       this.trigger('remove', {item: $item});
-    };
+  return [...instances];
+};
 
-    MultiEntry.prototype.items_count = function() {
-      return this.$items_container.find('.multientry-item').length;
-    };
-
-    MultiEntry.prototype.limit_check = function() {
-      this.limit_reached() ? this.on_limit_reached() : this.on_limit_valid();
-    };
-
-    MultiEntry.prototype.limit_reached = function() {
-      return this.items_count() >= this.opts.limit;
-    };
-
-    MultiEntry.prototype.on_limit_valid = function() {
-      this.opts.show_errors && this.$error.remove();
-      this.$add_button.removeClass('disabled');
-      this.trigger('limit:valid');
-    };
-
-    MultiEntry.prototype.on_limit_reached = function() {
-      this.opts.show_errors && this.$items_container.append(this.$error);
-      this.$add_button.addClass('disabled');
-      this.trigger('limit:reached');
-    };
-
-
-    MultiEntry.prototype.trigger = function(event, data){
-      var prefix = 'multientry:';
-      data = $.extend({}, data, {instance: this});
-      this.$el.trigger(prefix+event, data);
-      $(document.body).trigger(prefix+event, data);
-    };
-
-      //Expose as jquery plugin
-    $.fn.multientry = function(options){
-      var method = typeof options === 'string' && options;
-      $(this).each(function(){
-        var $this = $(this);
-        var instance = $this.data('multientry');
-        if(instance){
-          method && instance[method]();
-          return;
-        }
-        instance = new MultiEntry(this, options);
-        $this.data('multientry', instance);
-      });
-      return this;
-    };
-
-    //Expose class
-    $.MultiEntry = MultiEntry;
-
-})(jQuery);
-
+window.runMethodOnAllMultientries = function (methodName) {
+  instances.forEach((instance) => {
+    instance[methodName] && instance[methodName]();
+  });
+};
