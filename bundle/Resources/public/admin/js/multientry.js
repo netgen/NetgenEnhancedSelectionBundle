@@ -168,9 +168,9 @@ class MultiEntry {
 
   static create_element_from_string(elementString) {
     const template = document.createElement('template');
-    template.innerHTML = elementString;
+    template.innerHTML = elementString.trim();
 
-    return template.content.firstElementChild;
+    return template.content.firstChild;
   }
 }
 
