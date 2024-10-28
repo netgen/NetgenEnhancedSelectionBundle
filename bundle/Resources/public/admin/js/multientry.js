@@ -72,10 +72,10 @@ class MultiEntry {
     const $template = MultiEntry.create_element_from_string(
       this.item_template.replace(/__name__/g, this.next_id())
     );
-    $template.classList.add('multientry-item new');
+    $template.classList.add('multientry-item', 'new');
     $template.append(this.$remove_element);
 
-    $template.querySelector(SELECTORS.close_button).addEventListener('click', () => {
+    $template.querySelector(SELECTORS.remove_button).addEventListener('click', () => {
       this.remove($template);
     });
 
@@ -166,7 +166,10 @@ class MultiEntry {
   }
 
   static create_element_from_string(elementString) {
-    return this.parser.parseFromString(elementString).querySelector('body > *');
+    const template = document.createElement('template');
+    template.innerHTML = elementString;
+
+    return template.content.firstElementChild;
   }
 }
 
