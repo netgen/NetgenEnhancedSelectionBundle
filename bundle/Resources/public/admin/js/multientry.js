@@ -64,7 +64,7 @@ class MultiEntry {
   }
 
   next_id() {
-    const timestamp = new Date();
+    const timestamp = +new Date();
 
     return `${timestamp}${this.id++}`;
   }
@@ -86,6 +86,9 @@ class MultiEntry {
   setup_dom() {
     this.$element.querySelectorAll(SELECTORS.item).forEach(($item) => {
       $item.append(MultiEntry.create_element_from_string(this.remove_button_template));
+      $item.querySelector(SELECTORS.remove_button).addEventListener('click', () => {
+        this.remove($item);
+      });
     });
   }
 
