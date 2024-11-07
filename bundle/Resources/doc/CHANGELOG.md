@@ -1,6 +1,11 @@
 Netgen Enhanced Selection Bundle changelog
 ==========================================
 
+5.3.0 (07.11.2024)
+------------------
+
+* Replaced usage of jQuery with vanilla JS in content type edit interface
+
 5.2.0 (20.06.2023)
 ------------------
 
