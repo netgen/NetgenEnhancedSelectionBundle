@@ -1,41 +1,54 @@
-(function($) {
-    'use strict';
-    $('.multientry').multientry();
+const init = () => {
+  window.initaliseMultientries();
 
-    const saveButton = document.getElementById('content_type_edit__sidebar_right__save-tab');
+  const observer = new MutationObserver(() => {
+    window.initaliseMultientries();
+  });
 
-    const observer = new MutationObserver(e => {
-        $('.multientry').multientry();
+  // enables observer when element is dropped
+  document.addEventListener('drop', () => {
+    document.querySelectorAll('.ibexa-collapse').forEach((element) => {
+      observer.observe(element, { childList: true, subtree: true });
     });
+  });
 
-    // enables observer when elements is dropped
-    document.addEventListener("drop", e => {
-        document.querySelectorAll('.ibexa-collapse').forEach(el => {
-            observer.observe(el, { childList: true, subtree: true });
-        });
+  // disable observer while dragging to reduce function firing
+  document.addEventListener('drag', () => {
+    document.querySelectorAll('.ibexa-collapse').forEach(() => {
+      observer.disconnect();
     });
+  });
 
-    // disable observer while dragging to reduce function firing
-    document.addEventListener("drag", e => {
-        document.querySelectorAll('.ibexa-collapse').forEach(el => {
-            observer.disconnect();
-        });
-    });
+  // checks if any multientry inputs are empty and expands the field type
+  const saveButton = document.getElementById('content_type_edit__sidebar_right__save-tab');
 
-    // checks if any multientry inputs are empty and expands the field type
-    saveButton && saveButton.addEventListener("click", e => {
-        document.querySelectorAll('.multientry input').forEach(el => {
-            if (el.value.length === 0) {
-                e.preventDefault();
-                const fullElement = el.closest('.ibexa-collapse');
-                const elementBody = fullElement.querySelector('.ibexa-collapse__body');
-                const collapseToggle = fullElement.querySelector('.ibexa-collapse__toggle-btn');
-                fullElement.classList.contains('multientry-error') ? null : fullElement.classList.add('multientry-error');
-                fullElement.classList.contains('ibexa-collapse--collapsed') ? fullElement.classList.remove('ibexa-collapse--collapsed') : null;
-                elementBody.classList.contains('show') ? null : elementBody.classList.add('show');
-                collapseToggle.classList.contains('collapsed') ? elementBody.classList.remove('collapsed') : null;
-                fullElement.dataset.collapsed ? fullElement.dataset.collapsed = false : null;
-            }
-        })
+  saveButton && saveButton.addEventListener('click', (event) => {
+    document.querySelectorAll('.multientry input').forEach((input) => {
+      if (input.value.length > 0) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const collapseWrapper = input.closest('.ibexa-collapse');
+      const collapseBody = collapseWrapper.querySelector('.ibexa-collapse__body');
+      const collapseToggle = collapseWrapper.querySelector('.ibexa-collapse__toggle-btn');
+
+      collapseWrapper.classList.add('multientry-error');
+      collapseWrapper.classList.remove('ibexa-collapse--collapsed');
+      collapseWrapper.dataset.collapsed = false;
+
+      collapseBody.classList.add('show');
+
+      if (collapseToggle.classList.contains('collapsed')) {
+        collapseBody.classList.remove('collapsed');
+      }
     });
-})(jQuery);
+  });
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
