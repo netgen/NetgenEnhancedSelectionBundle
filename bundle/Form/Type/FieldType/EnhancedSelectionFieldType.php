@@ -60,6 +60,7 @@ final class EnhancedSelectionFieldType extends AbstractType
                 'identifiers',
                 ChoiceType::class,
                 [
+                    'label' => $fieldDefinition->getName($languageCode),
                     'choices' => $choices,
                     'multiple' => $fieldDefinition->fieldSettings['isMultiple'],
                     'expanded' => $fieldDefinition->fieldSettings['isExpanded'],
