@@ -38,7 +38,7 @@ final class DoctrineStorage extends Gateway
                 ->setParameter(':contentobject_attribute_version', $versionInfo->versionNo, Types::INTEGER)
                 ->setParameter(':identifier', $identifier, Types::STRING);
 
-            $insertQuery->execute();
+            $insertQuery->executeStatement();
         }
     }
 
@@ -61,7 +61,7 @@ final class DoctrineStorage extends Gateway
             ->setParameter(':contentobject_attribute_id', $fieldIds, Connection::PARAM_INT_ARRAY)
             ->setParameter(':contentobject_attribute_version', $versionInfo->versionNo, Types::INTEGER);
 
-        $query->execute();
+        $query->executeStatement();
     }
 
     /**
@@ -84,9 +84,7 @@ final class DoctrineStorage extends Gateway
             ->setParameter(':contentobject_attribute_id', $fieldId, Types::INTEGER)
             ->setParameter(':contentobject_attribute_version', $versionNo, Types::INTEGER);
 
-        $statement = $query->execute();
-
-        $rows = $statement->fetchAllAssociative();
+        $rows = $query->executeQuery()->fetchAllAssociative();
 
         return array_map(
             static fn (array $row): string => $row['identifier'],
