@@ -6,7 +6,7 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Core\Search\Legacy\Content\Commo
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Search\Legacy\Content\Common\Gateway\CriteriaConverter;
 use Ibexa\Core\Search\Legacy\Content\Common\Gateway\CriterionHandler\FieldBase;
@@ -14,13 +14,27 @@ use Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Cr
 
 final class EnhancedSelection extends FieldBase
 {
-    public function accept(Criterion $criterion): bool
+    public function accept(CriterionInterface $criterion): bool
     {
         return $criterion instanceof EnhancedSelectionCriterion;
     }
 
-    public function handle(CriteriaConverter $converter, QueryBuilder $queryBuilder, Criterion $criterion, array $languageSettings): string
-    {
+    /**
+     * @param CriteriaConverter $converter
+     * @param QueryBuilder $queryBuilder
+     * @param EnhancedSelectionCriterion $criterion
+     * @param array $languageSettings
+     *
+     * @return string
+     *
+     * @throws InvalidArgumentException
+     */
+    public function handle(
+        CriteriaConverter $converter,
+        QueryBuilder $queryBuilder,
+        CriterionInterface $criterion,
+        array $languageSettings,
+    ): string {
         $fieldDefinitionIds = $this->getFieldDefinitionIds($criterion->target);
 
         $subSelect = $this->connection->createQueryBuilder();
