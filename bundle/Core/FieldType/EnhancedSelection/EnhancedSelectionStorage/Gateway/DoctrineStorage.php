@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Types;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
@@ -34,9 +35,9 @@ final class DoctrineStorage extends Gateway
                         'identifier' => ':identifier',
                     ]
                 )
-                ->setParameter(':contentobject_attribute_id', $field->id, Types::INTEGER)
-                ->setParameter(':contentobject_attribute_version', $versionInfo->versionNo, Types::INTEGER)
-                ->setParameter(':identifier', $identifier, Types::STRING);
+                ->setParameter('contentobject_attribute_id', $field->id, Types::INTEGER)
+                ->setParameter('contentobject_attribute_version', $versionInfo->versionNo, Types::INTEGER)
+                ->setParameter('identifier', $identifier, Types::STRING);
 
             $insertQuery->executeStatement();
         }
@@ -54,12 +55,12 @@ final class DoctrineStorage extends Gateway
             ->delete($this->connection->quoteIdentifier('sckenhancedselection'))
             ->where(
                 $query->expr()->and(
-                    $query->expr()->in('contentobject_attribute_id', [':contentobject_attribute_id']),
+                    $query->expr()->in('contentobject_attribute_id', ':contentobject_attribute_id'),
                     $query->expr()->eq('contentobject_attribute_version', ':contentobject_attribute_version')
                 )
             )
-            ->setParameter(':contentobject_attribute_id', $fieldIds, Connection::PARAM_INT_ARRAY)
-            ->setParameter(':contentobject_attribute_version', $versionInfo->versionNo, Types::INTEGER);
+            ->setParameter('contentobject_attribute_id', $fieldIds, ArrayParameterType::INTEGER)
+            ->setParameter('contentobject_attribute_version', $versionInfo->versionNo, Types::INTEGER);
 
         $query->executeStatement();
     }
@@ -81,8 +82,8 @@ final class DoctrineStorage extends Gateway
                     $query->expr()->eq('contentobject_attribute_version', ':contentobject_attribute_version')
                 )
             )
-            ->setParameter(':contentobject_attribute_id', $fieldId, Types::INTEGER)
-            ->setParameter(':contentobject_attribute_version', $versionNo, Types::INTEGER);
+            ->setParameter('contentobject_attribute_id', $fieldId, Types::INTEGER)
+            ->setParameter('contentobject_attribute_version', $versionNo, Types::INTEGER);
 
         $rows = $query->executeQuery()->fetchAllAssociative();
 
