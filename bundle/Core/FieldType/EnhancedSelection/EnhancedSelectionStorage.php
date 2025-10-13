@@ -7,10 +7,17 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection
 use Ibexa\Contracts\Core\FieldType\GatewayBasedStorage;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
+use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 
 final class EnhancedSelectionStorage extends GatewayBasedStorage
 {
-    public function storeFieldData(VersionInfo $versionInfo, Field $field, array $context): ?bool
+    public function __construct(Gateway $gateway)
+    {
+        $this->gateway = $gateway;
+        parent::__construct($gateway);
+    }
+
+    public function storeFieldData(VersionInfo $versionInfo, Field $field): ?bool
     {
         $this->gateway->deleteFieldData($versionInfo, [$field->id]);
         if (!empty($field->value->externalData)) {
@@ -20,12 +27,12 @@ final class EnhancedSelectionStorage extends GatewayBasedStorage
         return null;
     }
 
-    public function getFieldData(VersionInfo $versionInfo, Field $field, array $context): void
+    public function getFieldData(VersionInfo $versionInfo, Field $field): void
     {
         $this->gateway->getFieldData($versionInfo, $field);
     }
 
-    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds, array $context): bool
+    public function deleteFieldData(VersionInfo $versionInfo, array $fieldIds): bool
     {
         $this->gateway->deleteFieldData($versionInfo, $fieldIds);
 
@@ -37,7 +44,7 @@ final class EnhancedSelectionStorage extends GatewayBasedStorage
         return true;
     }
 
-    public function getIndexData(VersionInfo $versionInfo, Field $field, array $context)
+    public function getIndexData(VersionInfo $versionInfo, Field $field): bool
     {
         return false;
     }
