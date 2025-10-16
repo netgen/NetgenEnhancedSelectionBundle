@@ -47,9 +47,9 @@ final class FieldValueTransformer implements DataTransformerInterface
             return $this->fieldType->getEmptyValue();
         }
 
-        $hash = is_array($value['identifiers']) ?
-            $value['identifiers'] :
-            [$value['identifiers']];
+        $hash = is_array($value['identifiers'])
+            ? $value['identifiers']
+            : [$value['identifiers']];
 
         return $this->fieldType->fromHash($hash);
     }
