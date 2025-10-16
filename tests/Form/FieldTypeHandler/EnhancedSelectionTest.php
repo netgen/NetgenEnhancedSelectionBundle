@@ -108,7 +108,7 @@ final class EnhancedSelectionTest extends TestCase
 
         $fieldDefinition = new FieldDefinition(
             [
-                'id' => 'id',
+                'id' => 11,
                 'identifier' => 'identifier',
                 'isRequired' => true,
                 'descriptions' => ['fre-FR' => 'fre-FR'],
