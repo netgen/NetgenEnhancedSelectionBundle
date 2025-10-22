@@ -7,16 +7,9 @@ namespace Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection
 use Ibexa\Contracts\Core\FieldType\GatewayBasedStorage;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
-use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage\Gateway;
 
 final class EnhancedSelectionStorage extends GatewayBasedStorage
 {
-    public function __construct(Gateway $gateway)
-    {
-        $this->gateway = $gateway;
-        parent::__construct($gateway);
-    }
-
     public function storeFieldData(VersionInfo $versionInfo, Field $field): ?bool
     {
         $this->gateway->deleteFieldData($versionInfo, [$field->id]);
