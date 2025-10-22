@@ -20,14 +20,7 @@ final class EnhancedSelection extends FieldBase
     }
 
     /**
-     * @param CriteriaConverter $converter
-     * @param QueryBuilder $queryBuilder
-     * @param EnhancedSelectionCriterion $criterion
-     * @param array $languageSettings
-     *
-     * @return string
-     *
-     * @throws InvalidArgumentException
+     * @param Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection $criterion
      */
     public function handle(
         CriteriaConverter $converter,
