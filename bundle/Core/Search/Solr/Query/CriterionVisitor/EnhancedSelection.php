@@ -20,9 +20,9 @@ final class EnhancedSelection extends Field
     }
 
     /**
-     * @param Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection $criterion
+     * @param \Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection $criterion
      *
-     * @throws Ibexa\Core\Base\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
      */
     public function visit(CriterionInterface $criterion, ?CriterionVisitor $subVisitor = null): string
     {

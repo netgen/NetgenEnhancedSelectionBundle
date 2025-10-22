@@ -20,7 +20,7 @@ final class EnhancedSelection extends FieldBase
     }
 
     /**
-     * @param Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection $criterion
+     * @param \Netgen\Bundle\EnhancedSelectionBundle\API\Repository\Values\Content\Query\Criterion\EnhancedSelection $criterion
      */
     public function handle(
         CriteriaConverter $converter,
