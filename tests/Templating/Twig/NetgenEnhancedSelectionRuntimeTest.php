@@ -25,10 +25,7 @@ final class NetgenEnhancedSelectionRuntimeTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->contentTypeService = $this->getMockBuilder(ContentTypeService::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['loadContentType'])
-            ->getMockForAbstractClass();
+        $this->contentTypeService = $this->createMock(ContentTypeService::class);
 
         $this->runtime = new NetgenEnhancedSelectionRuntime($this->contentTypeService);
     }

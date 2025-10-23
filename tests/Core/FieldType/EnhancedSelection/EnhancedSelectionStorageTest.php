@@ -60,7 +60,7 @@ final class EnhancedSelectionStorageTest extends TestCase
             ]
         );
 
-        $connection = $this->getMockForAbstractClass(StorageGateway::class);
+        $connection = $this->createMock(StorageGateway::class);
         $context = ['identifier' => 'enhancedselection', 'connection' => $connection];
 
         $this->gateway->expects(self::once())
@@ -86,7 +86,7 @@ final class EnhancedSelectionStorageTest extends TestCase
             ]
         );
 
-        $connection = $this->getMockForAbstractClass(StorageGateway::class);
+        $connection = $this->createMock(StorageGateway::class);
         $context = ['identifier' => 'enhancedselection', 'connection' => $connection];
 
         $this->gateway->expects(self::once())
@@ -100,7 +100,7 @@ final class EnhancedSelectionStorageTest extends TestCase
         $versionInfo = new VersionInfo();
         $fields = ['some_field'];
 
-        $connection = $this->getMockForAbstractClass(StorageGateway::class);
+        $connection = $this->createMock(StorageGateway::class);
         $context = ['identifier' => 'enhancedselection', 'connection' => $connection];
 
         $this->gateway->expects(self::once())
