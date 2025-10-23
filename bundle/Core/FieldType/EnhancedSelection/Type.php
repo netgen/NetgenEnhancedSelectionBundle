@@ -316,9 +316,9 @@ final class Type extends FieldType
 
                         if ($emptyCount > ($fieldSettings['isMultiple'] ? 0 : 1)) {
                             $validationErrors[] = new ValidationError(
-                                $fieldSettings['isMultiple'] ?
-                                    "'%setting%' setting value item's 'identifier' property must have a value" :
-                                    "'%setting%' setting value item's 'identifier' property must have only a single empty value",
+                                $fieldSettings['isMultiple']
+                                    ? "'%setting%' setting value item's 'identifier' property must have a value"
+                                    : "'%setting%' setting value item's 'identifier' property must have only a single empty value",
                                 null,
                                 [
                                     '%setting%' => $name,

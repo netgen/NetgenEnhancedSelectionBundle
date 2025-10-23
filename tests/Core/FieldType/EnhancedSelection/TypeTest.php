@@ -375,8 +375,6 @@ final class TypeTest extends TestCase
     {
         $this->expectException(InvalidArgumentType::class);
 
-        $value = new Value([true, true]);
-
-        $this->type->acceptValue($value);
+        $this->type->acceptValue([true, true]);
     }
 }

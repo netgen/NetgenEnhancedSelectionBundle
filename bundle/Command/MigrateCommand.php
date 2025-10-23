@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EnhancedSelectionBundle\Command;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Result;
+use Doctrine\DBAL\Result;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\Type as EnhancedSelectionType;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -42,7 +42,7 @@ final class MigrateCommand extends Command
         $this->io = new SymfonyStyle($input, $output);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $statement = $this->getFields();
         $this->io->progressStart($statement->rowCount());
@@ -80,7 +80,7 @@ final class MigrateCommand extends Command
             )
             ->setParameter('data_type_string', $this->typeIdentifier);
 
-        return $builder->execute();
+        return $builder->executeQuery();
     }
 
     private function resetFieldData(int $id, int $version): void
@@ -96,7 +96,7 @@ final class MigrateCommand extends Command
             ->setParameter('id', $id)
             ->setParameter('version', $version);
 
-        $builder->execute();
+        $builder->executeStatement();
     }
 
     private function removeSelectionDataForField(int $id, int $version): void
@@ -111,7 +111,7 @@ final class MigrateCommand extends Command
             ->setParameter('id', $id)
             ->setParameter('version', $version);
 
-        $builder->execute();
+        $builder->executeStatement();
     }
 
     private function createSelections(int $id, int $version, array $identifiers): void

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EnhancedSelectionBundle\Tests\Core\FieldType\EnhancedSelection;
 
+use Ibexa\Contracts\Core\FieldType\StorageGateway;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
 use Ibexa\Contracts\Core\Persistence\Content\FieldValue;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
-use Ibexa\Core\FieldType\StorageGateway;
 use Netgen\Bundle\EnhancedSelectionBundle\Core\FieldType\EnhancedSelection\EnhancedSelectionStorage;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -43,7 +43,7 @@ final class EnhancedSelectionStorageTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        self::assertFalse($this->storage->getIndexData($versionInfo, $field, []));
+        self::assertFalse($this->storage->getIndexData($versionInfo, $field));
     }
 
     public function testStoreFieldData(): void
@@ -60,7 +60,7 @@ final class EnhancedSelectionStorageTest extends TestCase
             ]
         );
 
-        $connection = $this->getMockForAbstractClass(StorageGateway::class);
+        $connection = $this->createMock(StorageGateway::class);
         $context = ['identifier' => 'enhancedselection', 'connection' => $connection];
 
         $this->gateway->expects(self::once())
@@ -86,7 +86,7 @@ final class EnhancedSelectionStorageTest extends TestCase
             ]
         );
 
-        $connection = $this->getMockForAbstractClass(StorageGateway::class);
+        $connection = $this->createMock(StorageGateway::class);
         $context = ['identifier' => 'enhancedselection', 'connection' => $connection];
 
         $this->gateway->expects(self::once())
@@ -100,7 +100,7 @@ final class EnhancedSelectionStorageTest extends TestCase
         $versionInfo = new VersionInfo();
         $fields = ['some_field'];
 
-        $connection = $this->getMockForAbstractClass(StorageGateway::class);
+        $connection = $this->createMock(StorageGateway::class);
         $context = ['identifier' => 'enhancedselection', 'connection' => $connection];
 
         $this->gateway->expects(self::once())
