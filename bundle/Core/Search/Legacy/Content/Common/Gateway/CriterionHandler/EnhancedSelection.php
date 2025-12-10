@@ -33,7 +33,7 @@ final class EnhancedSelection extends FieldBase
         $subSelect = $this->connection->createQueryBuilder();
         $subSelect
             ->select('t1.contentobject_id')
-            ->from('ezcontentobject_attribute', 't1')
+            ->from('ibexa_content_field', 't1')
             ->innerJoin(
                 't1',
                 'sckenhancedselection',
@@ -47,7 +47,7 @@ final class EnhancedSelection extends FieldBase
                 $queryBuilder->expr()->andX(
                     $queryBuilder->expr()->eq('t1.version', 'c.current_version'),
                     $subSelect->expr()->in(
-                        't1.contentclassattribute_id',
+                        't1.content_type_field_definition_id',
                         $queryBuilder->createNamedParameter($fieldDefinitionIds, Connection::PARAM_INT_ARRAY)
                     ),
                     $subSelect->expr()->in(

@@ -73,10 +73,10 @@ final class MigrateCommand extends Command
     private function getFields(): Result
     {
         $builder = $this->db->createQueryBuilder();
-        $builder->select('a.id', 'a.version', 'a.data_text')
-            ->from('ezcontentobject_attribute', 'a')
+        $builder->select('cf.id', 'cf.version', 'cf.data_text')
+            ->from('ibexa_content_field', 'cf')
             ->where(
-                $builder->expr()->eq('a.data_type_string', ':data_type_string')
+                $builder->expr()->eq('cf.data_type_string', ':data_type_string')
             )
             ->setParameter('data_type_string', $this->typeIdentifier);
 
@@ -86,7 +86,7 @@ final class MigrateCommand extends Command
     private function resetFieldData(int $id, int $version): void
     {
         $builder = $this->db->createQueryBuilder();
-        $builder->update('ezcontentobject_attribute')
+        $builder->update('ibexa_content_field')
             ->set('data_text', 'null')
             ->where(
                 $builder->expr()->eq('id', ':id')
